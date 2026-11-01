@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Varde99 — все ссылки</title>
+<meta name="description" content="Varde99: стримы CS2 на Twitch, анонсы в Telegram, прайс заданий и донат.">
+<meta name="theme-color" content="#07070a">
+<meta property="og:title" content="Varde99 — все ссылки">
+<meta property="og:description" content="Стримы CS2 каждый день · Управляй моей игрой за донат">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070a;--line:rgba(255,255,255,.09);--text:#f5f5f7;--mute:#9a9aa6;--acc:#e8173b;--acc2:#ff4d6d;--glow:rgba(232,23,59,.45);--gold:#ffc83d;--auto:#2ee6a6;
+  --fh:'Unbounded',Impact,'Arial Black',sans-serif;--fb:Manrope,system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.orb.a{width:520px;height:520px;left:50%;top:-260px;margin-left:-260px;background:radial-gradient(circle,rgba(232,23,59,.55),transparent 65%);animation:float 14s ease-in-out infinite alternate}
+.orb.b{width:380px;height:380px;right:-160px;bottom:-120px;background:radial-gradient(circle,rgba(122,13,36,.7),transparent 65%);animation:float 18s ease-in-out infinite alternate-reverse}
+@keyframes float{to{transform:translate(40px,60px) scale(1.1)}}
+.grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;
+  mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 75%)}
+main{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:44px 16px 40px;display:flex;flex-direction:column;align-items:center}
+
+/* профиль */
+.ava{position:relative;width:104px;height:104px;border-radius:30px;display:grid;place-items:center;background:var(--acc);font:900 46px var(--fh);transform:rotate(-6deg);box-shadow:0 0 50px var(--glow);animation:pop .8s var(--ease) both}
+.ava::after{content:"";position:absolute;inset:-8px;border-radius:36px;border:2px solid rgba(232,23,59,.5);animation:ring 2.4s ease-out infinite}
+@keyframes ring{from{transform:scale(.9);opacity:1}to{transform:scale(1.25);opacity:0}}
+@keyframes pop{from{transform:rotate(-6deg) scale(.6);opacity:0}}
+h1{font:900 34px/1 var(--fh);letter-spacing:-.04em;margin-top:22px}
+h1 b{color:var(--acc)}
+.tag{margin-top:10px;color:var(--mute);font-size:15px;font-weight:600;text-align:center;line-height:1.5}
+.tag i{font-style:normal;color:var(--acc2)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:99px;font-size:12.5px;font-weight:800;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--auto);box-shadow:0 0 8px var(--auto);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.3}}
+
+/* кнопки-ссылки */
+.links{width:100%;display:grid;gap:12px;margin-top:30px}
+.lk{position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);overflow:hidden;
+  transition:transform .25s var(--ease),border-color .25s,box-shadow .25s;animation:in .6s var(--ease) both;-webkit-tap-highlight-color:transparent}
+.lk:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 18px 40px -18px var(--c)}
+.lk:active{transform:scale(.98)}
+.lk::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at 0% 50%,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);pointer-events:none}
+.lk .ic{position:relative;flex:none;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:var(--c);font-size:24px}
+.lk .ic svg{width:26px;height:26px}
+.lk .tx{position:relative;flex:1;min-width:0}
+.lk .tx b{display:block;font-weight:800;font-size:16.5px}
+.lk .tx small{display:block;color:var(--mute);font-size:13px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lk .ar{position:relative;font-size:20px;color:var(--c);font-weight:800;transition:transform .25s}
+.lk:hover .ar{transform:translateX(4px)}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+/* главная кнопка — прайс */
+.lk.main{padding:18px;border:none;background:var(--acc);box-shadow:0 14px 40px -10px var(--glow)}
+.lk.main::before{background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);background-size:250% 100%;animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%,40%{background-position:120% 0}100%{background-position:-60% 0}}
+.lk.main .ic{background:rgba(0,0,0,.22)}
+.lk.main .tx small{color:rgba(255,255,255,.85)}
+.lk.main .ar{color:#fff}
+.lk.main .badge{display:inline-block;margin-right:6px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:6px;background:rgba(0,0,0,.25);color:#fff}
+.sep{width:100%;display:flex;align-items:center;gap:12px;margin:10px 0 0;color:var(--mute);font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.sep::before,.sep::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* как заказать */
+.how{width:100%;margin-top:26px;padding:18px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.how h2{font:700 15px var(--fh);margin-bottom:12px}
+.how ol{list-style:none;display:grid;gap:10px;counter-reset:s}
+.how li{position:relative;padding-left:36px;color:var(--mute);font-size:14px;line-height:1.5;counter-increment:s}
+.how li::before{content:counter(s);position:absolute;left:0;top:-1px;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:rgba(232,23,59,.16);color:var(--acc2);font:900 12px var(--fh)}
+.how li b{color:var(--text)}
+footer{margin-top:28px;color:#55555f;font-size:12.5px;text-align:center}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="orb a"></div><div class="orb b"></div><div class="grid"></div>
+<main>
+  <div class="ava">V</div>
+  <h1>VARDE<b>99</b></h1>
+  <p class="tag">Стримы <i>CS2</i> каждый день<br>Управляй моей игрой за донат 😈</p>
+  <div class="chips"><span class="chip"><span class="dot"></span>Twitch · TikTok</span><span class="chip">⏰ Марафон 24 ч</span></div>
+
+  <div class="links">
+    <a class="lk main" style="--c:#e8173b;animation-delay:.05s" href="https://varde4902.github.io/varde99/" target="_blank" rel="noopener">
+      <span class="ic">🔥</span><span class="tx"><b>Прайс заданий на стрим</b><small><span class="badge">55 заданий</span> ломай мне прицел</small></span><span class="ar">→</span></a>
+    <a class="lk" style="--c:#9146ff;animation-delay:.1s" href="https://www.twitch.tv/varde99" target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4 2 2.5 6v14h5v3h3l3-3h4l5-5V2H4Zm16 12-3 3h-5l-3 3v-3H5V4h15v10Zm-4-7h-2v6h2V7Zm-5 0H9v6h2V7Z"/></svg></span>
+      <span class="tx"><b>Twitch — стримы</b><small>twitch.tv/varde99</small></span><span class="ar">→</span></a>
+    <a class="lk" style="--c:#229ed9;animation-delay:.15s" href="https://t.me/varde99" target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3 18.8 19c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8L18.1 6c.4-.3-.1-.5-.6-.2L6.6 12.7 2 11.3c-1-.3-1-1 .2-1.5L20.5 2.8c.8-.3 1.6.2 1.4 1.5Z"/></svg></span>
+      <span class="tx"><b>Telegram — анонсы эфиров</b><small>Когда стрим, розыгрыши, новости</small></span><span class="ar">→</span></a>
+
+    <div class="sep">Донат</div>
+    <a class="lk" style="--c:#f57d07;animation-delay:.2s" href="https://www.donationalerts.com/r/varde99" target="_blank" rel="noopener">
+      <span class="ic">💸</span><span class="tx"><b>DonationAlerts</b><small>СБП · карты РФ · иностранные карты</small></span><span class="ar">→</span></a>
+    <a class="lk" style="--c:#2f7bff;animation-delay:.25s" href="https://donatepay.ru/don/1539325" target="_blank" rel="noopener">
+      <span class="ic">💳</span><span class="tx"><b>DonatePay</b><small>Карты · СБП · онлайн-банки · крипта</small></span><span class="ar">→</span></a>
+
+    <div class="sep">Ещё</div>
+    <a class="lk" style="--c:#ff0050;animation-delay:.3s" href="https://www.tiktok.com/@varde999" target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9a7.3 7.3 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z"/></svg></span>
+      <span class="tx"><b>TikTok</b><small>@varde999 — нарезки со стримов</small></span><span class="ar">→</span></a>
+    <a class="lk" style="--c:#ffc83d;animation-delay:.35s" href="https://varde4902.github.io/varde99/#hub" target="_blank" rel="noopener">
+      <span class="ic">🏆</span><span class="tx"><b>Табло MVP донатеров</b><small>Попади в топ-15 стрима</small></span><span class="ar">→</span></a>
+  </div>
+
+  <div class="how">
+    <h2>🎮 Как заказать задание</h2>
+    <ol>
+      <li>Открой <b>прайс</b> и нажми «Заказать» на задании.</li>
+      <li>Жми <b>DonationAlerts</b> или <b>DonatePay</b>: код задания скопируется сам.</li>
+      <li>Вставь код в сообщение доната и отправь сумму. Бот включит задание прямо на стриме.</li>
+    </ol>
+  </div>
+  <footer>© Varde99 · Спасибо за поддержку 💜</footer>
+</main>
+</body>
+</html>
