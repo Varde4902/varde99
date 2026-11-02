@@ -217,7 +217,9 @@ svg.i{stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-l
 .bt:hover .big{transform:rotate(-8deg) scale(1.08);opacity:.25}
 .bt.xh{grid-column:span 2;grid-row:span 2;padding:0;background:radial-gradient(circle,#232325,#0e0e0f 75%)}
 .bt.xh canvas{width:100%;height:100%}.bt.xh .lab{position:absolute;left:24px;top:22px}
-.bt.xh .pr{position:absolute;left:24px;right:24px;bottom:20px;display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--mute)}.bt.xh .pr b{color:var(--ink);font-weight:400;margin-left:6px}
+.xcode{position:absolute;left:20px;right:20px;bottom:18px;display:flex;align-items:center;gap:10px;background:rgba(11,11,12,.85);border:1px solid var(--line2);border-radius:16px;padding:8px 8px 8px 16px}
+.xcode code{flex:1;min-width:0;font:400 15px ui-monospace,Consolas,monospace;color:var(--acc);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xcode button{height:40px;padding:0 18px;border-radius:999px;background:var(--ink);color:var(--bg);font:400 14px "Geologica";flex:none}.xcode button:hover{background:var(--acc)}
 .bt.acc{background:var(--light);color:var(--bg);border-color:var(--light)}.bt.acc .lab{color:#6a6963}
 .bt.span2{grid-column:span 2}
 
@@ -517,6 +519,8 @@ const SITE = {
     ["🖱", "Мышь", "ATTACK SHARK X3"], ["🎧", "Наушники", "Logitech G435"],
     ["⌨️", "Клавиатура", "Aula F75"], ["🔲", "Разрешение", "1280×1024 (4:3)"],
   ],
+  /* код прицела из CS2 (Настройки → Игра → Прицел → «Поделиться»); пусто — блок с кодом не показывается */
+  crosshairCode: "CSpJntvQyRNJkrF6HCihc8wwR3kUuewrt75PXwtAvOQu9A",
   crosshair: { style: 4, length: 8, gap: 3, thickness: 3, r: 0, g: 255, b: 135, dot: false, outline: false, t: false },
   /* окно для стрима 24 часа (время МСК): день недели 0 = вс, 5 = пт */
   marathon: { from: { day: 5, hour: 18 }, to: { day: 0, hour: 20 } },
@@ -968,7 +972,7 @@ $("#foot-links").innerHTML = LINKS.map(l => `<a href="${l[4]}" target="_blank" r
   const x = SITE.crosshair;
   const tile = (lab, v, cls = "", ic = "") => v ? `<div class="bt ${cls}">${ic ? svg(ic, "i big") : ""}<span class="lab">${lab}</span><span class="v">${esc(v)}</span></div>` : "";
   $("#bento").innerHTML = `<div class="bt xh"><span class="lab">Мой прицел</span><canvas id="xh" width="1200" height="800"></canvas>
-      <div class="pr"><span>Длина<b>${x.length}</b></span><span>Зазор<b>${x.gap}</b></span><span>Толщина<b>${x.thickness}</b></span><span>Точка<b>${x.dot ? "да" : "нет"}</b></span></div></div>`
+      ${SITE.crosshairCode ? `<div class="xcode"><code>${esc(SITE.crosshairCode)}</code><button id="xcopy">Скопировать</button></div>` : ""}</div>`
     + tile("Сенса", get("Сенса"), "acc")
     + tile("DPI · eDPI", [get("DPI"), get("eDPI")].filter(Boolean).join(" · "))
     + tile("Монитор", get("Монитор"), "", "mon")
@@ -976,6 +980,7 @@ $("#foot-links").innerHTML = LINKS.map(l => `<a href="${l[4]}" target="_blank" r
     + tile("Мышь", get("Мышь"), "dev", "mouse")
     + tile("Наушники", get("Наушники"), "dev", "head")
     + tile("Клавиатура", get("Клавиатура"), "dev span2", "kb");
+  if ($("#xcopy")) $("#xcopy").onclick = () => copyText(SITE.crosshairCode, "Код прицела скопирован — вставь в CS2: Настройки → Прицел → Импорт");
   const cv = $("#xh"), g = cv.getContext("2d"), host = cv.parentElement, col = `rgb(${x.r},${x.g},${x.b})`;
   let hot = 0, hv = 0, run = false;
   function draw(){
