@@ -166,6 +166,15 @@ svg.i{stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-l
 .row2 .tile{width:40px;height:40px;border-radius:13px}.row2 .tile svg{width:20px;height:20px}
 .row2.nw{cursor:var(--cur)}.row2.nw:hover .tile{background:var(--acc);border-color:var(--acc)}.row2.nw:hover .tile svg{stroke:var(--bg)}
 .empty2{padding:36px 0;text-align:center;color:var(--mute)}
+.st3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.st3>div{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px 24px;min-width:0}
+.st3 b{display:block;font:200 46px/1.05 "Geologica";letter-spacing:-.03em;margin-top:8px}
+.st3 small{display:block;color:var(--mute);font-size:14px;margin-top:2px}
+.ach{display:inline-flex;gap:4px;margin-left:8px;vertical-align:middle}
+.ach i{width:22px;height:22px;border-radius:50%;background:var(--card2);border:1px solid var(--line2);display:inline-grid;place-items:center}
+.ach i svg{width:12px;height:12px;stroke:var(--acc)}
+.achs{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font-size:12px;color:var(--mute);margin-top:12px}
+.achs span{display:flex;align-items:center;gap:8px}.achs .ach{margin:0}
 .qbox{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .qbox>div{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:24px;min-width:0}
 .qbox h3{font:300 24px "Geologica";display:flex;align-items:center;gap:10px;margin-bottom:6px}.qbox h3 svg{width:22px;height:22px}
@@ -295,6 +304,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
   .dial{margin:0 auto}
   .rules{position:static}
   .cols,.qbox{grid-template-columns:1fr}
+  .st3{grid-template-columns:1fr}
   .tv .scr{transform:none}
 }
 @media (max-width:860px){
@@ -394,6 +404,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
   <div class="gb rv"><div><span class="lab">Всего задоначено</span><div class="big" id="feed-total">0 ₽</div></div>
     <div><div class="gt"><span id="goal-name"></span><span id="goal-pct">0%</span></div><div class="bar"><i id="goal-bar"></i></div><div class="upd"><span id="goal-txt"></span> <span id="feed-upd"></span></div></div>
     <a class="btn pri" href="#donate">Поддержать стрим</a></div>
+  <div class="st3 rv"><div><span class="lab">Бот выполнил заданий</span><b id="st-tasks">—</b></div><div><span class="lab">Донатов всего</span><b id="st-don">—</b></div><div><span class="lab">Самый большой донат</span><b id="st-big">—</b><small id="st-big-who"></small></div></div>
   <div class="qbox rv" id="qbox">
     <div><h3 data-ic="zap">Сейчас на стриме</h3><div id="q-now"></div></div>
     <div><h3 data-ic="clock">Ждут в очереди</h3><div id="q-wait"></div></div>
@@ -859,13 +870,17 @@ $("#c-dp").addEventListener("click", () => copyText(cartCodes(), "Коды ск�
 /* звания по общей сумме донатов, как в CS */
 const RANKS = [[0,"Silver","#9aa3b5"],[300,"Gold Nova","#e6c35c"],[800,"Master Guardian","#5fb3ff"],[1500,"Legendary Eagle","#b58cff"],[3000,"Supreme","#ff8a5c"],[6000,"Global Elite","#ff4d6d"]];
 const rankOf = sum => [...RANKS].reverse().find(r => sum >= r[0]);
+/* достижения: бот считает сам и присылает ключи в ленте */
+const ACH = {first:["fire","Первый донат"], regular:["user","10 донатов"], tasks10:["zap","10 заданий"], cases5:["box","Открыл 5 кейсов"], marathon:["clock","Заказал марафон"], big:["card","Донат от 1 000 ₽"]};
+const achIcons = keys => keys && keys.length ? `<span class="ach">${keys.filter(k => ACH[k]).map(k => `<i title="${ACH[k][1]}">${svg(ACH[k][0])}</i>`).join("")}</span>` : "";
 function renderFame(){
   const list = [...FAME].sort((a, b) => b.sum - a.sum).slice(0, 6);
   $("#fame-since").textContent = "Донаты считаются с " + FAME_SINCE;
   $("#fame").innerHTML = (list.length ? list.map((d, i) => { const r = rankOf(d.sum);
-      return `<div class="row2"><span class="pos">${i + 1}</span><span class="av ${i ? "" : "top1"}">${esc((d.name || "?")[0].toUpperCase())}</span><span class="nm">${esc(d.name)}<span class="rk" style="--rc:${r[2]}">${r[1]}</span></span><span class="sm">${fmt(d.sum)} ₽</span></div>`; }).join("")
+      return `<div class="row2"><span class="pos">${i + 1}</span><span class="av ${i ? "" : "top1"}">${esc((d.name || "?")[0].toUpperCase())}</span><span class="nm">${esc(d.name)}<span class="rk" style="--rc:${r[2]}">${r[1]}${achIcons(d.ach)}</span></span><span class="sm">${fmt(d.sum)} ₽</span></div>`; }).join("")
     : '<div class="empty2">Топ пока пустой — первый донат займёт первое место</div>')
-    + `<div class="ranks">${RANKS.map(r => `<span style="--rc:${r[2]}">${r[1]}${r[0] ? " от " + fmt(r[0]) + " ₽" : ""}</span>`).join("")}</div>`;
+    + `<div class="ranks">${RANKS.map(r => `<span style="--rc:${r[2]}">${r[1]}${r[0] ? " от " + fmt(r[0]) + " ₽" : ""}</span>`).join("")}</div>`
+    + `<div class="achs">${Object.keys(ACH).map(k => `<span>${achIcons([k])}${ACH[k][1]}</span>`).join("")}</div>`;
 }
 const NEW = TASKS.filter(t => t.new);
 $("#new-list").innerHTML = NEW.length ? NEW.map(x => `<div class="row2 nw" data-open="${TASKS.indexOf(x)}"><span class="tile">${svg(icoOf(x))}</span><span class="nm">${esc(x.t)}</span><span class="sm">${x.p} ₽</span></div>`).join("")
@@ -895,6 +910,9 @@ $("#new-list").innerHTML = NEW.length ? NEW.map(x => `<div class="row2 nw" data-
     goal((d.top || []).reduce((a, x) => a + x.sum, 0));
     $("#feed-upd").textContent = d.updated ? "· обновлено " + ago(d.updated) : "";
     if (d.top && d.top.length){ FAME.length = 0; d.top.forEach(x => FAME.push(x)); renderFame(); }
+    const st = d.stats;
+    if (st){ $("#st-tasks").textContent = fmt(st.tasks); $("#st-don").textContent = fmt(st.donations);
+      $("#st-big").textContent = st.biggest ? fmt(st.biggest.sum) + " ₽" : "—"; $("#st-big-who").textContent = st.biggest ? "от " + st.biggest.who : "пока никого — будь первым"; }
     QUEUE_D = d.queue && Date.now() / 1000 - (d.updated || 0) < 900 ? d.queue : null; renderQueue();
   }
   /* очередь: бот присылает, что включено сейчас и что ждёт; старше 15 минут — значит, бот выключен */
