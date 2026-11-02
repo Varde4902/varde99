@@ -589,7 +589,7 @@ const TASKS = [
  {c:"weapons",ico:"🔪",t:"Только нож",d:"Раунд только с ножом. Бегу резать всех.",p:129,dur:"раунд",auto:false,code:"KNIFE"},
  {c:"weapons",ico:"🎯",t:"AWP без прицела",d:"Только AWP и стреляю без зума (noscope).",p:89,dur:"раунд",auto:false,code:"NOSCOPE"},
  {c:"weapons",ico:"🔫",t:"Только Negev",d:"Беру пулемёт и спамлю весь раунд.",p:69,dur:"раунд",auto:false,code:"NEGEV"},
- {c:"weapons",ico:"💣",t:"Только гранаты",d:"Никакого оружия — только нады, молики и флешки.",p:99,dur:"раунд",auto:false,code:"NADES"},
+ {c:"weapons",ico:"💣",t:"Только гранаты",d:"Весь раунд без стволов: играю только гранатами — осколочные, молотов, флешки и дым.",p:99,dur:"раунд",auto:false,code:"NADES"},
  {c:"weapons",ico:"🔫",t:"Только пистолеты на игру",d:"Целую игру только пистолеты.",p:209,dur:"игра",auto:false,code:"PISTOL-G"},
  {c:"weapons",ico:"⚡",t:"Только Zeus",d:"Раунд только с тазером.",p:139,dur:"раунд",auto:false,code:"ZEUS"},
  {c:"weapons",ico:"🎲",t:"Оружие выбирает чат",d:"Пишу в чат «какое оружие?» — беру то, что напишут первым.",p:39,dur:"раунд",auto:false,code:"CHATGUN"},
@@ -611,10 +611,7 @@ const TASKS = [
 
  // ЧЕЛЛЕНДЖИ
  {c:"challenge",ico:"🦆",t:"Только на корточках",d:"Весь раунд передвигаюсь присев.",p:39,dur:"раунд",auto:false,code:"DUCK"},
- {c:"challenge",ico:"🔙",t:"Хожу задом",d:"Раунд двигаюсь только спиной вперёд.",p:49,dur:"раунд",auto:false,code:"BACK"},
- {c:"challenge",ico:"🐇",t:"Только прыжки",d:"Всё время прыгаю. Стоять запрещено.",p:49,dur:"раунд",auto:false,code:"JUMP"},
  {c:"challenge",ico:"🚀",t:"Раш без остановки",d:"Со старта бегу в лоб на врагов.",p:29,dur:"раунд",auto:false,code:"RUSH"},
- {c:"challenge",ico:"🖐",t:"Одна рука",d:"Играю только мышкой, без клавиатуры.",p:119,dur:"раунд",auto:false,code:"ONEHAND"},
  {c:"challenge",ico:"🤐",t:"Не говорю с тимой",d:"Весь матч молчу в войсе.",p:99,dur:"игра",auto:false,code:"MUTE"},
  {c:"challenge",ico:"🎁",t:"Отдать оружие тиммейту",d:"Покупаю и дропаю лучшую пушку тиммейту.",p:29,dur:"раунд",auto:false,code:"DROP"},
  {c:"challenge",ico:"👆",t:"Только тапы",d:"Стреляю только одиночными: никаких зажимов и спреев.",p:49,dur:"раунд",auto:false,code:"TAPS",new:true},
@@ -642,7 +639,6 @@ const TASKS = [
  {c:"cam",ico:"🧍",t:"Играю стоя",d:"Встаю из-за стола и играю стоя до конца игры.",p:149,dur:"игра",auto:false,code:"STAND",new:true},
 
  // ЧАТ
- {c:"chat",ico:"🗳",t:"Голосование",d:"Запускаю опрос в чате на твою тему.",p:29,dur:"сразу",auto:false,code:"POLL"},
  {c:"chat",ico:"⭐",t:"Привет на стриме",d:"Передам привет тебе или другу на камеру.",p:19,dur:"сразу",auto:false,code:"HI"},
  {c:"chat",ico:"🗺",t:"Карта на следующую игру",d:"Ты выбираешь карту (если режим позволяет).",p:119,dur:"игра",auto:false,code:"MAP"},
  {c:"chat",ico:"🤝",t:"Сыграть со мной",d:"Беру тебя в пати на одну игру.",p:319,dur:"игра",auto:false,code:"PARTY"},
