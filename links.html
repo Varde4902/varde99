@@ -1,124 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Varde99 — все ссылки</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VARDE99 — все ссылки</title>
 <meta name="description" content="Varde99: стримы CS2 на Twitch, анонсы в Telegram, прайс заданий и донат.">
-<meta name="theme-color" content="#07070a">
-<meta property="og:title" content="Varde99 — все ссылки">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:title" content="VARDE99 — все ссылки">
 <meta property="og:description" content="Стримы CS2 каждый день · Управляй моей игрой за донат">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0b0c'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='900' font-size='30' text-anchor='middle' fill='%23c8ff4d'%3E99%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;400;800&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
-:root{--bg:#07070a;--line:rgba(255,255,255,.09);--text:#f5f5f7;--mute:#9a9aa6;--acc:#e8173b;--acc2:#ff4d6d;--glow:rgba(232,23,59,.45);--gold:#ffc83d;--auto:#2ee6a6;
-  --fh:'Unbounded',Impact,'Arial Black',sans-serif;--fb:Manrope,system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.2,.8,.2,1)}
+:root{--bg:#0b0b0c;--card:#141415;--card2:#1a1a1b;--ink:#ecebe6;--ink2:#b5b4ae;--mute:#82817b;--line:#262624;--line2:#3a3a37;--acc:#c8ff4d;--light:#e9e8e2;--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%}
-body{font-family:var(--fb);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font:300 16px/1.5 "Geologica",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
-.orb.a{width:520px;height:520px;left:50%;top:-260px;margin-left:-260px;background:radial-gradient(circle,rgba(232,23,59,.55),transparent 65%);animation:float 14s ease-in-out infinite alternate}
-.orb.b{width:380px;height:380px;right:-160px;bottom:-120px;background:radial-gradient(circle,rgba(122,13,36,.7),transparent 65%);animation:float 18s ease-in-out infinite alternate-reverse}
-@keyframes float{to{transform:translate(40px,60px) scale(1.1)}}
-.grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;
-  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;
-  mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 75%)}
-main{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:44px 16px 40px;display:flex;flex-direction:column;align-items:center}
-
-/* профиль */
-.ava{position:relative;width:104px;height:104px;border-radius:30px;display:grid;place-items:center;background:var(--acc);font:900 46px var(--fh);transform:rotate(-6deg);box-shadow:0 0 50px var(--glow);animation:pop .8s var(--ease) both}
-.ava::after{content:"";position:absolute;inset:-8px;border-radius:36px;border:2px solid rgba(232,23,59,.5);animation:ring 2.4s ease-out infinite}
-@keyframes ring{from{transform:scale(.9);opacity:1}to{transform:scale(1.25);opacity:0}}
-@keyframes pop{from{transform:rotate(-6deg) scale(.6);opacity:0}}
-h1{font:900 34px/1 var(--fh);letter-spacing:-.04em;margin-top:22px}
-h1 b{color:var(--acc)}
-.tag{margin-top:10px;color:var(--mute);font-size:15px;font-weight:600;text-align:center;line-height:1.5}
-.tag i{font-style:normal;color:var(--acc2)}
-.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}
-.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:99px;font-size:12.5px;font-weight:800;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--auto);box-shadow:0 0 8px var(--auto);animation:blink 1.4s infinite}
-@keyframes blink{50%{opacity:.3}}
-
-/* кнопки-ссылки */
-.links{width:100%;display:grid;gap:12px;margin-top:30px}
-.lk{position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);overflow:hidden;
-  transition:transform .25s var(--ease),border-color .25s,box-shadow .25s;animation:in .6s var(--ease) both;-webkit-tap-highlight-color:transparent}
-.lk:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 18px 40px -18px var(--c)}
-.lk:active{transform:scale(.98)}
-.lk::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at 0% 50%,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);pointer-events:none}
-.lk .ic{position:relative;flex:none;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:var(--c);font-size:24px}
-.lk .ic svg{width:26px;height:26px}
-.lk .tx{position:relative;flex:1;min-width:0}
-.lk .tx b{display:block;font-weight:800;font-size:16.5px}
-.lk .tx small{display:block;color:var(--mute);font-size:13px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lk .ar{position:relative;font-size:20px;color:var(--c);font-weight:800;transition:transform .25s}
-.lk:hover .ar{transform:translateX(4px)}
-@keyframes in{from{opacity:0;transform:translateY(16px)}}
-/* главная кнопка — прайс */
-.lk.main{padding:18px;border:none;background:var(--acc);box-shadow:0 14px 40px -10px var(--glow)}
-.lk.main::before{background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);background-size:250% 100%;animation:shine 3.2s ease-in-out infinite}
-@keyframes shine{0%,40%{background-position:120% 0}100%{background-position:-60% 0}}
-.lk.main .ic{background:rgba(0,0,0,.22)}
-.lk.main .tx small{color:rgba(255,255,255,.85)}
-.lk.main .ar{color:#fff}
-.lk.main .badge{display:inline-block;margin-right:6px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:6px;background:rgba(0,0,0,.25);color:#fff}
-.sep{width:100%;display:flex;align-items:center;gap:12px;margin:10px 0 0;color:var(--mute);font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
-.sep::before,.sep::after{content:"";flex:1;height:1px;background:var(--line)}
-
-/* как заказать */
-.how{width:100%;margin-top:26px;padding:18px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
-.how h2{font:700 15px var(--fh);margin-bottom:12px}
-.how ol{list-style:none;display:grid;gap:10px;counter-reset:s}
-.how li{position:relative;padding-left:36px;color:var(--mute);font-size:14px;line-height:1.5;counter-increment:s}
-.how li::before{content:counter(s);position:absolute;left:0;top:-1px;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:rgba(232,23,59,.16);color:var(--acc2);font:900 12px var(--fh)}
-.how li b{color:var(--text)}
-footer{margin-top:28px;color:#55555f;font-size:12.5px;text-align:center}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+#dots{position:fixed;left:50%;top:-140px;width:560px;height:560px;margin-left:-280px;z-index:0;pointer-events:none;opacity:.55}
+main{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:56px 18px 40px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.kick{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;color:var(--ink2);border:1px solid #2e2e2c;border-radius:999px;padding:7px 16px;background:#0b0b0c99;backdrop-filter:blur(6px)}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--acc);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.3}}
+h1{font:800 64px/.9 "Geologica";letter-spacing:-.05em;margin:22px 0 12px}
+h1 span{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.tag{color:var(--ink2);font-size:17px}.tag em{font-style:normal;color:var(--acc)}
+.links{width:100%;display:grid;gap:10px;margin-top:32px;text-align:left}
+svg.i{width:24px;height:24px;stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.lk{display:flex;align-items:center;gap:14px;padding:14px 14px 14px 16px;border-radius:22px;background:var(--card);border:1px solid var(--line);transition:border-color .3s,transform .3s var(--ease);animation:in .6s var(--ease) both}
+.lk:hover{border-color:#4a4a45;transform:translateY(-2px)}
+.tile{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:var(--card2);border:1px solid #2e2e2c;flex:none;transition:.3s}
+.lk:hover .tile{background:var(--c);border-color:var(--c)}.lk:hover .tile svg{stroke:#fff}
+.lk b{display:block;font-weight:400;font-size:17px}.lk small{display:block;color:var(--mute);font-size:13px}
+.lk .tx{flex:1;min-width:0}
+.arr{width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;flex:none;transition:.3s}
+.lk:hover .arr{background:var(--ink);color:var(--bg);transform:rotate(-45deg)}
+.lk.main{background:var(--light);color:var(--bg);border-color:var(--light);padding:18px 16px 18px 18px}
+.lk.main .tile{background:var(--bg);border-color:var(--bg)}.lk.main .tile svg{stroke:var(--acc)}
+.lk.main small{color:#4a4943}.lk.main .arr{border-color:#0b0b0c33}
+.lk.main:hover .tile{background:var(--bg)}.lk.main:hover .arr{background:var(--bg);color:var(--acc)}
+.lk.main b{font-size:19px}
+.sep{font-size:12px;letter-spacing:.12em;color:var(--mute);margin:14px 0 2px 4px}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.how{width:100%;margin-top:26px;padding:22px;border-radius:22px;background:var(--card);border:1px solid var(--line);text-align:left}
+.how h2{font:300 22px "Geologica";margin-bottom:12px}
+.how li{list-style:none;display:flex;gap:14px;color:var(--ink2);font-size:15px;padding:10px 0;border-top:1px solid var(--line)}
+.how li b{color:var(--acc);font-weight:400;flex:none;width:16px}
+footer{margin-top:28px;color:var(--mute);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="orb a"></div><div class="orb b"></div><div class="grid"></div>
+<canvas id="dots" width="1120" height="1120"></canvas>
 <main>
-  <div class="ava">V</div>
-  <h1>VARDE<b>99</b></h1>
-  <p class="tag">Стримы <i>CS2</i> каждый день<br>Управляй моей игрой за донат 😈</p>
-  <div class="chips"><span class="chip"><span class="dot"></span>Twitch · TikTok</span><span class="chip">⏰ Марафон 24 ч</span></div>
-
-  <div class="links">
-    <a class="lk main" style="--c:#e8173b;animation-delay:.05s" href="https://varde4902.github.io/varde99/" target="_blank" rel="noopener">
-      <span class="ic">🔥</span><span class="tx"><b>Прайс заданий на стрим</b><small><span class="badge">55 заданий</span> ломай мне прицел</small></span><span class="ar">→</span></a>
-    <a class="lk" style="--c:#9146ff;animation-delay:.1s" href="https://www.twitch.tv/varde99" target="_blank" rel="noopener">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4 2 2.5 6v14h5v3h3l3-3h4l5-5V2H4Zm16 12-3 3h-5l-3 3v-3H5V4h15v10Zm-4-7h-2v6h2V7Zm-5 0H9v6h2V7Z"/></svg></span>
-      <span class="tx"><b>Twitch — стримы</b><small>twitch.tv/varde99</small></span><span class="ar">→</span></a>
-    <a class="lk" style="--c:#229ed9;animation-delay:.15s" href="https://t.me/varde99" target="_blank" rel="noopener">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3 18.8 19c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8L18.1 6c.4-.3-.1-.5-.6-.2L6.6 12.7 2 11.3c-1-.3-1-1 .2-1.5L20.5 2.8c.8-.3 1.6.2 1.4 1.5Z"/></svg></span>
-      <span class="tx"><b>Telegram — анонсы эфиров</b><small>Когда стрим, розыгрыши, новости</small></span><span class="ar">→</span></a>
-
-    <div class="sep">Донат</div>
-    <a class="lk" style="--c:#f57d07;animation-delay:.2s" href="https://www.donationalerts.com/r/varde99" target="_blank" rel="noopener">
-      <span class="ic">💸</span><span class="tx"><b>DonationAlerts</b><small>СБП · карты РФ · иностранные карты</small></span><span class="ar">→</span></a>
-    <a class="lk" style="--c:#2f7bff;animation-delay:.25s" href="https://donatepay.ru/don/1539325" target="_blank" rel="noopener">
-      <span class="ic">💳</span><span class="tx"><b>DonatePay</b><small>Карты · СБП · онлайн-банки · крипта</small></span><span class="ar">→</span></a>
-
-    <div class="sep">Ещё</div>
-    <a class="lk" style="--c:#ff0050;animation-delay:.3s" href="https://www.tiktok.com/@vardee99" target="_blank" rel="noopener">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9a7.3 7.3 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z"/></svg></span>
-      <span class="tx"><b>TikTok</b><small>@vardee99 — нарезки со стримов</small></span><span class="ar">→</span></a>
-    <a class="lk" style="--c:#ffc83d;animation-delay:.35s" href="https://varde4902.github.io/varde99/#hub" target="_blank" rel="noopener">
-      <span class="ic">🏆</span><span class="tx"><b>Табло MVP донатеров</b><small>Попади в топ-15 стрима</small></span><span class="ar">→</span></a>
-  </div>
-
-  <div class="how">
-    <h2>🎮 Как заказать задание</h2>
-    <ol>
-      <li>Открой <b>прайс</b> и нажми «Заказать» на задании.</li>
-      <li>Жми <b>DonationAlerts</b> или <b>DonatePay</b>: код задания скопируется сам.</li>
-      <li>Вставь код в сообщение доната и отправь сумму. Бот включит задание прямо на стриме.</li>
-    </ol>
-  </div>
-  <footer>© Varde99 · Спасибо за поддержку 💜</footer>
+  <span class="kick"><i></i>CS2 · TWITCH И TIKTOK</span>
+  <h1>VARDE<span>99</span></h1>
+  <p class="tag">Стримы CS2 каждый день.<br>Управляй <em>моей игрой</em> за донат.</p>
+  <div class="links" id="links"></div>
+  <div class="how"><h2>Как заказать задание</h2><ol>
+    <li><b>1</b><span>Открой прайс и нажми «Заказать» на задании.</span></li>
+    <li><b>2</b><span>Жми DonationAlerts или DonatePay — код задания с ценой скопируется сам.</span></li>
+    <li><b>3</b><span>Вставь код в сообщение доната и отправь сумму. Бот включит задание прямо на стриме.</span></li></ol></div>
+  <footer>© Varde99 · Спасибо за поддержку</footer>
 </main>
+<script>
+const SITE_URL = "https://varde4902.github.io/varde99/";
+const P = {
+  price:'<path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/>',
+  tw:'<path d="M4 3h16v11l-5 5h-4l-3 3v-3H4z"/><path d="M10 8v4M15 8v4"/>',
+  tg:'<path d="M21 4L3 11.2l6 2.1 2.2 6.2 3.3-3.8 4.6 3.5z"/><path d="M9 13.3l12-9.3"/>',
+  tt:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.3 2.8 2.2 4.8 5 5"/>',
+  fire:'<path d="M12 21c4 0 7-2.7 7-6.5 0-3.5-2.5-5.5-3.5-8.5-1 2-2 3-3.5 3.5C12 6 11 4 9 3c0 4-4 6-4 11.5C5 18.3 8 21 12 21z"/>',
+  card:'<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/>',
+  crown:'<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/>'};
+const L = [
+  ["main","price","","Прайс заданий на стрим","Задания от 19 ₽ — бот включает их сам",SITE_URL],
+  ["","tw","#9146ff","Twitch — стримы","twitch.tv/varde99","https://www.twitch.tv/varde99"],
+  ["","tg","#2aabee","Telegram — анонсы эфиров","Когда стрим, розыгрыши, новости","https://t.me/varde99"],
+  ["sep","Донат"],
+  ["","fire","#f57d07","DonationAlerts","СБП · карты РФ · иностранные карты","https://www.donationalerts.com/r/varde99"],
+  ["","card","#3f9cf2","DonatePay","Карты · СБП · онлайн-банки · крипта","https://donatepay.ru/don/1539325"],
+  ["sep","Ещё"],
+  ["","tt","#ff0050","TikTok","@vardee99 — нарезки со стримов","https://www.tiktok.com/@vardee99"],
+  ["","crown","#c8ff4d","Топ донатеров и очередь","Попади в MVP стрима",SITE_URL + "#hub"]];
+document.getElementById("links").innerHTML = L.map((x, i) => x[0] === "sep" ? `<div class="sep">${x[1].toUpperCase()}</div>`
+  : `<a class="lk ${x[0]}" style="--c:${x[2]};animation-delay:${i * .05}s" href="${x[5]}" target="_blank" rel="noopener"><span class="tile"><svg class="i" viewBox="0 0 24 24">${P[x[1]]}</svg></span><span class="tx"><b>${x[3]}</b><small>${x[4]}</small></span><span class="arr">→</span></a>`).join("");
+/* фон: шар из точек, как на главной (без библиотек) */
+(function(){
+  const cv = document.getElementById("dots"), g = cv.getContext("2d"), N = 1400, RM = matchMedia("(prefers-reduced-motion: reduce)").matches, pts = [];
+  for (let i = 0; i < N; i++){ const y = 1 - 2 * (i + .5) / N, r = Math.sqrt(1 - y * y), th = i * 2.39996; pts.push([Math.cos(th) * r, y, Math.sin(th) * r]); }
+  function frame(t){
+    t *= .001; g.clearRect(0, 0, 1120, 1120); const a = t * .15, ca = Math.cos(a), sa = Math.sin(a);
+    for (const [x, y, z] of pts){ const n = Math.sin(x * 4 + t) * Math.sin(y * 5 - t * .8) * Math.sin(z * 4 + t * .6), r = 470 + n * 40;
+      const X = x * ca - z * sa, Z = x * sa + z * ca; if (Z < -.2) continue;
+      g.fillStyle = n > .42 ? "#c8ff4d" : `rgba(236,235,230,${.15 + Z * .35})`; g.beginPath(); g.arc(560 + X * r, 560 + y * r, 2.2, 0, 7); g.fill(); }
+  }
+  if (RM){ frame(4000); return; }
+  (function loop(t){ frame(t); requestAnimationFrame(loop); })(0);
+})();
+</script>
 </body>
 </html>
