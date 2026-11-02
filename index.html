@@ -615,12 +615,12 @@ html.lenis,html.lenis body{height:auto}
   <div class="wrap">
     <div class="sh rv"><div><div class="lbl">Эфир</div><h2 id="live-h">Смотри <i>стрим</i></h2></div><p>Если я в эфире — смотри прямо здесь и заказывай задания, не уходя со страницы.</p></div>
     <div class="tv rv">
-      <div class="scr" id="tw-box"><div class="ph"><div><b id="tw-ph-t">📺 Загружаю плеер…</b><span>Плеер Twitch работает на varde99.netlify.app</span></div></div></div>
+      <div class="scr" id="tw-box"><div class="ph"><div><b id="tw-ph-t">📺 Загружаю плеер…</b><span>Плеер Twitch загружается</span></div></div></div>
       <div class="glass tv-side">
         <div class="st" id="live-st">Проверяю эфир…</div>
         <p>Стримлю CS2 каждый день: челленджи от чата, донат-задания, розыгрыши в ТГК.</p>
         <a class="btn tw" href="https://www.twitch.tv/varde99" target="_blank" rel="noopener">Смотреть на Twitch</a>
-        <a class="btn" id="lnk-tiktok" href="https://www.tiktok.com/@varde999" target="_blank" rel="noopener">TikTok @varde999</a>
+        <a class="btn" id="lnk-tiktok" href="https://www.tiktok.com/@vardee99" target="_blank" rel="noopener">TikTok @vardee99</a>
         <a class="btn tg" id="lnk-tg" href="https://t.me/varde99" target="_blank" rel="noopener">✈️ Анонсы в Telegram</a>
       </div>
     </div>
@@ -695,7 +695,7 @@ html.lenis,html.lenis body{height:auto}
     <div class="ft">
       <div><a class="brand" href="#top"><span class="mk">V</span>VARDE<b>99</b></a><p>Стримы по CS2 на Twitch и TikTok. Управляй моей игрой за донат.</p></div>
       <div><h5>Разделы</h5><a href="#price">Задания на стрим</a><a href="#case">Кейс</a><a href="#hub">MVP и донаты</a><a href="#live">Эфир</a><a href="#setup">Мой сетап</a><a href="#faq">FAQ</a></div>
-      <div><h5>Каналы</h5><a href="https://www.twitch.tv/varde99" target="_blank" rel="noopener">Twitch</a><a href="https://www.tiktok.com/@varde999" target="_blank" rel="noopener">TikTok</a><a href="https://t.me/varde99" target="_blank" rel="noopener">Telegram</a><a href="https://www.donationalerts.com/r/varde99" target="_blank" rel="noopener">DonationAlerts</a><a href="https://donatepay.ru/don/1539325" target="_blank" rel="noopener">DonatePay</a></div>
+      <div><h5>Каналы</h5><a href="https://www.twitch.tv/varde99" target="_blank" rel="noopener">Twitch</a><a href="https://www.tiktok.com/@vardee99" target="_blank" rel="noopener">TikTok</a><a href="https://t.me/varde99" target="_blank" rel="noopener">Telegram</a><a href="https://www.donationalerts.com/r/varde99" target="_blank" rel="noopener">DonationAlerts</a><a href="https://donatepay.ru/don/1539325" target="_blank" rel="noopener">DonatePay</a></div>
     </div>
     <div class="copy">© Varde99 · Спасибо за поддержку 💜</div>
   </div>
@@ -751,7 +751,7 @@ html.lenis,html.lenis body{height:auto}
 const CONFIG = {
   donationAlerts: "https://www.donationalerts.com/r/varde99",   // твоя ссылка DonationAlerts
   donatePay:      "https://donatepay.ru/don/1539325",           // твоя ссылка DonatePay
-  tiktok:         "https://www.tiktok.com/@varde999",           // твой TikTok
+  tiktok:         "https://www.tiktok.com/@vardee99",           // твой TikTok
   telegram:       "https://t.me/varde99",                       // канал с анонсами эфиров
 };
 
@@ -1142,14 +1142,20 @@ renderCart(); renderFame(); render();
   }
   const host = location.hostname;
   if (!host || !/\./.test(host) || /claude|anthropic|usercontent/.test(host)){ $("#tw-ph-t").textContent = "📺 Плеер появится на сайте"; st.textContent = "Twitch: " + SITE.twitch; return; }
+  // запасной путь: плеер напрямую, без скрипта Twitch (если его режет блокировщик или сеть)
+  let done = false;
+  const plain = () => { if (done) return; done = true;
+    box.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${SITE.twitch}&parent=${host}&muted=true&autoplay=true" allowfullscreen allow="autoplay; fullscreen" style="width:100%;height:100%;border:0"></iframe>`;
+    st.textContent = "Twitch: " + SITE.twitch; };
   const s = document.createElement("script"); s.src = "https://embed.twitch.tv/embed/v1.js";
-  s.onload = () => {
+  s.onload = () => { if (done || !window.Twitch) return plain(); done = true;
     box.innerHTML = '<div id="tw-embed" style="width:100%;height:100%"></div>';
     const em = new Twitch.Embed("tw-embed", {width:"100%", height:"100%", channel:SITE.twitch, layout:"video", muted:true, autoplay:true, parent:[host]});
     em.addEventListener(Twitch.Player.ONLINE, () => setLive(true));
     em.addEventListener(Twitch.Player.OFFLINE, () => setLive(false));
   };
-  s.onerror = () => { $("#tw-ph-t").textContent = "📺 Не удалось загрузить плеер"; };
+  s.onerror = plain;
+  setTimeout(plain, 6000);
   document.head.appendChild(s);
 })();
 
