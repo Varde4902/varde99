@@ -357,7 +357,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
     <span class="kick"><b>CS2</b> ПРАЙС НА СТРИМ<span class="long"> · TWITCH И TIKTOK</span></span>
     <h1 class="name" aria-label="VARDE99"><i style="animation-delay:.05s">V</i><i style="animation-delay:.1s">A</i><i style="animation-delay:.15s">R</i><i style="animation-delay:.2s">D</i><i style="animation-delay:.25s">E</i><span><i style="animation-delay:.32s">9</i><i style="animation-delay:.39s">9</i></span></h1>
     <div class="sub">Управляй <em>моей игрой</em> за донат</div>
-    <p class="lead">Закинь донат с кодом задания — и бот сам сломает мне прицел, перевернёт экран или оставит с одним диглом.</p>
+    <p class="lead">Закинь донат с кодом задания — и бот сам сломает мне прицел, перепутает кнопки или оставит с одним диглом.</p>
     <div class="cta"><a class="btn pri go" href="#price">Открыть прайс<span>→</span></a><a class="btn ghost" href="#how">Как заказать</a></div>
   </div>
   <div class="hstats" id="hstats"></div>
@@ -541,7 +541,7 @@ const CATS = [
  {id:"weapons", name:"Оружие", ico:"🔫", sub:"Играю только с этим"},
  {id:"cs2auto", name:"CS2 — авто", ico:"⚙️", sub:"Бот сам меняет мне настройки игры"},
  {id:"challenge", name:"Челленджи", ico:"🎯", sub:"Ломаем привычки"},
- {id:"obs", name:"Хаос на экране", ico:"⚡", sub:"Срабатывает автоматически"},
+ {id:"obs", name:"Звук", ico:"🔊", sub:"Играет прямо у меня в ушах"},
  {id:"cam", name:"Вебка / IRL", ico:"📸", sub:"Физуха на камеру"},
  {id:"chat", name:"Чат", ico:"💬", sub:"Ты решаешь"},
  {id:"mega", name:"МЕГА", ico:"👑", sub:"Для легенд"},
@@ -598,6 +598,7 @@ const TASKS = [
  {c:"weapons",ico:"⚡",t:"Только Zeus",d:"Раунд только с тазером.",p:139,dur:"раунд",auto:false,code:"ZEUS"},
  {c:"weapons",ico:"🎲",t:"Оружие выбирает чат",d:"Пишу в чат «какое оружие?» — беру то, что напишут первым.",p:39,dur:"раунд",auto:false,code:"CHATGUN"},
  {c:"weapons",ico:"🪙",t:"Без брони на игру",d:"Не покупаю броню и шлем весь матч.",p:159,dur:"игра",auto:false,code:"NOARMOR"},
+ {c:"weapons",ico:"🔫",t:"Эко на всю игру",d:"Ничего не покупаю весь матч: только стартовый пистолет и нож.",p:199,dur:"игра",auto:false,code:"ECO",new:true},
 
  // CS2 АВТО
  {c:"cs2auto",ico:"➕",t:"Рандомный прицел",d:"Бот ставит мне случайный (уродский) прицел.",p:49,dur:"раунд",auto:true,code:"CROSS-R",hot:true},
@@ -612,6 +613,7 @@ const TASKS = [
  {c:"cs2auto",ico:"🫳",t:"Выкинь оружие!",d:"Бот в случайный момент нажимает у меня кнопку дропа.",p:79,dur:"мгновенно",auto:true,code:"DROPNOW"},
  {c:"cs2auto",ico:"🔫",t:"Рандомная позиция оружия",d:"Бот двигает оружие в руке: ближе, дальше, выше, ниже — каждый раз по-новому.",p:49,dur:"раунд",auto:true,code:"GUNPOS",new:true},
  {c:"cs2auto",ico:"🙈",t:"Без интерфейса",d:"Бот прячет HUD: не вижу здоровье, патроны и радар — играю на ощупь.",p:79,dur:"раунд",auto:true,code:"NOHUD",new:true},
+ {c:"cs2auto",ico:"⌨️",t:"Перепутанные кнопки",d:"Бот меняет мне W↔S и A↔D: жму вперёд — иду назад. Весь раунд.",p:99,dur:"раунд",auto:true,code:"SWAP",new:true},
 
  // ЧЕЛЛЕНДЖИ
  {c:"challenge",ico:"🦆",t:"Только на корточках",d:"Весь раунд передвигаюсь присев.",p:39,dur:"раунд",auto:false,code:"DUCK"},
@@ -619,17 +621,13 @@ const TASKS = [
  {c:"challenge",ico:"🤐",t:"Не говорю с тимой",d:"Весь матч молчу в войсе.",p:99,dur:"игра",auto:false,code:"MUTE"},
  {c:"challenge",ico:"🎁",t:"Отдать оружие тиммейту",d:"Покупаю и дропаю лучшую пушку тиммейту.",p:29,dur:"раунд",auto:false,code:"DROP"},
  {c:"challenge",ico:"👆",t:"Только тапы",d:"Стреляю только одиночными: никаких зажимов и спреев.",p:49,dur:"раунд",auto:false,code:"TAPS",new:true},
+ {c:"challenge",ico:"🖥",t:"Твоё разрешение экрана",d:"Напиши в сообщении доната разрешение (например 800×600 растянутое или 1024×768) — ставлю его в CS2 и играю так всю игру.",p:299,dur:"игра",auto:false,code:"RES",new:true},
+ {c:"challenge",ico:"🎧",t:"Наушники наоборот",d:"Надеваю наушники задом наперёд: шаги слева слышу справа. Весь раунд.",p:59,dur:"раунд",auto:false,code:"EARS",new:true},
+ {c:"challenge",ico:"🖱",t:"Мышка в левой руке",d:"Целый раунд играю мышкой в нерабочей руке.",p:149,dur:"раунд",auto:false,code:"LHAND",new:true},
+ {c:"challenge",ico:"🖱",t:"Без коврика для мыши",d:"Убираю коврик и играю мышкой прямо по столу. Весь раунд.",p:59,dur:"раунд",auto:false,code:"NOPAD",new:true},
 
  // OBS / АВТО
- {c:"obs",ico:"🙃",t:"Перевёрнутый экран",d:"Экран стрима переворачивается на 60 сек.",p:59,dur:"60 сек",auto:true,code:"FLIP"},
- {c:"obs",ico:"🌫",t:"Размытие экрана",d:"Блюр на картинку. Зрители видят только силуэты.",p:59,dur:"45 сек",auto:true,code:"BLUR"},
- {c:"obs",ico:"🪞",t:"Зеркальный экран",d:"Картинка отражается: лево и право меняются местами. Удачи мне с раскидками.",p:59,dur:"60 сек",auto:true,code:"MIRROR",new:true},
- {c:"obs",ico:"👾",t:"Пиксельный экран",d:"Картинка как в 240p — сплошные квадраты вместо врагов.",p:69,dur:"раунд",auto:true,code:"PIXEL",new:true},
- {c:"obs",ico:"⚫",t:"Ч/Б режим",d:"Мир теряет краски — фильтр на игру и камеру.",p:39,dur:"раунд",auto:true,code:"BW"},
- {c:"obs",ico:"🔍",t:"Зум в лицо",d:"Вебка на весь экран, игра в маленьком окошке.",p:59,dur:"30 сек",auto:true,code:"FACECAM"},
- {c:"obs",ico:"🌈",t:"Дискотека",d:"Мигающие RGB-фильтры на экране.",p:39,dur:"30 сек",auto:true,code:"DISCO"},
  {c:"obs",ico:"🔊",t:"Мем-звук",d:"Резкий мем-звук мне в наушники и на стрим.",p:19,dur:"мгновенно",auto:true,code:"SOUND"},
- {c:"obs",ico:"📺",t:"Чёрный экран",d:"Зрители не видят игру — только моё лицо.",p:79,dur:"раунд",auto:true,code:"BLACK"},
  {c:"obs",ico:"🎵",t:"Закажи трек",d:"Напиши в сообщении исполнителя и название — трек сам откроется у меня в Яндекс.Музыке.",p:49,dur:"1 трек",auto:true,code:"MUSIC"},
 
  // ВЕБКА / IRL
@@ -649,8 +647,8 @@ const TASKS = [
 
  // МЕГА
  {c:"mega",ico:"📦",t:"Открыть кейс",d:"Бот открывает кейс прямо на стриме: выпадает случайное задание — от синего до золотого ★. Испытай удачу (мою).",p:99,dur:"разное",auto:true,code:"CASE",hot:true},
- {c:"mega",ico:"🎲",t:"Случайное задание",d:"Бот сам выбирает 1 случайное задание на раунд — от дигла до перевёрнутого экрана или приседаний. Повезёт тебе или мне?",p:99,dur:"раунд",auto:true,code:"RANDOM",hot:true},
- {c:"mega",ico:"🌪",t:"Хаос-режим",d:"Рандомный прицел + ч/б + перевёрнутый экран сразу.",p:249,dur:"раунд",auto:true,code:"CHAOS",hot:true},
+ {c:"mega",ico:"🎲",t:"Случайное задание",d:"Бот сам выбирает 1 случайное задание на раунд — от дигла до перепутанных кнопок или приседаний. Повезёт тебе или мне?",p:99,dur:"раунд",auto:true,code:"RANDOM",hot:true},
+ {c:"mega",ico:"🌪",t:"Хаос-режим",d:"Рандомный прицел + сенса скачет + без интерфейса — всё сразу.",p:249,dur:"раунд",auto:true,code:"CHAOS",hot:true},
  {c:"mega",ico:"🎰",t:"Рулетка ×3",d:"Бот крутит рулетку и включает сразу 3 случайных АВТО-задания.",p:179,dur:"разное",auto:true,code:"ROULETTE"},
  {c:"mega",ico:"💜",t:"Твой ник на оверлее",d:"Твой ник висит на экране до конца стрима.",p:399,dur:"стрим",auto:true,code:"NAME"},
  {c:"mega",ico:"👑",t:"Ты — тренер на игру",d:"Весь матч ты командуешь мной в чате: куда идти, что покупать, где стоять — я слушаюсь.",p:479,dur:"игра",auto:false,code:"COACH"},
@@ -705,10 +703,10 @@ const P = {
  tt:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.3 2.8 2.2 4.8 5 5"/>',
  tg:'<path d="M21 4L3 11.2l6 2.1 2.2 6.2 3.3-3.8 4.6 3.5z"/><path d="M9 13.3l12-9.3"/>',
  play:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/>'};
-const BYCODE = {GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",FLIP:"flip",BLUR:"eye",BW:"screen",FACECAM:"cam",DISCO:"screen",SOUND:"sound",BLACK:"screen",MUSIC:"music",
+const BYCODE = {GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",SOUND:"sound",MUSIC:"music",
  "CROSS-R":"cross","CROSS-G":"cross",NOCROSS:"cross",LOWSENS:"mouse",HIGHSENS:"mouse",SENSRND:"mouse",INVERT:"mouse",LEFT:"gun",NOSOUND:"sound",DROPNOW:"gun",
  DUCK:"body",BACK:"walk",JUMP:"walk",RUSH:"walk",ONEHAND:"user",MUTE:"mic",DROP:"gun",HAT:"hat",GLASSES:"glasses",
- GUNPOS:"gun",NOHUD:"eye",MIRROR:"flip",PIXEL:"screen",TAPS:"cross",STAND:"body",POLL:"vote",HI:"chat",MAP:"chat",PARTY:"user",CASE:"box",RANDOM:"dice",CHAOS:"zap",ROULETTE:"dice",NAME:"crown",COACH:"user",UNTILWIN:"crown",STREAM24:"clock"};
+ GUNPOS:"gun",NOHUD:"eye",SWAP:"kb",RES:"mon",EARS:"head",LHAND:"mouse",ECO:"gun",NOPAD:"mouse",TAPS:"cross",STAND:"body",POLL:"vote",HI:"chat",MAP:"chat",PARTY:"user",CASE:"box",RANDOM:"dice",CHAOS:"zap",ROULETTE:"dice",NAME:"crown",COACH:"user",UNTILWIN:"crown",STREAM24:"clock"};
 const BYCAT = {weapons:"gun",cs2auto:"cross",challenge:"walk",obs:"screen",cam:"body",chat:"chat",mega:"crown"};
 const icoOf = x => P[BYCODE[x.code] || BYCAT[x.c] || "box"] ? (BYCODE[x.code] || BYCAT[x.c] || "box") : "box";
 const svg = (k, cls = "i") => `<svg class="${cls}" viewBox="0 0 24 24">${P[k] || P.box}</svg>`;
@@ -1002,7 +1000,7 @@ $("#don").innerHTML = [["fire","DonationAlerts",CONFIG.donationAlerts,["СБП",
   .map(d => `<a href="${d[2]}" target="_blank" rel="noopener">${svg(d[0], "i bg")}<div class="chips">${d[3].map(c => `<span class="chip2">${c}</span>`).join("")}</div><h3>${d[1]} →</h3><small>${d[2].replace(/^https?:\/\/(www\.)?/, "")}</small></a>`).join("");
 const FAQ = [
   ["Как заказать задание?","Нажми «Заказать», затем DonationAlerts или DonatePay — код задания скопируется сам. Вставь его в сообщение доната и отправь указанную сумму."],
-  ["Что значит «АВТО»?","Задания с меткой АВТО включает бот сам: меняет прицел, сенсу, фильтры на экране. Остальные задания попадают в очередь на экране стрима, и я выполняю их сам."],
+  ["Что значит «АВТО»?","Задания с меткой АВТО включает бот сам: меняет прицел, сенсу, кнопки и звук в игре. Остальные задания попадают в очередь на экране стрима, и я выполняю их сам."],
   ["Зачем код в сообщении?","По коду бот понимает, что донат пришёл с сайта и какое задание включить. Код копируется сам — нужно только вставить его в сообщение. Обычный донат без кода задание не включит."],
   ["Когда начинается задание «на раунд»?","АВТО-задания включаются сразу и выключаются в конце раунда. Ручные — со следующего раунда. «На игру» — до конца текущего матча."],
   ["Как заказать трек?","Выбери «Закажи трек» и напиши в сообщении исполнителя и название. Трек откроется у меня в Яндекс.Музыке."],
