@@ -159,6 +159,12 @@ svg.i{stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-l
 .gb .gt{display:flex;justify-content:space-between;gap:16px;margin-bottom:10px}.gb .gt span:last-child{color:var(--dark-on-light)}
 .bar{height:8px;border-radius:4px;background:#0b0b0c1a;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--bg);border-radius:4px;transition:width 1.2s var(--ease)}
 .gb .upd{font-size:13px;color:var(--dark-on-light);margin-top:8px}
+/* сбор по ступенькам: отметки на шкале (SITE.goal.steps) */
+.gbw{position:relative}.gbw.has{padding-bottom:26px}
+.gst{position:absolute;top:-4px;width:2px;height:16px;background:var(--bg);border-radius:1px}
+.gst span{position:absolute;top:22px;right:0;white-space:nowrap;font-size:12px;color:var(--dark-on-light)}
+.gst.first span{right:auto;left:0;transform:translateX(-50%)}
+.gst.ok span{color:var(--bg);font-weight:500}
 .gb .btn.pri{background:var(--bg);color:var(--ink)}.gb .btn.pri:hover{background:#3d6b00}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .col{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:24px;min-width:0}
@@ -414,7 +420,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
   <div class="sh rv"><h2>Стрим-центр</h2><p>Топ донатеров, последние донаты и новые задания — обновляется само.</p></div>
   <div class="fundb rv" id="fundb" hidden><div><span class="lab">Сейчас на стриме · спидран</span><h3>С нуля до 10 lvl FACEIT за 150 часов</h3><small>50% всех донатов за спидран идут в призовой фонд. Не успею — разыграю его в Telegram. Чем больше мешаешь заданиями, тем больше приз.</small></div><div class="fr"><span class="lab">Призовой фонд Расплаты</span><div class="fv" id="fund-v">0 ₽</div><small id="fund-sub"></small></div></div>
   <div class="gb rv"><div><span class="lab">Всего задоначено</span><div class="big" id="feed-total">0 ₽</div></div>
-    <div><div class="gt"><span id="goal-name"></span><span id="goal-pct">0%</span></div><div class="bar"><i id="goal-bar"></i></div><div class="upd"><span id="goal-txt"></span> <span id="feed-upd"></span></div></div>
+    <div><div class="gt"><span id="goal-name"></span><span id="goal-pct">0%</span></div><div class="gbw" id="goal-w"><div class="bar"><i id="goal-bar"></i></div></div><div class="upd"><span id="goal-txt"></span> <span id="feed-upd"></span></div></div>
     <a class="btn pri" href="#donate">Поддержать стрим</a></div>
   <div class="st3 rv"><div><span class="lab">Бот выполнил заданий</span><b id="st-tasks">—</b></div><div><span class="lab">Донатов всего</span><b id="st-don">—</b></div><div><span class="lab">Самый большой донат</span><b id="st-big">—</b><small id="st-big-who"></small></div></div>
   <div class="qbox rv" id="qbox">
@@ -523,7 +529,8 @@ const CONFIG = {
 /* ============ САЙТ: цель, сетап, прицел ============ */
 const SITE = {
   twitch: "varde99",
-  goal: { name: "Цель: на материнку + акк FACEIT", target: 10000 },   // цель сбора (сумма донатов из ленты)
+  goal: { name: "Цель: 32 ГБ памяти + Ryzen 5 5500X3D", target: 38000,
+    steps: [{ t: "Память +16 ГБ", at: 15000 }, { t: "Ryzen 5 5500X3D", at: 38000 }] },   // цель сбора (сумма донатов из ленты)
   setup: [                      // [значок, название, значение] — пустые не показываются
     ["🎯", "Сенса", "1.25"], ["🖱", "DPI", "800"], ["📐", "eDPI", "1000"], ["🖥", "Монитор", "144 Гц"],
     ["🖱", "Мышь", "ATTACK SHARK X3"], ["🎧", "Наушники", "Logitech G435"],
@@ -902,6 +909,11 @@ $("#new-list").innerHTML = NEW.length ? NEW.map(x => `<div class="row2 nw" data-
     $("#goal-txt").textContent = `${fmt(total)} из ${fmt(SITE.goal.target)} ₽`;
     $("#goal-pct").textContent = pct.toFixed(pct < 10 && pct > 0 ? 1 : 0) + "%";
     $("#goal-bar").style.width = pct + "%";
+    const steps = SITE.goal.steps || [];
+    $("#goal-w").classList.toggle("has", steps.length > 0);
+    $("#goal-w").querySelectorAll(".gst").forEach(e => e.remove());
+    steps.forEach((s, i) => { const at = Math.min(100, s.at / SITE.goal.target * 100), ok = total >= s.at;
+      $("#goal-w").insertAdjacentHTML("beforeend", `<div class="gst${ok ? " ok" : ""}${i === 0 && steps.length > 1 ? " first" : ""}" style="left:calc(${at}% - 1px)"><span>${ok ? "✓ " : ""}${esc(s.t)} · ${fmt(s.at)} ₽</span></div>`); });
   }
   goal(0);
   let lastKey = "";
