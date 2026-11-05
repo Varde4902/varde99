@@ -520,8 +520,8 @@ const SITE = {
     ["⌨️", "Клавиатура", "Aula F75"], ["🔲", "Разрешение", "1280×1024 (4:3)"],
   ],
   /* код прицела из CS2 (Настройки → Игра → Прицел → «Поделиться»); пусто — блок с кодом не показывается */
-  crosshairCode: "CSyAqUtN69wWNvDFi89hfa9qHCnj5JURoPsvD99oC8V6wL",
-  crosshair: { style: 4, length: 8, gap: 3, thickness: 3, r: 0, g: 255, b: 135, dot: false, outline: false, t: false },
+  crosshairCode: "CSEaP4XwaTQ4Lq5ZxqXuh7KAWhfAX3NthRrcn55z2RyfcT",
+  crosshair: { style: 4, length: 2, gap: 1, thickness: 2, r: 11, g: 255, b: 0, a: 200, dot: false, outline: false, t: false },
   /* окно для стрима 24 часа (время МСК): день недели 0 = вс, 5 = пт */
   marathon: { from: { day: 5, hour: 18 }, to: { day: 0, hour: 20 } },
   /* лента донатов и MVP: ссылка на feed.json в GitHub Gist (бот пишет её в окне при первом запуске). Пусто — берётся feed.json с сайта */
@@ -979,7 +979,7 @@ $("#foot-links").innerHTML = LINKS.map(l => `<a href="${l[4]}" target="_blank" r
     + tile("Наушники", get("Наушники"), "dev", "head")
     + tile("Клавиатура", get("Клавиатура"), "dev span2", "kb");
   if ($("#xcopy")) $("#xcopy").onclick = () => copyText(SITE.crosshairCode, "Код прицела скопирован — вставь в CS2: Настройки → Прицел → Импорт");
-  const cv = $("#xh"), g = cv.getContext("2d"), host = cv.parentElement, col = `rgb(${x.r},${x.g},${x.b})`;
+  const cv = $("#xh"), g = cv.getContext("2d"), host = cv.parentElement, col = `rgba(${x.r},${x.g},${x.b},${(x.a ?? 255) / 255})`;
   let hot = 0, hv = 0, run = false;
   function draw(){
     hv += (hot - hv) * .12; g.clearRect(0, 0, cv.width, cv.height);
