@@ -80,7 +80,7 @@ const L = [
   ["","fire","#f57d07","DonationAlerts","СБП · карты РФ · иностранные карты","https://www.donationalerts.com/r/varde99"],
   ["","card","#3f9cf2","DonatePay","Карты · СБП · онлайн-банки · крипта","https://donatepay.ru/don/1539325"],
   ["sep","Ещё"],
-  ["","tt","#ff0050","TikTok","@vardee99 — нарезки со стримов","https://www.tiktok.com/@vardee99"],
+  ["","tt","#ff0050","TikTok","@varde9999 — нарезки со стримов","https://www.tiktok.com/@varde9999"],
   ["","crown","#c8ff4d","Топ донатеров и очередь","Попади в MVP стрима",SITE_URL + "#hub"]];
 document.getElementById("links").innerHTML = L.map((x, i) => x[0] === "sep" ? `<div class="sep">${x[1].toUpperCase()}</div>`
   : `<a class="lk ${x[0]}" style="--c:${x[2]};animation-delay:${i * .05}s" href="${x[5]}" target="_blank" rel="noopener"><span class="tile"><svg class="i" viewBox="0 0 24 24">${P[x[1]]}</svg></span><span class="tx"><b>${x[3]}</b><small>${x[4]}</small></span><span class="arr">→</span></a>`).join("");
