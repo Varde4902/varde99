@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><title>Varde99 — кейс</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;600;800&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent;overflow:hidden;width:100%;height:100%;font-family:Geologica,'Segoe UI',sans-serif;color:#fff}
+#st{position:absolute;left:50%;top:50%;width:1500px;transform:translate(-50%,-50%) scale(var(--k,1));opacity:0;transition:opacity .4s}
+#st.on{opacity:1}
+.hd{display:flex;justify-content:space-between;align-items:center;margin:0 6px 14px}
+.hd b{font:800 46px Geologica;letter-spacing:-.02em}.hd b i{font-style:normal;color:#b08bff}
+.hd span{font:600 30px Geologica;color:#cfc6e4;background:rgba(12,8,22,.85);padding:8px 18px;border-radius:12px}
+.win{position:relative;height:210px;border-radius:24px;overflow:hidden;background:rgba(12,8,22,.92);border:3px solid #9146ff;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#strip{position:absolute;left:0;top:18px;display:flex;gap:12px;will-change:transform}
+.cd{flex:none;width:230px;height:174px;border-radius:14px;background:linear-gradient(180deg,#1d1730,#120d20);position:relative;padding:16px 14px;overflow:hidden}
+.cd:after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--c)}
+.cd:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 120%,var(--c),transparent 70%);opacity:.35}
+.cd b{position:relative;display:block;font:600 27px/1.12 Geologica;letter-spacing:-.01em;height:92px;overflow:hidden}
+.cd s{position:relative;text-decoration:none;display:block;margin-top:10px;font:800 32px Geologica}
+.mk{position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;background:#ffd23f;box-shadow:0 0 16px #ffd23f;z-index:2}
+.mk:before,.mk:after{content:"";position:absolute;left:50%;transform:translateX(-50%);border:14px solid transparent}
+.mk:before{top:0;border-top-color:#ffd23f}.mk:after{bottom:0;border-bottom-color:#ffd23f}
+#res{margin:18px auto 0;width:fit-content;max-width:1500px;padding:18px 34px;border-radius:20px;background:rgba(12,8,22,.95);border:3px solid var(--c,#9146ff);
+ text-align:center;transform:scale(.6);opacity:0;transition:all .45s cubic-bezier(.2,1.5,.4,1)}
+#res.on{transform:scale(1);opacity:1}
+#res small{display:block;font:600 26px Geologica;color:var(--c);letter-spacing:.12em;text-transform:uppercase}
+#res b{display:block;font:800 60px/1.1 Geologica;letter-spacing:-.02em;margin-top:4px}
+#res em{display:inline-block;margin-top:10px;font:800 34px Geologica;font-style:normal;text-transform:uppercase;letter-spacing:.04em;
+ background:var(--c);color:#0c0816;padding:6px 18px;border-radius:12px}
+#res em:empty{display:none}
+.cd s u{text-decoration:none;font:600 20px Geologica;color:#cfc6e4;margin-left:6px}
+</style></head><body><div id=st><div class=hd><b>КЕЙС <i>открывает</i> <span id=who style="background:none;padding:0;color:#fff"></span></b><span>что выпадет — то и выполняю</span></div>
+<div class=win><div class=mk></div><div id=strip></div></div><div id=res><small id=rr></small><b id=rt></b><em id=rd></em></div></div>
+<script>
+const st=document.getElementById('st'),strip=document.getElementById('strip'),res=document.getElementById('res');
+function fit(){st.style.setProperty('--k',Math.min(1,innerWidth/1560,innerHeight/620));}addEventListener('resize',fit);fit();
+let last=null,ac=null;const A=()=>{try{ac=ac||new AudioContext()}catch(e){}return ac};
+function tick(f=1500,d=.035,v=.05,type='square'){const a=A();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=f;
+ g.gain.setValueAtTime(v,a.currentTime);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+d);o.connect(g).connect(a.destination);o.start();o.stop(a.currentTime+d+.02);}
+function win(){[523,659,784,1046].forEach((f,i)=>setTimeout(()=>tick(f,.25,.1,'triangle'),i*110));}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+// на сколько задание: «раунд» → «на раунд», «игра» → «на игру», остальное как есть
+function dur(d){d=String(d||'').trim();const m={'раунд':'на раунд','игра':'на игру','стрим':'на весь стрим','весь стрим':'на весь стрим'};return m[d]||d;}
+function play(r){
+ document.getElementById('who').textContent=r.who||'';
+ strip.innerHTML=r.items.map(i=>`<div class=cd style="--c:${i.c}"><b>${esc(i.t)}</b><s>${i.p} ₽ <u>${esc(dur(i.d))}</u></s></div>`).join('');
+ strip.style.transition='none';strip.style.transform='translateX(0)';res.classList.remove('on');st.classList.add('on');
+ const W=242, box=strip.parentElement.clientWidth, jit=(Math.random()-.5)*150;
+ const target=-(r.win*W+115-box/2+jit), ms=(r.spin||7)*1000, t0=performance.now(); let lastI=-1;
+ function f(t){const p=Math.min(1,(t-t0)/ms),e=1-Math.pow(1-p,4),x=target*e;strip.style.transform=`translateX(${x}px)`;
+  const i=Math.floor((-x+box/2)/W);if(i!==lastI){lastI=i;tick();}
+  if(p<1)requestAnimationFrame(f);else{const w=r.items[r.win];res.style.setProperty('--c',w.c);document.getElementById('rr').textContent='Выпало · '+w.r;
+   document.getElementById('rd').textContent=dur(w.d);
+   document.getElementById('rt').textContent=w.t;res.classList.add('on');win();setTimeout(()=>{st.classList.remove('on');res.classList.remove('on')},7000);}}
+ setTimeout(()=>requestAnimationFrame(f),500);
+}
+async function poll(){try{const r=await(await fetch('http://127.0.0.1:3123/case.json',{cache:'no-store'})).json();
+ if(last===null){last=r.id;if(r.id&&Date.now()/1000-r.id<15)play(r);return}   // при открытии старый кейс не повторяем, свежий (до 15 с) — показываем
+ if(r.id&&r.id!==last){last=r.id;play(r)}}catch(e){}}
+setInterval(poll,700);poll();
+</script></body></html>
