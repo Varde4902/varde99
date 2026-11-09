@@ -522,7 +522,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
 const CONFIG = {
   donationAlerts: "https://www.donationalerts.com/r/varde99",   // твоя ссылка DonationAlerts
   donatePay:      "https://donatepay.ru/don/1539325",           // твоя ссылка DonatePay
-  tiktok:         "https://www.tiktok.com/@vardee99",           // твой TikTok
+  tiktok:         "https://www.tiktok.com/@varde9999",           // твой TikTok
   telegram:       "https://t.me/varde99",                       // канал с анонсами эфиров
 };
 
@@ -532,7 +532,7 @@ const SITE = {
   goal: { name: "Цель: 32 ГБ памяти + Ryzen 5 5500X3D", target: 38000,
     steps: [{ t: "Память +16 ГБ", at: 15000 }, { t: "Ryzen 5 5500X3D", at: 38000 }] },   // цель сбора (сумма донатов из ленты)
   setup: [                      // [значок, название, значение] — пустые не показываются
-    ["🎯", "Сенса", "1.25"], ["🖱", "DPI", "800"], ["📐", "eDPI", "1000"], ["🖥", "Монитор", "144 Гц"],
+    ["🎯", "Сенса", "1"], ["🖱", "DPI", "800"], ["📐", "eDPI", "1000"], ["🖥", "Монитор", "144 Гц"],
     ["🖱", "Мышь", "ATTACK SHARK X3"], ["🎧", "Наушники", "Logitech G435"],
     ["⌨️", "Клавиатура", "Aula F75"], ["🔲", "Разрешение", "1280×1024 (4:3)"],
   ],
@@ -927,7 +927,7 @@ $("#new-list").innerHTML = NEW.length ? NEW.map(x => `<div class="row2 nw" data-
         <span class="nm">${esc(e.who)}<small>${e.tasks && e.tasks.length ? esc(e.tasks.join(" + ")) : "поддержал стрим"} · ${ago(e.t)}</small></span><span class="sm">${fmt(e.sum)} ₽</span></div>`).join("")
         : '<div class="empty2">Пока тихо… стань первым!</div>';
     }
-    goal((d.top || []).reduce((a, x) => a + x.sum, 0));
+    goal(d.total ?? (d.top || []).reduce((a, x) => a + x.sum, 0));   // total — по всем донатам, включая Анонима
     $("#feed-upd").textContent = d.updated ? "· обновлено " + ago(d.updated) : "";
     if (d.top && d.top.length){ FAME.length = 0; d.top.forEach(x => FAME.push(x)); renderFame(); }
     const fd = d.fund; $("#fundb").hidden = !(fd && fd.on);
