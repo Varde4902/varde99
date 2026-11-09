@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Varde99 — баннер TikTok</title>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+/* Маленький баннер для угла экрана на Twitch.
+   OBS: источник «Браузер», ширина 640, высота 160, масштаб 1 (НЕ растягивать — тогда текст чёткий).
+   Главное на нём — ссылка: крупно, тёмным по салатовому. */
+:root{--bg:#0b0b0c;--ink:#ecebe6;--mute:#8d8c86;--line:#2e2e2c;--acc:#c8ff4d}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:transparent;overflow:hidden;font-family:"Geologica",sans-serif;color:var(--ink)}
+em{font-style:normal;color:var(--acc)}
+.box{position:absolute;left:4px;top:4px;width:632px;height:152px;border-radius:22px;background:rgba(11,11,12,.94);
+  border:1.5px solid var(--line);padding:14px 16px 14px 16px;overflow:hidden}
+.top{display:flex;gap:14px;align-items:center;height:72px}
+.tile{flex:none;width:72px;height:72px;border-radius:16px;background:var(--acc);position:relative;overflow:hidden}
+.tile svg{position:absolute;left:16px;top:16px;width:40px;height:40px;fill:none;stroke:var(--bg);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mid{flex:1;min-width:0}
+h1{font:600 29px/1 "Geologica";letter-spacing:-.025em;white-space:nowrap}
+.tk{position:relative;height:34px;margin-top:6px;overflow:hidden}
+.it{position:absolute;inset:0;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.it b{font:400 24px "Geologica";letter-spacing:-.01em}
+.it .pr{margin-left:auto;font:700 25px "Geologica";color:var(--acc)}
+.link{margin-top:12px;height:40px;border-radius:12px;background:var(--acc);color:var(--bg);display:flex;align-items:center;
+  justify-content:space-between;padding:0 8px 0 16px}
+.link b{font:700 23px "Geologica";letter-spacing:-.01em}
+.link span{font:600 15px "Geologica";letter-spacing:.06em;text-transform:uppercase;background:var(--bg);color:var(--acc);
+  border-radius:8px;padding:6px 10px}
+/* TikTok (?tt=1): полоса во всю ширину 1080×250 */
+body.tt .box{left:0;top:0;width:1080px;height:250px;border-radius:28px;padding:22px 26px}
+body.tt .top{height:118px;gap:22px}
+body.tt .tile{width:118px;height:118px;border-radius:24px}
+body.tt .tile svg{left:27px;top:27px;width:64px;height:64px}
+body.tt h1{font-size:46px}
+body.tt .tk{height:56px;margin-top:10px}
+body.tt .it b{font-size:40px}
+body.tt .it .pr{font-size:42px}
+body.tt .link{margin-top:20px;height:68px;border-radius:18px;padding:0 12px 0 24px}
+body.tt .link b{font-size:38px}
+body.tt .link span{font-size:22px;padding:10px 14px;border-radius:12px}
+/* подарки/лайки TikTok (данные — бот, /tt.json) */
+.tile .emo{position:absolute;inset:0;display:grid;place-items:center;font-size:66px}
+body:not(.tt) .tile .emo{font-size:40px}
+.it .pr.mute{color:var(--mute);font-weight:600}
+#pop{position:absolute;inset:0;background:var(--acc);color:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:0 34px;
+  transform:translateY(-105%);transition:transform .45s cubic-bezier(.2,1.3,.4,1)}
+#pop.on{transform:none}
+#pop small{font:600 32px "Geologica";opacity:.75}
+#pop b{font:800 70px/1.05 "Geologica";letter-spacing:-.02em;margin-top:4px}
+#pop span{font:700 34px "Geologica";margin-top:6px}
+body:not(.tt) #pop small{font-size:18px} body:not(.tt) #pop b{font-size:36px} body:not(.tt) #pop span{font-size:18px}
+.in{animation:in .55s cubic-bezier(.2,.9,.25,1) both}.out{animation:out .35s ease-in both}
+@keyframes in{from{opacity:0;transform:translateY(30px)}}
+@keyframes out{to{opacity:0;transform:translateY(-30px)}}
+</style></head>
+<body class="tt">
+<div class="box">
+  <div class="top">
+    <div class="tile" id="tile"></div>
+    <div class="mid">
+      <h1 id="h">Управляй <em>моей игрой</em> за донат</h1>
+      <div class="tk" id="tk"></div>
+    </div>
+  </div>
+  <div class="link"><b>varde4902.github.io/varde99</b><span>прайс и заказ</span></div>
+  <div id="pop"><small id="pw"></small><b id="pt"></b><span id="pd"></span></div>
+</div>
+<script>
+/* задания по кругу: [иконка, название, цена] — цены сверять с сайтом */
+const ITEMS = [
+  ["mouse", "Сенса 0.3", 49], ["kb", "Перепутанные кнопки", 69], ["gun", "Дигл на всю игру", 169],
+  ["cross", "Рандомный прицел", 39], ["box", "Открыть кейс", 69], ["mouse", "Инверсия мыши", 59],
+  ["zap", "Хаос-режим", 179], ["knife", "Только нож", 89], ["eye", "Без интерфейса", 59], ["body", "10 приседаний", 69],
+];
+const EVERY = 4;
+const P = {
+  mouse:'<rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/>',
+  kb:'<rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6 10h1M9 10h1M12 10h1M15 10h1M18 10h.5M6 13h1M9 13h6M17 13h1M7 15.5h10"/>',
+  gun:'<path d="M2.5 8.5h16l1.8 1.8v2.2h-5.6l-1.2 2.3h-2.3l-.8 4H6.4l1.3-6.3H2.5z"/>',
+  cross:'<circle cx="12" cy="12" r="7"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/>',
+  box:'<path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/>',
+  zap:'<path d="M13 2L5 13h6l-1 9 8-11h-6z"/>',
+  knife:'<path d="M3 20l9-9M12 11l7.5-7.5c.8 2.8-.5 6-3.4 8.4L13 14.4z"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  body:'<circle cx="12" cy="4.5" r="1.8"/><path d="M12 7v6M8 21l2-5h4l2 5M7 10.5h10"/>'};
+if (location.search.includes("tt=1")) document.body.classList.add("tt");
+/* баннер сам подстраивается под окно (TikTok LIVE Studio может дать любой размер) — не обрезается */
+const BOX = document.querySelector(".box");
+function fit(){
+  const tt = document.body.classList.contains("tt"), W = tt ? 1080 : 640, H = tt ? 250 : 160;
+  const k = Math.min(innerWidth / W, innerHeight / H);
+  BOX.style.transformOrigin = "0 0";
+  BOX.style.transform = `scale(${k})`;
+}
+addEventListener("resize", fit); fit();
+const tk = document.getElementById("tk"), tile = document.getElementById("tile");
+let n = 0, cur = null, ico = null;
+function swap(old, el, parent){
+  if (old){ old.classList.add("out"); setTimeout(() => old.remove(), 380); }
+  parent.appendChild(el); el.classList.add("in");
+}
+/* По кругу: задание из прайса → подарок TikTok → задание → подарок → лайки … (подарки и лайки берём у бота) */
+const BOT = "http://127.0.0.1:3123/tt.json";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const durTxt = d => ({"раунд":"на раунд","игра":"на игру","сразу":"сразу"}[d] ?? "");
+const H = document.getElementById("h");
+const HEAD = {price: 'Управляй <em>моей игрой</em> за донат', gift: 'Подари — <em>и я выполняю</em>', likes: 'Лайкай эфир — <em>и я выполняю</em>'};
+let TT = null, gn = 0, step = 0, lastEv = null, popT = null, headNow = "price";
+const ORDER = ["price", "gift", "price", "gift", "likes"];
+function setHead(k){ if (k !== headNow){ headNow = k; H.innerHTML = HEAD[k]; H.classList.remove("in"); void H.offsetWidth; H.classList.add("in"); } }
+function setTile(html, isSvg){
+  let el;
+  if (isSvg){ el = document.createElementNS("http://www.w3.org/2000/svg", "svg"); el.setAttribute("viewBox", "0 0 24 24"); el.innerHTML = html; }
+  else { el = document.createElement("div"); el.className = "emo"; el.textContent = html; }
+  swap(ico, el, tile); ico = el;
+}
+function next(){
+  let kind = ORDER[step++ % ORDER.length];
+  if (kind !== "price" && !(TT && (kind === "gift" ? TT.show.length : TT.tiers.length))) kind = "price";   // бот молчит — только прайс
+  const it = document.createElement("div"); it.className = "it";
+  if (kind === "price"){
+    const [k, name, price] = ITEMS[n++ % ITEMS.length];
+    it.innerHTML = `<b>${name}</b><span class="pr">${price} ₽</span>`; setTile(P[k], true);
+  } else if (kind === "gift"){
+    const [e, name, task, d] = TT.show[gn++ % TT.show.length];
+    it.innerHTML = `<b>${esc(name)} → ${esc(task)}</b><span class="pr mute">${esc(durTxt(d))}</span>`; setTile(e, false);
+  } else {
+    const t = TT.tiers[0];
+    it.innerHTML = `<b>❤️ ${t.every - t.left} / ${t.every} → ${esc(t.task)}</b><span class="pr mute">${esc(durTxt(t.dur))}</span>`; setTile("❤️", false);
+  }
+  setHead(kind); swap(cur, it, tk); cur = it;
+}
+async function poll(){
+  try { TT = await (await fetch(BOT, {cache: "no-store"})).json(); } catch (e) { return; }
+  const ev = TT.event || {};
+  if (lastEv === null){ lastEv = ev.id || 0; return; }
+  if (ev.id && ev.id !== lastEv){ lastEv = ev.id;       // сработало задание от подарка/лайков — баннер на 6 с становится салатовым
+    document.getElementById("pw").textContent = ev.who === "чат TikTok" ? "Спасибо за лайки! " + ev.why : ev.who + " — " + ev.why;
+    document.getElementById("pt").textContent = ev.task;
+    document.getElementById("pd").textContent = durTxt(ev.dur);
+    const p = document.getElementById("pop"); p.classList.add("on"); clearTimeout(popT); popT = setTimeout(() => p.classList.remove("on"), 6500); }
+}
+setInterval(poll, 1000); poll();
+next(); setInterval(next, EVERY * 1000);
+</script>
+</body></html>
