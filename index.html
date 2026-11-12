@@ -656,6 +656,7 @@ const TASKS = [
  {c:"cam",ico:"🧢",t:"Надеть шапку",d:"Играю в шапке до конца игры.",p:49,dur:"игра",auto:false,code:"HAT"},
  {c:"cam",ico:"🕶",t:"Надеть очки",d:"Играю в очках до конца игры.",p:49,dur:"игра",auto:false,code:"GLASSES"},
  {c:"cam",ico:"🧍",t:"Играю стоя",d:"Встаю из-за стола и играю стоя весь раунд.",p:39,dur:"раунд",auto:false,code:"STAND",new:true},
+ {c:"cam",ico:"🧍",t:"Встать в угол",d:"Встаю в угол на минуту — лицом к вебке, чтобы всем было видно.",p:50,dur:"1 мин",auto:false,code:"CORNER",new:true},
 
  // ЧАТ
  {c:"chat",ico:"⭐",t:"Привет на стриме",d:"Передам привет тебе или другу на камеру.",p:19,dur:"сразу",auto:false,code:"HI"},
@@ -723,7 +724,7 @@ const P = {
 const BYCODE = {GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",SOUND:"sound",MUSIC:"music",
  "CROSS-R":"cross","CROSS-G":"cross",NOCROSS:"cross",LOWSENS:"mouse",HIGHSENS:"mouse",SENSRND:"mouse",INVERT:"mouse",LEFT:"gun",NOSOUND:"sound",DROPNOW:"gun",
  DUCK:"body",BACK:"walk",JUMP:"walk",RUSH:"walk",ONEHAND:"user",MUTE:"mic",DROP:"gun",HAT:"hat",GLASSES:"glasses",
- GUNPOS:"gun",NOHUD:"eye",SWAP:"kb",RES:"mon",EARS:"head",LHAND:"mouse",ECO:"gun",NOPAD:"mouse",TAPS:"cross",STAND:"body",POLL:"vote",HI:"chat",MAP:"chat",PARTY:"user",CASE:"box",RANDOM:"dice",CHAOS:"zap",ROULETTE:"dice",NAME:"crown",COACH:"user",UNTILWIN:"crown",STREAM24:"clock"};
+ GUNPOS:"gun",NOHUD:"eye",SWAP:"kb",RES:"mon",EARS:"head",LHAND:"mouse",ECO:"gun",NOPAD:"mouse",TAPS:"cross",STAND:"body",CORNER:"body",POLL:"vote",HI:"chat",MAP:"chat",PARTY:"user",CASE:"box",RANDOM:"dice",CHAOS:"zap",ROULETTE:"dice",NAME:"crown",COACH:"user",UNTILWIN:"crown",STREAM24:"clock"};
 const BYCAT = {weapons:"gun",cs2auto:"cross",challenge:"walk",obs:"screen",cam:"body",chat:"chat",mega:"crown"};
 const icoOf = x => P[BYCODE[x.code] || BYCAT[x.c] || "box"] ? (BYCODE[x.code] || BYCAT[x.c] || "box") : "box";
 const svg = (k, cls = "i") => `<svg class="${cls}" viewBox="0 0 24 24">${P[k] || P.box}</svg>`;
