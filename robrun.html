@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VARDE99 — прайс заданий на стрим ROB RUN</title>
+<meta name="description" content="Управляй игрой Varde99 за донат: задания на стрим CS2, бот включает их сам. Кейс, марафон 24 часа, топ донатеров.">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0b0c'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='900' font-size='30' text-anchor='middle' fill='%23c8ff4d'%3E99%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;400;600;800&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0c;--card:#141415;--card2:#1a1a1b;--ink:#ecebe6;--ink2:#b5b4ae;--mute:#82817b;--line:#262624;--line2:#3a3a37;--acc:#c8ff4d;--light:#e9e8e2;--dark-on-light:#4a4943;
+  --tw:#9146ff;--tt:#ff0050;--tg:#2aabee;--da:#f57d07;--dp:#3f9cf2;--ease:cubic-bezier(.2,.8,.2,1);
+  --cur:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M3 2 L3 21 L8 16 L12 24 L15.5 22.5 L11.5 14.5 L18.5 14.5 Z' fill='%23c8ff4d' stroke='%230b0b0c' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 3 2, auto}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;cursor:var(--cur)}
+a,button,summary,select,label{cursor:var(--cur)}input,textarea{cursor:text}
+body{background:var(--bg);color:var(--ink);font:300 16px/1.55 "Geologica",system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0}
+::selection{background:var(--acc);color:var(--bg)}
+.w{max-width:1360px;margin:0 auto;padding:0 44px}
+.s{padding:110px 0 0}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:32px;flex-wrap:wrap}
+h2{font:200 clamp(42px,5vw,64px)/1 "Geologica";letter-spacing:-.03em}
+.sh p{color:var(--mute);max-width:440px}
+.lab{font-size:12px;letter-spacing:.1em;color:var(--mute);text-transform:uppercase}
+/* спидран: призовой фонд Расплаты (из ленты бота: d.fund) */
+.fundb{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border:1px solid var(--acc);border-radius:18px;padding:22px 26px;margin-bottom:18px;background:var(--card)}
+.fundb[hidden]{display:none}
+.fundb .lab{color:var(--acc)}
+.fundb h3{font:500 clamp(18px,1.6vw,22px)/1.25 "Geologica";margin:6px 0 4px}
+.fundb .fv{font:600 clamp(34px,4vw,52px)/1 "Geologica";letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.fundb small{display:block;color:var(--ink2);font-size:14px;line-height:1.45;max-width:520px}
+.fundb .fr{text-align:right}.fundb .fr small{margin-top:6px}
+@media(max-width:640px){.fundb .fr{text-align:left}}
+svg.i{stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tile{width:56px;height:56px;border-radius:17px;background:var(--card2);border:1px solid #2e2e2c;display:grid;place-items:center;transition:background .3s,border-color .3s;flex:none}
+.tile svg{width:26px;height:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:52px;padding:0 24px;border-radius:999px;font:400 16px "Geologica";transition:background .25s,color .25s,border-color .25s,transform .25s;white-space:nowrap}
+.btn.pri{background:var(--ink);color:var(--bg)}.btn.pri:hover{background:var(--acc)}
+.btn.ghost{border:1px solid var(--line2);background:#0b0b0c88}.btn.ghost:hover{border-color:var(--acc);color:var(--acc)}
+.btn.go{padding:0 8px 0 24px}.btn.go span{width:36px;height:36px;border-radius:50%;background:var(--acc);color:var(--bg);display:grid;place-items:center;transition:transform .3s}
+.btn.go:hover span{transform:rotate(-45deg)}
+.btn:disabled{opacity:.5}
+.auto{font-size:12px;letter-spacing:.06em;color:var(--acc);display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.auto::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mute)}
+.on-air .dot,.dot.on{background:var(--acc);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- шапка ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(11,11,12,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav .w{display:flex;align-items:center;justify-content:space-between;height:76px;gap:20px}
+.logo{font:600 17px "Geologica";letter-spacing:.32em}
+.nav ul{display:flex;gap:34px;list-style:none;font-size:14px;color:var(--mute)}
+.nav ul a:hover{color:var(--ink)}
+.nav .live-l{display:flex;align-items:center;gap:10px;font-size:14px}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);place-items:center}
+.burger svg{width:20px;height:20px}
+
+/* ---------- первый экран ---------- */
+.hero{position:relative;height:100vh;min-height:760px;overflow:hidden}
+#bg3d{position:absolute;inset:0;width:100%;height:100%}
+.hero .c{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:calc(76px + 9vh) 24px 0}
+.kick{display:inline-flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.14em;color:var(--ink2);border:1px solid #2e2e2c;border-radius:999px;padding:8px 18px;background:#0b0b0c99;backdrop-filter:blur(6px)}
+.kick b{font-weight:400;color:var(--acc)}
+.name{margin:26px 0 16px;font:800 clamp(56px,13.5vw,190px)/.9 "Geologica";letter-spacing:-.05em;white-space:nowrap}
+.name span{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.name i{display:inline-block;font-style:normal;opacity:0;transform:translateY(40%);animation:up .9s var(--ease) forwards}
+.sub{font:300 clamp(24px,2.4vw,36px)/1.15 "Geologica";letter-spacing:-.02em;margin-bottom:14px}.sub em{font-style:normal;color:var(--acc)}
+.lead{max-width:560px;color:var(--ink2);font-size:17px}
+.hero .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;justify-content:center}
+.hstats{position:absolute;z-index:2;left:0;right:0;bottom:34px;display:flex;justify-content:center;gap:60px;font-size:14px;color:var(--mute);padding:0 20px}
+.hstats b{display:block;font:200 30px "Geologica";color:var(--ink);letter-spacing:-.02em}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* ---------- как заказать ---------- */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.step:hover .tile{background:var(--acc);border-color:var(--acc)}.step:hover .tile svg{stroke:var(--bg)}
+.step .top{display:flex;justify-content:space-between;align-items:center}
+.step .n{font-size:13px;color:var(--acc);letter-spacing:.06em}
+.step h3{font:400 22px "Geologica"}.step p{color:var(--mute)}
+
+/* ---------- прайс ---------- */
+.ctrl{position:sticky;top:76px;z-index:20;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 0;margin-bottom:22px;background:linear-gradient(var(--bg) 75%,transparent)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+.tab{font-size:14px;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:9px 16px;transition:.2s}
+.tab:hover{color:var(--ink);border-color:var(--line2)}
+.tab.on{color:var(--bg);background:var(--ink);border-color:var(--ink)}
+.search{position:relative}.search input{height:42px;width:220px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:300 14px "Geologica";padding:0 16px 0 40px;outline:none}
+.search input:focus{border-color:var(--line2)}.search svg{position:absolute;left:14px;top:12px;width:18px;height:18px;stroke:var(--mute)}
+.chip{height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--mute);display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.chip:hover{color:var(--ink)}.chip.on{color:var(--bg);background:var(--acc);border-color:var(--acc)}
+.cat{display:flex;align-items:baseline;gap:14px;margin:34px 0 16px}
+.cat:first-child{margin-top:0}
+.cat h3{font:300 28px "Geologica";letter-spacing:-.02em}.cat small{color:var(--mute)}.cat .ct{margin-left:auto;color:var(--mute);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);border-color:#4a4a45}
+.card:hover .tile{background:var(--acc);border-color:var(--acc)}.card:hover .tile svg{stroke:var(--bg)}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card .flags{display:flex;gap:8px;align-items:center}
+.flag{font-size:11px;letter-spacing:.08em;border-radius:999px;padding:3px 9px;border:1px solid var(--line2);color:var(--ink2)}
+.flag.new{background:var(--acc);border-color:var(--acc);color:var(--bg)}
+.card h3{font:400 23px/1.15 "Geologica";letter-spacing:-.01em}
+.card p{color:var(--mute);font-size:15px;flex:1}
+.card .bot{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--line)}
+.card .pr{font:200 36px/1 "Geologica";letter-spacing:-.03em;margin-right:auto}
+.card .pr small{display:block;font:300 13px "Geologica";color:var(--mute);letter-spacing:0;margin-top:5px}
+.card .pr em{font-style:normal;font-size:16px;color:var(--mute)}
+.add{width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);font:300 22px/1 "Geologica";transition:.25s;flex:none}
+.add:hover{border-color:var(--acc);color:var(--acc)}
+.buy{height:46px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg);font:400 15px "Geologica";transition:.25s}
+.buy:hover{background:var(--acc)}
+.card.roul{border-color:var(--acc)}.card.flash{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc)}
+.empty{display:none;text-align:center;color:var(--mute);padding:60px 0}
+
+/* ---------- кейс ---------- */
+.reel{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;padding:26px 0;background:#0f0f10;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.strip{display:flex;gap:14px;will-change:transform;padding-left:14px}
+.reel .line{position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--acc);z-index:2}
+.reel .line::before,.reel .line::after{content:"";position:absolute;left:-7px;border:8px solid transparent}
+.reel .line::before{top:0;border-top-color:var(--acc)}.reel .line::after{bottom:0;border-bottom-color:var(--acc)}
+.mini{width:190px;flex:none;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.mini::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--rc)}
+.mini .tile{width:46px;height:46px;border-radius:14px}.mini .tile svg{width:22px;height:22px}
+.mini b{font:400 16px/1.2 "Geologica";min-height:38px}
+.mini small{font-size:12px;color:var(--rc);letter-spacing:.04em}
+.mini.win{border-color:var(--acc)}.mini.win .tile{background:var(--acc);border-color:var(--acc)}.mini.win .tile svg{stroke:var(--bg)}
+.case-res{margin-top:22px;min-height:28px;font-size:18px}.case-res b{font-weight:400;color:var(--acc)}.case-res small{display:block;color:var(--mute);font-size:14px;margin-top:4px}
+.case-acts{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.odds{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:var(--mute);margin-top:22px}
+.odds span{display:inline-flex;align-items:center;gap:8px}.odds i{width:10px;height:10px;border-radius:3px;background:var(--rc)}
+
+/* ---------- марафон ---------- */
+.m24{display:grid;grid-template-columns:520px 1fr;gap:70px;align-items:center}
+.dial{position:relative;width:520px;max-width:100%;aspect-ratio:1}
+.dial canvas{width:100%;height:100%}
+.dial .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.dial .in b{font:200 clamp(44px,6vw,70px)/1.05 "Geologica";letter-spacing:-.04em;margin:6px 0}
+.m24 .st{display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--mute)}
+.m24 .st.open{color:var(--acc)}
+.m24 h3{font:200 clamp(38px,4.4vw,54px)/1.02 "Geologica";letter-spacing:-.03em;margin:14px 0 18px}
+.m24 ul{list-style:none;border-top:1px solid var(--line);margin:24px 0}
+.m24 li{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}.m24 li span:last-child{color:var(--mute);text-align:right}
+.m24 .row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.m24 .pr{font:200 46px "Geologica";letter-spacing:-.03em}
+
+/* ---------- стрим-центр ---------- */
+.gb{display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center;background:var(--light);color:var(--bg);border-radius:26px;padding:26px 32px;margin-bottom:16px}
+.gb .lab{color:#6a6963}.gb .big{font:200 52px/1 "Geologica";letter-spacing:-.04em}
+.gb .gt{display:flex;justify-content:space-between;gap:16px;margin-bottom:10px}.gb .gt span:last-child{color:var(--dark-on-light)}
+.bar{height:8px;border-radius:4px;background:#0b0b0c1a;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--bg);border-radius:4px;transition:width 1.2s var(--ease)}
+.gb .upd{font-size:13px;color:var(--dark-on-light);margin-top:8px}
+/* сбор по ступенькам: отметки на шкале (SITE.goal.steps) */
+.gbw{position:relative}.gbw.has{padding-bottom:26px}
+.gst{position:absolute;top:-4px;width:2px;height:16px;background:var(--bg);border-radius:1px}
+.gst span{position:absolute;top:22px;right:0;white-space:nowrap;font-size:12px;color:var(--dark-on-light)}
+.gst.first span{right:auto;left:0;transform:translateX(-50%)}
+.gst.ok span{color:var(--bg);font-weight:500}
+.gb .btn.pri{background:var(--bg);color:var(--ink)}.gb .btn.pri:hover{background:#3d6b00}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.col{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:24px;min-width:0}
+.col h3{font:300 24px "Geologica";display:flex;align-items:center;gap:10px;margin-bottom:6px}.col h3 svg{width:22px;height:22px}
+.col .since{font-size:13px;color:var(--mute);margin-bottom:6px}
+.row2{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row2:last-child{border:0}
+.row2 .pos{width:22px;font:200 20px "Geologica";color:var(--mute);flex:none}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:400 15px "Geologica";background:var(--card2);border:1px solid #2e2e2c;flex:none}
+.row2:first-of-type .av.top1{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.row2 .nm{flex:1;min-width:0;font-weight:400;font-size:15px;overflow:hidden;text-overflow:ellipsis}
+.row2 .nm small{display:block;font-weight:300;font-size:13px;color:var(--mute);white-space:normal}
+.row2 .sm{font:200 22px "Geologica";letter-spacing:-.02em;white-space:nowrap}
+.row2 .tile{width:40px;height:40px;border-radius:13px}.row2 .tile svg{width:20px;height:20px}
+.row2.nw{cursor:var(--cur)}.row2.nw:hover .tile{background:var(--acc);border-color:var(--acc)}.row2.nw:hover .tile svg{stroke:var(--bg)}
+.empty2{padding:36px 0;text-align:center;color:var(--mute)}
+.st3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.st3>div{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px 24px;min-width:0}
+.st3 b{display:block;font:200 46px/1.05 "Geologica";letter-spacing:-.03em;margin-top:8px}
+.st3 small{display:block;color:var(--mute);font-size:14px;margin-top:2px}
+.ach{display:inline-flex;gap:4px;margin-left:8px;vertical-align:middle}
+.ach i{width:22px;height:22px;border-radius:50%;background:var(--card2);border:1px solid var(--line2);display:inline-grid;place-items:center}
+.ach i svg{width:12px;height:12px;stroke:var(--acc)}
+.achs{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font-size:12px;color:var(--mute);margin-top:12px}
+.achs span{display:flex;align-items:center;gap:8px}.achs .ach{margin:0}
+.qbox{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.qbox>div{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:24px;min-width:0}
+.qbox h3{font:300 24px "Geologica";display:flex;align-items:center;gap:10px;margin-bottom:6px}.qbox h3 svg{width:22px;height:22px}
+.qi{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}.qi:last-child{border:0}
+.qi .nm{flex:1;min-width:0;font-weight:400}.qi .nm small{display:block;font-weight:300;font-size:13px;color:var(--mute)}
+.qi .tm{font-size:14px;color:var(--acc);white-space:nowrap}
+.qi .live{width:10px;height:10px;border-radius:50%;background:var(--acc);flex:none;animation:pulse 1.4s infinite}
+.qi .num{width:22px;color:var(--mute);font:200 20px "Geologica";flex:none}
+.qoff{padding:22px 0 8px;color:var(--mute)}
+.rk{display:block;font-size:12px;letter-spacing:.04em;color:var(--rc);font-weight:400}
+.ranks{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--mute);margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.ranks span{color:var(--rc)}
+
+/* ---------- эфир ---------- */
+.live{display:grid;grid-template-columns:400px minmax(0,1fr);gap:50px;align-items:center}
+.live h3{font:200 clamp(38px,4.4vw,54px)/1.02 "Geologica";letter-spacing:-.03em;margin:16px 0 18px}
+.live .st{display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--mute)}
+.live .st.on{color:var(--acc)}
+.lk{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.lk:first-child{border-top:1px solid var(--line)}
+.lk b{font-weight:400;font-size:18px;display:block}.lk small{color:var(--mute);font-size:14px}
+.lk .tile{width:50px;height:50px;border-radius:15px}
+.arr{margin-left:auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;transition:.3s;flex:none}
+.lk:hover .tile{background:var(--c);border-color:var(--c)}.lk:hover .tile svg{stroke:#fff}.lk:hover .arr{background:var(--ink);color:var(--bg);transform:rotate(-45deg)}
+.tv{perspective:1400px}
+.scr{position:relative;aspect-ratio:16/9;border-radius:26px;overflow:hidden;background:#101011;border:1px solid var(--line);transform:rotateY(-12deg) rotateX(3deg) scale(.94);box-shadow:-40px 40px 80px #000;transition:transform .8s var(--ease)}
+.tv:hover .scr{transform:none}
+.scr .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--mute);background:repeating-linear-gradient(0deg,#ffffff05 0 1px,transparent 1px 4px)}
+.scr .ph svg{width:54px;height:54px;stroke:#3a3a37;margin:0 auto 10px;display:block}
+.scr .ph b{display:block;font:300 22px "Geologica";color:var(--ink);margin-bottom:4px}
+.pill{position:absolute;left:18px;top:18px;z-index:2;display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.06em;background:#0b0b0ccc;border:1px solid var(--line);border-radius:999px;padding:6px 14px;pointer-events:none}
+
+/* ---------- сетап ---------- */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:16px}
+.bt{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:24px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:border-color .3s;min-width:0}
+.bt:hover{border-color:#4a4a45}
+.bt .v{font:200 54px/1 "Geologica";letter-spacing:-.04em;margin-top:auto;position:relative}
+.bt.dev .v{font-size:26px;letter-spacing:-.01em;font-weight:300}
+.bt .big{position:absolute;right:-18px;bottom:-24px;width:150px;height:150px;opacity:.12;stroke-width:1.2;transition:transform .6s var(--ease),opacity .4s}
+.bt:hover .big{transform:rotate(-8deg) scale(1.08);opacity:.25}
+.bt.xh{grid-column:span 2;grid-row:span 2;padding:0;background:radial-gradient(circle,#232325,#0e0e0f 75%)}
+.bt.xh canvas{width:100%;height:100%}.bt.xh .lab{position:absolute;left:24px;top:22px}
+.xcode{position:absolute;left:20px;right:20px;bottom:18px;display:flex;align-items:center;gap:10px;background:rgba(11,11,12,.85);border:1px solid var(--line2);border-radius:16px;padding:8px 8px 8px 16px}
+.xcode code{flex:1;min-width:0;font:400 15px ui-monospace,Consolas,monospace;color:var(--acc);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xcode button{height:40px;padding:0 18px;border-radius:999px;background:var(--ink);color:var(--bg);font:400 14px "Geologica";flex:none}.xcode button:hover{background:var(--acc)}
+.bt.acc{background:var(--light);color:var(--bg);border-color:var(--light)}.bt.acc .lab{color:#6a6963}
+.bt.span2{grid-column:span 2}
+
+/* ---------- донат ---------- */
+.don{display:grid;grid-template-columns:1fr 1fr;border-radius:30px;overflow:hidden;border:1px solid var(--line)}
+.don a{padding:40px;display:flex;flex-direction:column;gap:18px;min-height:300px;position:relative;overflow:hidden}
+.don a:first-child{background:var(--light);color:var(--bg)}.don a:first-child svg{stroke:var(--bg)}.don a:first-child .chip2{color:var(--dark-on-light);border-color:#0b0b0c22}.don a:first-child small{color:var(--dark-on-light)}
+.don a:last-child{background:var(--card)}
+.don h3{font:200 clamp(44px,5vw,64px)/1 "Geologica";letter-spacing:-.04em;margin-top:auto;position:relative;transition:transform .4s var(--ease)}
+.don a:hover h3{transform:translateX(8px)}
+.don small{color:var(--mute);position:relative}
+.don .bg{position:absolute;right:-40px;top:-40px;width:240px;height:240px;opacity:.08;transition:transform .6s var(--ease)}.don a:hover .bg{transform:rotate(-12deg) scale(1.1)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;position:relative}
+.chip2{font-size:13px;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.don-note{color:var(--mute);margin-top:16px}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:40px;align-items:start}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font:400 18px "Geologica"}
+.qa summary::-webkit-details-marker{display:none}
+.qa .pl{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;transition:.3s;flex:none}
+.qa[open] .pl{transform:rotate(45deg);background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.qa p{color:var(--mute);padding:0 50px 20px 0;max-width:760px}
+.rules{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:28px;position:sticky;top:96px}
+.rules h3{font:300 26px "Geologica";margin-bottom:12px;display:flex;align-items:center;gap:12px}.rules h3 svg{width:24px;height:24px}
+.rules li{list-style:none;color:var(--ink2);font-size:15px;padding:11px 0 11px 22px;border-bottom:1px solid var(--line);position:relative}.rules li:last-child{border:0}
+.rules li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;border-radius:50%;background:var(--acc)}
+
+/* ---------- подвал ---------- */
+footer{padding:120px 0 30px}
+footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px}
+footer h5{font-size:12px;letter-spacing:.1em;color:var(--mute);font-weight:400;margin-bottom:14px}
+footer .top a{display:block;color:var(--ink2);padding:4px 0}footer .top a:hover{color:var(--acc)}
+footer .word{font:800 clamp(90px,19vw,300px)/.8 "Geologica";letter-spacing:-.06em;color:#161617;white-space:nowrap;overflow:hidden;margin-top:10px;transition:color .6s;user-select:none}
+footer .word span{color:transparent;-webkit-text-stroke:1.5px #2a2a28}
+footer:hover .word{color:#1c1c1d}
+footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;color:var(--mute);padding-top:20px;border-top:1px solid var(--line)}
+
+/* ---------- окна заказа и корзины ---------- */
+.ov{position:fixed;inset:0;z-index:100;background:rgba(5,5,6,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.modal{position:relative;width:100%;max-width:520px;max-height:calc(100vh - 40px);overflow:auto;background:var(--card);border:1px solid var(--line2);border-radius:28px;padding:30px;animation:pop .35s var(--ease)}
+@keyframes pop{from{transform:translateY(20px) scale(.97);opacity:0}}
+.x{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;color:var(--mute)}
+.x:hover{color:var(--ink);border-color:var(--ink)}
+.modal h3{font:300 30px/1.1 "Geologica";letter-spacing:-.02em;margin:16px 40px 8px 0}
+.m-desc{color:var(--mute)}
+.gameban{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;background:var(--acc,#c8ff4d);color:#0b0b0c;
+  font:600 15px "Geologica";padding:12px 20px;border-radius:999px;text-decoration:none;box-shadow:0 8px 30px #0008;white-space:nowrap}
+.gameban[hidden]{display:none}.gameban b{font-weight:800}
+.picker{display:none;margin-top:18px}.picker.on{display:block}
+.picker select{width:100%;height:48px;border-radius:14px;border:1px solid var(--line2);background:var(--card2);color:var(--ink);font:300 15px "Geologica";padding:0 14px;margin:8px 0 10px;outline:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--line);border-radius:14px}
+.seg button{padding:10px;border-radius:10px;color:var(--mute);font-size:14px}.seg button.on{background:var(--ink);color:var(--bg)}
+.m-sum{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 12px;padding-top:18px;border-top:1px solid var(--line)}
+.m-sum .price{font:200 44px/1 "Geologica";letter-spacing:-.03em}.m-sum .price small{font-size:20px;color:var(--mute)}
+.hint{display:none;font-size:14px;color:var(--ink2);background:var(--card2);border-radius:14px;padding:12px 14px;margin-bottom:12px}.hint.on{display:block}
+.codebox{display:flex;gap:8px;margin:8px 0 16px}
+.codebox input,.codebox textarea{flex:1;min-width:0;border-radius:14px;border:1px solid var(--line2);background:var(--bg);color:var(--acc);font:400 14px ui-monospace,Consolas,monospace;padding:12px 14px;outline:none;resize:none}
+.cpy{padding:0 16px;border-radius:14px;border:1px solid var(--line2);font-size:14px}.cpy:hover{border-color:var(--acc);color:var(--acc)}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pbtn{border-radius:18px;padding:14px 16px;font:400 16px "Geologica";display:flex;flex-direction:column;gap:2px;transition:transform .2s,filter .2s;color:#fff}
+.pbtn small{font-size:12px;opacity:.8;font-weight:300}
+.pbtn.da{background:var(--da)}.pbtn.dp{background:var(--dp)}.pbtn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.madd{width:100%;margin-top:10px;height:50px;border-radius:999px;border:1px solid var(--line2);font-size:15px}.madd:hover{border-color:var(--acc);color:var(--acc)}
+.note{font-size:13px;color:var(--mute);margin-top:12px}.note b{color:var(--ink);font-weight:400}
+.cit{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cit .tile{width:40px;height:40px;border-radius:12px}.cit .tile svg{width:20px;height:20px}
+.cit .t{flex:1;font-size:15px}.cit .p{font:200 22px "Geologica"}
+.cit button{width:32px;height:32px;border-radius:50%;border:1px solid var(--line2);color:var(--mute)}.cit button:hover{color:var(--ink)}
+.mini-l{display:block;margin:14px auto 0;color:var(--mute);font-size:13px;text-decoration:underline}
+.cartfab{position:fixed;right:22px;bottom:22px;z-index:60;display:none;align-items:center;gap:12px;height:56px;padding:0 10px 0 22px;border-radius:999px;background:var(--acc);color:var(--bg);font:400 15px "Geologica";box-shadow:0 14px 40px -10px rgba(200,255,77,.5)}
+.cartfab.on{display:flex}
+.cartfab .n{width:36px;height:36px;border-radius:50%;background:var(--bg);color:var(--acc);display:grid;place-items:center}
+.cartfab.bump{animation:bump .4s}@keyframes bump{40%{transform:scale(1.08)}}
+.fly{position:fixed;z-index:140;width:40px;height:40px;border-radius:12px;background:var(--acc);pointer-events:none;transition:transform .7s cubic-bezier(.5,-.3,.7,1),opacity .7s}
+.toast{position:fixed;left:50%;bottom:26px;z-index:150;transform:translate(-50%,240%);visibility:hidden;background:var(--ink);color:var(--bg);border-radius:999px;padding:12px 22px;font-size:15px;transition:transform .35s var(--ease);pointer-events:none}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+
+/* ---------- телефоны и планшеты ---------- */
+@media (max-width:1100px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .m24,.live,.faq{grid-template-columns:minmax(0,1fr)}
+  .m24>*,.live>*,.faq>*{min-width:0}
+  .dial{margin:0 auto}
+  .rules{position:static}
+  .cols,.qbox{grid-template-columns:1fr}
+  .st3{grid-template-columns:1fr}
+  .tv .scr{transform:none}
+}
+@media (max-width:860px){
+  .w{padding:0 18px}
+  .s{padding-top:80px}
+  .nav ul,.nav .live-l{display:none}.burger{display:grid}
+  .nav.open ul{display:flex;position:absolute;top:76px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 18px 16px}
+  .nav.open ul a{display:block;padding:12px 0;font-size:17px;color:var(--ink)}
+  .hero{min-height:680px}
+  .hero .c{padding-top:calc(76px + 6vh)}
+  .kick{font-size:11px;letter-spacing:.08em;padding:7px 14px}.kick .long{display:none}
+  .ctrl{position:static;background:none}.tabs{flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap}
+  .name span{-webkit-text-stroke-width:1.5px}
+  .hstats{gap:22px;bottom:22px;flex-wrap:wrap}.hstats b{font-size:22px}
+  .how,.grid{grid-template-columns:1fr}
+  .search input{width:100%}.search{flex:1 1 100%}.chip{flex:1;justify-content:center}
+  .gb{grid-template-columns:1fr;gap:16px;padding:24px}
+  .bento{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .bt.xh{grid-column:span 2;grid-row:span 2}.bt .v{font-size:40px}.bt.dev .v{font-size:20px}
+  .don{grid-template-columns:1fr}.don a{min-height:240px;padding:28px}
+  footer .top{grid-template-columns:1fr 1fr}footer .top>div:first-child{grid-column:span 2}
+  .pay{grid-template-columns:1fr}
+  .modal{padding:24px;border-radius:24px}
+  .qa p{padding-right:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .name i{animation:none;opacity:1;transform:none}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .strip{transition:transform 6.2s cubic-bezier(.08,.6,.12,1)!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav"><div class="w">
+  <a class="logo" href="#top">VARDE99</a>
+  <ul id="menu"><li><a href="#price">Прайс</a></li><li><a href="#case">Кейс</a></li><li><a href="#m24">Марафон</a></li><li><a href="#hub">Топ</a></li><li><a href="#live">Эфир</a></li><li><a href="#setup">Сетап</a></li><li><a href="#faq">FAQ</a></li></ul>
+  <a class="btn ghost gsw" href="index.html" style="height:36px;padding:0 14px;font-size:13px">CS2 →</a>
+  <a class="live-l" href="#live"><span class="dot" id="nav-dot"></span><span id="nav-live">Стрим на Twitch</span></a>
+  <button class="burger" id="burger" aria-label="Меню"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<a class="gameban" id="gameban" hidden></a>
+<main>
+<section class="hero" id="top">
+  <canvas id="bg3d"></canvas>
+  <div class="c">
+    <span class="kick"><b>ROB RUN</b> ПРАЙС НА СТРИМ<span class="long"> · TWITCH И TIKTOK</span></span>
+    <h1 class="name" aria-label="VARDE99"><i style="animation-delay:.05s">V</i><i style="animation-delay:.1s">A</i><i style="animation-delay:.15s">R</i><i style="animation-delay:.2s">D</i><i style="animation-delay:.25s">E</i><span><i style="animation-delay:.32s">9</i><i style="animation-delay:.39s">9</i></span></h1>
+    <div class="sub">Управляй <em>моей игрой</em> за донат</div>
+    <p class="lead">Закинь донат с кодом задания — и бот сам перепутает мне кнопки, заставит прыгать без остановки или выкинет из машины.</p>
+    <div class="cta"><a class="btn pri go" href="#price">Открыть прайс<span>→</span></a><a class="btn ghost" href="#how">Как заказать</a></div>
+  </div>
+  <div class="hstats" id="hstats"></div>
+</section>
+
+<section class="s w" id="how">
+  <div class="sh rv"><h2>Как заказать</h2><p>Три шага — и задание уже на стриме. Без кода в сообщении задание не включится.</p></div>
+  <div class="how" id="how-steps"></div>
+</section>
+
+<section class="s w" id="price">
+  <div class="sh rv"><h2>Прайс</h2><p>Цены за одно задание. Метку <span class="auto">АВТО</span> бот включает сам — сразу после доната.</p></div>
+  <div class="ctrl" id="ctrl">
+    <div class="tabs" id="tabs"></div>
+    <label class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Найти задание"></label>
+    <button class="chip" id="onlyAuto">Только АВТО</button>
+    <button class="chip" id="rand">Случайное</button>
+  </div>
+  <div id="list"></div>
+  <div class="empty" id="empty">Ничего не нашлось. Попробуй другое слово.</div>
+</section>
+
+<section class="s w" id="case">
+  <div class="sh rv"><h2>Кейс</h2><p>Задонать <b id="case-price" style="font-weight:400">99</b> ₽ с кодом #CASE — бот крутит кейс на стриме, и выпавшее задание включается сразу.</p></div>
+  <div class="reel rv"><div class="line"></div><div class="strip" id="strip"></div></div>
+  <div class="case-res" id="drop"></div>
+  <div class="case-acts"><button class="btn pri" id="case-buy">Открыть кейс</button><button class="btn ghost" id="case-try">Покрутить бесплатно</button></div>
+  <div class="odds" id="chances"></div>
+</section>
+
+<section class="s w" id="m24">
+  <div class="sh rv"><h2>Стрим 24 часа</h2></div>
+  <div class="m24">
+    <div class="dial rv"><canvas id="dial" width="1040" height="1040"></canvas><div class="in"><span class="lab" id="m24-h">До открытия окна</span><b id="cd">00:00:00</b><span class="lab">ЧЧ : ММ : СС</span></div></div>
+    <div class="rv"><span class="st" id="m24-st"><span class="dot"></span><span></span></span>
+      <h3>Сутки в эфире<br>без остановки</h3>
+      <p style="color:var(--mute)">Ты заказываешь — я стримлю 24 часа подряд. Точный старт договорим в чате.</p>
+      <ul><li><span>Окно</span><span id="m24-win">пт 18:00 — вс 20:00 МСК</span></li><li><span>Длительность</span><span>24 часа</span></li><li><span>Код в донате</span><span>#STREAM24</span></li></ul>
+      <div class="row"><span class="pr" id="m24-price">3499 ₽</span><button class="btn pri" id="m24-buy">Заказать марафон</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="s w" id="hub">
+  <div class="sh rv"><h2>Стрим-центр</h2><p>Топ донатеров, последние донаты и новые задания — обновляется само.</p></div>
+  <div class="fundb rv" id="fundb" hidden><div><span class="lab">Сейчас на стриме · спидран</span><h3>С нуля до 10 lvl FACEIT за 150 часов</h3><small>50% всех донатов за спидран идут в призовой фонд. Не успею — разыграю его в Telegram. Чем больше мешаешь заданиями, тем больше приз.</small></div><div class="fr"><span class="lab">Призовой фонд Расплаты</span><div class="fv" id="fund-v">0 ₽</div><small id="fund-sub"></small></div></div>
+  <div class="gb rv"><div><span class="lab">Всего задоначено</span><div class="big" id="feed-total">0 ₽</div></div>
+    <div><div class="gt"><span id="goal-name"></span><span id="goal-pct">0%</span></div><div class="gbw" id="goal-w"><div class="bar"><i id="goal-bar"></i></div></div><div class="upd"><span id="goal-txt"></span> <span id="feed-upd"></span></div></div>
+    <a class="btn pri" href="#donate">Поддержать стрим</a></div>
+  <div class="st3 rv"><div><span class="lab">Бот выполнил заданий</span><b id="st-tasks">—</b></div><div><span class="lab">Донатов всего</span><b id="st-don">—</b></div><div><span class="lab">Самый большой донат</span><b id="st-big">—</b><small id="st-big-who"></small></div></div>
+  <div class="qbox rv" id="qbox">
+    <div><h3 data-ic="zap">Сейчас на стриме</h3><div id="q-now"></div></div>
+    <div><h3 data-ic="clock">Ждут в очереди</h3><div id="q-wait"></div></div>
+  </div>
+  <div class="cols">
+    <div class="col rv"><h3 data-ic="crown">MVP</h3><div class="since" id="fame-since"></div><div id="fame"></div></div>
+    <div class="col rv"><h3 data-ic="zap">Последние донаты</h3><div id="feed-list"><div class="empty2">Пока тихо… стань первым!</div></div></div>
+    <div class="col rv"><h3 data-ic="box">Новинки</h3><div id="new-list"></div></div>
+  </div>
+</section>
+
+<section class="s w" id="live">
+  <div class="sh rv"><h2 id="live-h">Смотри стрим</h2></div>
+  <div class="live">
+    <div class="rv"><span class="st" id="live-st"><span class="dot" id="live-dot"></span><span id="live-t">Twitch: varde99</span></span>
+      <h3>Смотри прямо<br>здесь</h3>
+      <p style="color:var(--mute);margin-bottom:26px">И заказывай задания, не уходя со страницы. Стримлю CS2 каждый день: челленджи от чата, задания за донат, розыгрыши в Telegram.</p>
+      <div id="links"></div>
+    </div>
+    <div class="tv rv"><div class="scr"><span class="pill" id="livepill"><span class="dot"></span><span>TWITCH</span></span><div id="tw-box" style="position:absolute;inset:0"><div class="ph"><div><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><b id="tw-ph-t">Загружаю плеер…</b>плеер Twitch</div></div></div></div></div>
+  </div>
+</section>
+
+<section class="s w" id="setup">
+  <div class="sh rv"><h2>Мой сетап</h2><p>Настройки и железо, на которых я играю. Прицел — мой настоящий, наведи на него.</p></div>
+  <div class="bento rv" id="bento"></div>
+</section>
+
+<section class="s w" id="donate">
+  <div class="sh rv"><h2>Куда донатить</h2></div>
+  <div class="don rv" id="don"></div>
+  <p class="don-note">Оба сервиса работают одинаково — донаты суммируются в табло MVP.</p>
+</section>
+
+<section class="s w" id="faq">
+  <div class="sh rv"><h2>Вопросы</h2></div>
+  <div class="faq"><div id="qa" style="border-top:1px solid var(--line)"></div><div class="rules rv"><h3 data-ic="book">Правила</h3><ul id="rules"></ul></div></div>
+</section>
+</main>
+
+<footer class="w">
+  <div class="top"><div><div class="logo" style="margin-bottom:12px">VARDE99</div><p style="color:var(--mute);max-width:320px">Стримы по CS2 на Twitch и TikTok. Управляй моей игрой за донат.</p></div>
+    <div><h5>РАЗДЕЛЫ</h5><a href="#price">Прайс</a><a href="#case">Кейс</a><a href="#m24">Марафон</a><a href="#hub">Стрим-центр</a><a href="#live">Эфир</a><a href="#setup">Сетап</a><a href="#faq">FAQ</a></div>
+    <div><h5>КАНАЛЫ</h5><div id="foot-links"></div></div></div>
+  <div class="word" aria-hidden="true">VARDE<span>99</span></div>
+  <div class="bot"><span>© Varde99 · Спасибо за поддержку</span><a href="#top">Наверх ↑</a></div>
+</footer>
+
+<!-- окно задания -->
+<div class="ov" id="ov">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="x" id="x" aria-label="Закрыть">✕</button>
+    <div class="tile" id="m-ico"></div>
+    <h3 id="m-title"></h3>
+    <p class="m-desc" id="m-desc"></p>
+    <div class="picker" id="picker">
+      <span class="lab">Оружие</span>
+      <select id="gun"></select>
+      <div class="seg"><button data-m="R" class="on">На раунд</button><button data-m="G">На всю игру</button></div>
+    </div>
+    <div class="m-sum"><span style="color:var(--mute)">Сумма доната</span><span class="price" id="m-price"></span></div>
+    <div class="hint" id="m-hint"></div>
+    <span class="lab">Код задания — скопируется сам, когда нажмёшь кнопку ниже</span>
+    <div class="codebox"><input id="m-code" readonly><button class="cpy" id="copy">Копировать</button></div>
+    <div class="pay">
+      <a class="pbtn da" id="m-da" target="_blank" rel="noopener">DonationAlerts<small>СБП · Карты РФ · Иностранные карты</small></a>
+      <a class="pbtn dp" id="m-dp" target="_blank" rel="noopener">DonatePay<small>Карты РФ · СБП · Онлайн-банки · Крипта</small></a>
+    </div>
+    <button class="madd" id="madd">Добавить в корзину</button>
+    <p class="note" id="m-note"></p>
+  </div>
+</div>
+
+<!-- корзина -->
+<button class="cartfab" id="cartfab">Корзина · <span id="cartSum">0 ₽</span><span class="n" id="cartN">0</span></button>
+<div class="ov" id="cov">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="x" id="cx" aria-label="Закрыть">✕</button>
+    <h3>Корзина заданий</h3>
+    <div id="citems"></div>
+    <div class="m-sum"><span style="color:var(--mute)">Итого</span><span class="price" id="ctotal"></span></div>
+    <span class="lab">Коды заданий — скопируются сами, когда нажмёшь кнопку ниже</span>
+    <div class="codebox"><textarea id="ccode" readonly rows="3"></textarea></div>
+    <div class="pay">
+      <a class="pbtn da" id="c-da" target="_blank" rel="noopener">DonationAlerts<small>СБП · Карты РФ · Иностранные карты</small></a>
+      <a class="pbtn dp" id="c-dp" target="_blank" rel="noopener">DonatePay<small>Карты РФ · СБП · Онлайн-банки · Крипта</small></a>
+    </div>
+    <p class="note" id="cnote"></p>
+    <button class="mini-l" id="cclear">Очистить корзину</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script>
+/* ============ НАСТРОЙКИ — поменяй под себя ============ */
+const CONFIG = {
+  donationAlerts: "https://www.donationalerts.com/r/varde99",   // твоя ссылка DonationAlerts
+  donatePay:      "https://donatepay.ru/don/1539325",           // твоя ссылка DonatePay
+  tiktok:         "https://www.tiktok.com/@varde9999",           // твой TikTok
+  telegram:       "https://t.me/varde99",                       // канал с анонсами эфиров
+};
+
+/* ============ САЙТ: цель, сетап, прицел ============ */
+const SITE = {
+  twitch: "varde99",
+  goal: { name: "Цель: 32 ГБ памяти + Ryzen 5 5500X3D", target: 38000,
+    steps: [{ t: "Память +16 ГБ", at: 15000 }, { t: "Ryzen 5 5500X3D", at: 38000 }] },   // цель сбора (сумма донатов из ленты)
+  setup: [                      // [значок, название, значение] — пустые не показываются
+    ["🎯", "Сенса", "1"], ["🖱", "DPI", "800"], ["📐", "eDPI", "1000"], ["🖥", "Монитор", "144 Гц"],
+    ["🖱", "Мышь", "ATTACK SHARK X3"], ["🎧", "Наушники", "Logitech G435"],
+    ["⌨️", "Клавиатура", "Aula F75"], ["🔲", "Разрешение", "1280×1024 (4:3)"],
+  ],
+  /* код прицела из CS2 (Настройки → Игра → Прицел → «Поделиться»); пусто — блок с кодом не показывается */
+  crosshairCode: "CSEaP4XwaTQ4Lq5ZxqXuh7KAWhfAX3NthRrcn55z2RyfcT",
+  crosshair: { style: 4, length: 2, gap: 1, thickness: 2, r: 11, g: 255, b: 0, a: 200, dot: false, outline: false, t: false },
+  /* окно для стрима 24 часа (время МСК): день недели 0 = вс, 5 = пт */
+  marathon: { from: { day: 5, hour: 18 }, to: { day: 0, hour: 20 } },
+  /* лента донатов и MVP: ссылка на feed.json в GitHub Gist (бот пишет её в окне при первом запуске). Пусто — берётся feed.json с сайта */
+  feed: "https://gist.githubusercontent.com/Varde4902/ba7f4db86aefce53896db1b628d1e114/raw/feed.json",
+};
+
+/* ============ ЗАЛ СЛАВЫ — бот сам подставляет топ из feed.json ============ */
+const FAME_SINCE = "01.11.2026";
+const FAME = [
+  // {name:"Ник", sum: 1500},
+];
+
+/* auto: true — срабатывает само (OBS/скрипт), false — делаешь сам
+   code — короткий код, по нему бот понимает задание
+   hot: true — метка «ХИТ», new: true — попадает во вкладку «Новинки» */
+const CATS = [
+ {id:"rrauto", name:"ROB RUN — авто", ico:"⚙️", sub:"Бот сам жмёт кнопки и ломает мне управление"},
+ {id:"rrgame", name:"В игре", ico:"🏦", sub:"Что я делаю в ROB RUN"},
+ {id:"hands", name:"Руки", ico:"🖱", sub:"Играю неудобно"},
+ {id:"cam", name:"Вебка / IRL", ico:"📸", sub:"Физуха на камеру"},
+ {id:"chat", name:"Чат", ico:"💬", sub:"Ты решаешь"},
+];
+
+/* Оружие для конструктора «Выбери моё оружие». r — цена за раунд, g — за игру */
+const GAME_MULT = 4;
+const GUNS = [
+ {id:"AK",n:"AK-47",r:29,g:109},
+ {id:"M4A4",n:"M4A4",r:29,g:109},
+ {id:"M4A1S",n:"M4A1-S",r:29,g:109},
+ {id:"AWP",n:"AWP",r:39,g:139},
+ {id:"GALIL",n:"Galil AR",r:39,g:139},
+ {id:"FAMAS",n:"FAMAS",r:39,g:139},
+ {id:"SG",n:"SG 553",r:39,g:139},
+ {id:"AUG",n:"AUG",r:39,g:139},
+ {id:"SCOUT",n:"SSG 08 (Скаут)",r:39,g:149},
+ {id:"P90",n:"P90",r:39,g:139},
+ {id:"MP9",n:"MP9",r:39,g:149},
+ {id:"MAC10",n:"MAC-10",r:39,g:149},
+ {id:"UMP",n:"UMP-45",r:39,g:149},
+ {id:"MP7",n:"MP7",r:39,g:149},
+ {id:"MP5",n:"MP5-SD",r:49,g:179},
+ {id:"BIZON",n:"PP-Bizon",r:49,g:179},
+ {id:"NOVA",n:"Nova",r:49,g:199},
+ {id:"XM",n:"XM1014",r:49,g:179},
+ {id:"MAG7",n:"MAG-7",r:49,g:199},
+ {id:"SAWED",n:"Sawed-Off",r:59,g:219},
+ {id:"M249",n:"M249",r:49,g:199},
+ {id:"NEGEV",n:"Negev",r:49,g:199},
+ {id:"DEAGLE",n:"Desert Eagle",r:39,g:149},
+ {id:"USP",n:"USP-S",r:49,g:179},
+ {id:"GLOCK",n:"Glock-18",r:49,g:199},
+ {id:"P250",n:"P250",r:49,g:179},
+ {id:"FIVE",n:"Five-SeveN",r:49,g:179},
+ {id:"TEC9",n:"Tec-9",r:49,g:179},
+ {id:"CZ",n:"CZ75-Auto",r:49,g:179},
+ {id:"DUAL",n:"Dual Berettas",r:59,g:219},
+ {id:"R8",n:"R8 Revolver",r:59,g:219},
+ {id:"ZEUS",n:"Zeus x27",r:109,g:409},
+ {id:"KNIFE",n:"Нож",r:89,g:359},
+];
+
+const TASKS = [
+ {c:"rrauto",ico:"🔀",t:"Перепутанные кнопки",d:"W↔S и A↔D меняются местами. Вперёд — значит назад.",p:69,dur:"2 мин",auto:true,code:"RR-SWAP",hot:true},
+ {c:"rrauto",ico:"🐇",t:"Прыгаю без остановки",d:"Бот сам жмёт прыжок каждые 2–4 секунды.",p:39,dur:"1 мин",auto:true,code:"RR-JUMP"},
+ {c:"rrauto",ico:"🌀",t:"Резкие развороты",d:"В случайные моменты камеру резко крутит на 180°.",p:49,dur:"1 мин",auto:true,code:"RR-SPIN",hot:true},
+ {c:"rrauto",ico:"🏃",t:"Неудержимый бег",d:"Бот зажимает «вперёд» — меня несёт, куда смотрю.",p:29,dur:"15 сек",auto:true,code:"RR-RUN"},
+ {c:"rrauto",ico:"🚪",t:"Выкинуть из машины",d:"Бот жмёт выход из машины прямо на ходу.",p:39,dur:"мгновенно",auto:true,code:"RR-EXIT"},
+ {c:"rrauto",ico:"🐌",t:"Мышка-улитка",d:"Мышка вязнет и тормозит.",p:50,dur:"1 мин",auto:true,code:"RR-SLOW"},
+ {c:"rrauto",ico:"🔇",t:"Без звука игры",d:"Бот выключает звук ROB RUN — не слышу ни копов, ни машин.",p:40,dur:"1 мин",auto:true,code:"RR-MUTE"},
+ {c:"rrauto",ico:"🔊",t:"Оглушение",d:"Звук игры на максимум.",p:29,dur:"30 сек",auto:true,code:"RR-LOUD"},
+ {c:"rrauto",ico:"🏋",t:"Приседай по сигналу",d:"Бот пикает каждые 30 секунд — я встаю и приседаю.",p:69,dur:"3 мин",auto:true,code:"RR-SQUATS"},
+ {c:"rrauto",ico:"⚡",t:"Хаос",d:"Перепутанные кнопки + прыжки + развороты сразу.",p:149,dur:"1 мин",auto:true,code:"RR-CHAOS",hot:true},
+ {c:"rrauto",ico:"📦",t:"Открыть кейс",d:"Случайное задание ROB RUN — крутится кейс на стриме.",p:69,dur:"разное",auto:true,code:"RR-CASE",hot:true},
+ {c:"rrgame",ico:"🚗",t:"Ездить только задом",d:"Любая машина — только задним ходом.",p:49,dur:"5 мин",auto:false,code:"RR-BACK"},
+ {c:"rrgame",ico:"🚶",t:"Без машины",d:"Никаких машин — только бегом.",p:59,dur:"10 мин",auto:false,code:"RR-NOCAR"},
+ {c:"rrgame",ico:"👊",t:"Только кулаки",d:"Оружие убираю — дерусь руками.",p:69,dur:"5 мин",auto:false,code:"RR-FISTS"},
+ {c:"rrgame",ico:"🚓",t:"Сдаться копу",d:"Сдаюсь первому же полицейскому.",p:99,dur:"мгновенно",auto:false,code:"RR-SURRENDER",hot:true},
+ {c:"rrgame",ico:"🙅",t:"Нельзя убегать от полиции",d:"Копы приехали — стою на месте.",p:79,dur:"5 мин",auto:false,code:"RR-NOESCAPE"},
+ {c:"rrgame",ico:"💰",t:"Отдать награбленное",d:"Всё, что награбил, отдаю первому встречному.",p:149,dur:"мгновенно",auto:false,code:"RR-GIVE",hot:true},
+ {c:"rrgame",ico:"🏦",t:"Грабить самое сложное",d:"Бросаю всё и иду на самое сложное ограбление.",p:99,dur:"мгновенно",auto:false,code:"RR-HEIST"},
+ {c:"rrgame",ico:"👣",t:"Хвост",d:"Хожу за первым встречным игроком: куда он — туда и я.",p:39,dur:"2 мин",auto:false,code:"RR-FOLLOW"},
+ {c:"hands",ico:"🖱",t:"Мышка в левой руке",d:"Играю мышкой левой рукой.",p:70,dur:"5 мин",auto:false,code:"RR-LHAND",hot:true},
+ {c:"hands",ico:"🧍",t:"Играть стоя",d:"Встаю и играю стоя.",p:40,dur:"5 мин",auto:false,code:"RR-STAND"},
+ {c:"hands",ico:"🟫",t:"Без коврика",d:"Убираю коврик для мыши.",p:29,dur:"5 мин",auto:false,code:"RR-NOPAD"},
+ {c:"cam",ico:"🏋",t:"10 приседаний",d:"Прямо на камеру.",p:69,dur:"сразу",auto:false,code:"SQUAT10"},
+ {c:"cam",ico:"🏋",t:"30 приседаний",d:"Прямо на камеру.",p:179,dur:"сразу",auto:false,code:"SQUAT30"},
+ {c:"cam",ico:"💪",t:"15 отжиманий",d:"Прямо на камеру.",p:179,dur:"сразу",auto:false,code:"PUSH15"},
+ {c:"cam",ico:"🧱",t:"Планка 1 минута",d:"Стою в планке на камеру.",p:109,dur:"1 мин",auto:false,code:"PLANK"},
+ {c:"cam",ico:"🧢",t:"Надеть шапку",d:"Играю в шапке.",p:49,dur:"игра",auto:false,code:"HAT"},
+ {c:"cam",ico:"👓",t:"Надеть очки",d:"Играю в очках.",p:49,dur:"игра",auto:false,code:"GLASSES"},
+ {c:"chat",ico:"🎯",t:"Чат выбирает цель",d:"Чат решает, кого грабить и куда ехать.",p:49,dur:"10 мин",auto:false,code:"RR-CHATPICK"},
+ {c:"chat",ico:"👋",t:"Передать привет",d:"Передам привет кому скажешь.",p:19,dur:"сразу",auto:false,code:"HI"},
+ {c:"chat",ico:"🎵",t:"Закажи трек",d:"Включу твой трек на стриме.",p:39,dur:"1 трек",auto:true,code:"MUSIC"},
+ {c:"chat",ico:"🔊",t:"Мем-звук",d:"Случайный мем-звук на стриме.",p:19,dur:"мгновенно",auto:true,code:"SOUND"}
+];
+
+/* ================================ ЛОГИКА ================================ */
+
+/* ============ дальше — работа сайта, менять не нужно ============ */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => Math.round(n).toLocaleString("ru-RU");
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let cat = "all", onlyAuto = false, query = "";
+
+/* ---------- иконки (тонкие линии, свои) ---------- */
+const P = {
+ screen:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/>',
+ flip:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4M14.6 8.4a3 3 0 1 0 .4 2.6M15 6.6v2h-2"/>',
+ gun:'<path d="M2.5 8.5h16l1.8 1.8v2.2h-5.6l-1.2 2.3h-2.3l-.8 4H6.4l1.3-6.3H2.5z"/>',
+ knife:'<path d="M3 20l9-9M12 11l7.5-7.5c.8 2.8-.5 6-3.4 8.4L13 14.4z"/>',
+ nade:'<circle cx="12" cy="14" r="6"/><path d="M10 8V6h4v2M14 6l3-2"/>',
+ cross:'<circle cx="12" cy="12" r="7"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/>',
+ mouse:'<rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/>',
+ sound:'<path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M15.5 9.5a3.5 3.5 0 0 1 0 5M18 7a7 7 0 0 1 0 10"/>',
+ walk:'<circle cx="13" cy="4.5" r="1.8"/><path d="M13 7l-2 6 3 3 1 5M11 13l-3 1-2 4M12 9l4 2"/>',
+ body:'<circle cx="12" cy="4.5" r="1.8"/><path d="M12 7v6M8 21l2-5h4l2 5M7 10.5h10"/>',
+ cam:'<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3"/>',
+ chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
+ vote:'<path d="M5 20V12M12 20V5M19 20v-5"/>',
+ music:'<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
+ box:'<path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/>',
+ zap:'<path d="M13 2L5 13h6l-1 9 8-11h-6z"/>',
+ dice:'<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r=".8"/><circle cx="15" cy="15" r=".8"/><circle cx="15" cy="9" r=".8"/><circle cx="9" cy="15" r=".8"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ crown:'<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/>',
+ mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M3 3l18 18"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4-6.5 8-6.5s7 2 8 6.5"/>',
+ hat:'<path d="M4 17h16M6 17c0-6 2.5-10 6-10s6 4 6 10"/>',
+ glasses:'<circle cx="7" cy="14" r="3.5"/><circle cx="17" cy="14" r="3.5"/><path d="M10.5 14h3M3.5 13L5 8M20.5 13L19 8"/>',
+ head:'<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
+ kb:'<rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6 10h1M9 10h1M12 10h1M15 10h1M18 10h.5M6 13h1M9 13h6M17 13h1M7 15.5h10"/>',
+ mon:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/>',
+ pick:'<path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>',
+ copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+ eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ fire:'<path d="M12 21c4 0 7-2.7 7-6.5 0-3.5-2.5-5.5-3.5-8.5-1 2-2 3-3.5 3.5C12 6 11 4 9 3c0 4-4 6-4 11.5C5 18.3 8 21 12 21z"/>',
+ card:'<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/>',
+ book:'<path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M4 17a3 3 0 0 1 3-3h11"/>',
+ tw:'<path d="M4 3h16v11l-5 5h-4l-3 3v-3H4z"/><path d="M10 8v4M15 8v4"/>',
+ tt:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.3 2.8 2.2 4.8 5 5"/>',
+ tg:'<path d="M21 4L3 11.2l6 2.1 2.2 6.2 3.3-3.8 4.6 3.5z"/><path d="M9 13.3l12-9.3"/>',
+ play:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/>'};
+const BYCODE = {"RR-SWAP":"kb","RR-JUMP":"walk","RR-SPIN":"dice","RR-RUN":"walk","RR-EXIT":"walk","RR-SLOW":"mouse","RR-MUTE":"sound","RR-LOUD":"sound","RR-SQUATS":"body","RR-CHAOS":"zap","RR-CASE":"box","RR-LHAND":"mouse","RR-STAND":"body","RR-NOPAD":"mouse","RR-CHATPICK":"vote",SQUAT10:"body",SQUAT30:"body",PUSH15:"body",PLANK:"body",GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",SOUND:"sound",MUSIC:"music",
+ "CROSS-R":"cross","CROSS-G":"cross",NOCROSS:"cross",LOWSENS:"mouse",HIGHSENS:"mouse",SENSRND:"mouse",INVERT:"mouse",LEFT:"gun",NOSOUND:"sound",DROPNOW:"gun",
+ DUCK:"body",BACK:"walk",JUMP:"walk",RUSH:"walk",ONEHAND:"user",MUTE:"mic",DROP:"gun",HAT:"hat",GLASSES:"glasses",
+ GUNPOS:"gun",NOHUD:"eye",SWAP:"kb",RES:"mon",EARS:"head",LHAND:"mouse",ECO:"gun",NOPAD:"mouse",TAPS:"cross",STAND:"body",CORNER:"body",POLL:"vote",HI:"chat",MAP:"chat",PARTY:"user",CASE:"box",RANDOM:"dice",CHAOS:"zap",ROULETTE:"dice",NAME:"crown",COACH:"user",UNTILWIN:"crown",STREAM24:"clock"};
+const BYCAT = {rrauto:"kb",rrgame:"walk",hands:"mouse",weapons:"gun",cs2auto:"cross",challenge:"walk",obs:"screen",cam:"body",chat:"chat",mega:"crown"};
+const icoOf = x => P[BYCODE[x.code] || BYCAT[x.c] || "box"] ? (BYCODE[x.code] || BYCAT[x.c] || "box") : "box";
+const svg = (k, cls = "i") => `<svg class="${cls}" viewBox="0 0 24 24">${P[k] || P.box}</svg>`;
+$$("[data-ic]").forEach(h => h.insertAdjacentHTML("afterbegin", svg(h.dataset.ic)));
+
+/* ---------- первый экран: цифры ---------- */
+$("#hstats").innerHTML = [[TASKS.length, "заданий в прайсе"], ["от " + Math.min(...TASKS.map(t => t.p)) + " ₽", "цена задания"], [TASKS.filter(t => t.auto).length, "бот включает сам"], ["24 часа", "марафон по выходным"]]
+  .map(([n, l]) => `<div><b>${n}</b>${l}</div>`).join("");
+
+/* ---------- как заказать ---------- */
+$("#how-steps").innerHTML = [["pick","Выбери задание","Жми «Заказать» на карточке или собери несколько в корзину."],["copy","Задонать с кодом","Нажми DonationAlerts или DonatePay — код уже в буфере. Вставь его в сообщение и отправь сумму."],["eye","Смотри, как я страдаю","Задания с меткой АВТО бот включает сам прямо на стриме, остальные выполняю я."]]
+  .map((s, i) => `<div class="step rv"><div class="top"><span class="tile">${svg(s[0])}</span><span class="n">ШАГ ${i + 1}</span></div><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join("");
+
+/* ---------- прайс ---------- */
+function renderTabs(){
+  const all = [{id:"all", name:"Все"}, ...CATS];
+  $("#tabs").innerHTML = all.map(c => `<button class="tab ${c.id === cat ? "on" : ""}" data-c="${c.id}">${c.name}</button>`).join("");
+}
+function card(x){
+  const i = TASKS.indexOf(x);
+  const flags = (x.auto ? '<span class="auto">АВТО</span>' : "") + (x.new ? '<span class="flag new">NEW</span>' : x.hot ? '<span class="flag">ХИТ</span>' : "");
+  return `<article class="card" id="t${i}">
+    <div class="top"><span class="tile">${svg(icoOf(x))}</span><span class="flags">${flags}</span></div>
+    <h3>${esc(x.t)}</h3><p>${esc(x.d)}</p>
+    <div class="bot"><span class="pr">${x.from ? "<em>от </em>" : ""}${x.p} ₽<small>${esc(x.dur)}</small></span>${x.picker ? "" : `<button class="add" data-i="${i}" aria-label="В корзину" title="В корзину">+</button>`}<button class="buy" data-i="${i}">Заказать</button></div>
+  </article>`;
+}
+function render(){
+  renderTabs();
+  const q = query.toLowerCase().trim();
+  const ok = x => (cat === "all" || x.c === cat) && (!onlyAuto || x.auto) && (!q || (x.t + " " + x.d).toLowerCase().includes(q));
+  let html = "", n = 0;
+  CATS.forEach(c => {
+    const items = TASKS.filter(x => x.c === c.id && ok(x));
+    if (!items.length) return;
+    n += items.length;
+    html += `<div class="cat"><h3>${c.name}</h3><small>${c.sub}</small><span class="ct">${items.length}</span></div><div class="grid">${items.map(card).join("")}</div>`;
+  });
+  $("#list").innerHTML = html;
+  $("#empty").style.display = n ? "none" : "block";
+}
+
+/* ---------- окно задания ---------- */
+let gunMode = "R", CUR = {};
+/* текст для сообщения доната: код (по нему бот включает задание) + понятное название, время и цена */
+function codeText(c){
+  const dur = /^раунд/.test(c.dur) ? "на раунд" : /^игра/.test(c.dur) ? "на игру" : /^стрим/.test(c.dur) ? "на весь стрим" : c.dur;
+  const d = dur && !/раунд|игр|стрим/i.test(c.title) ? ` (${dur})` : "";
+  return `#${c.code} — ${c.title}${d} — ${c.price} ₽`;
+}
+function setPrice(p, code){
+  CUR.price = p; CUR.code = code;
+  $("#m-price").innerHTML = `${p}<small> ₽</small>`;
+  const p2 = $("#m-price2"); if (p2) p2.textContent = p;
+  $("#m-code").value = codeText(CUR);
+}
+function updGun(){
+  const g = GUNS[$("#gun").value];
+  const p = gunMode === "R" ? g.r : g.g;
+  $("#m-desc").textContent = `Играю только с ${g.n} ${gunMode === "R" ? "весь раунд" : "всю игру"}.`;
+  CUR.title = `Только ${g.n} — ${gunMode === "R" ? "на раунд" : "на всю игру"}`; CUR.ico = "gun"; CUR.dur = "";
+  setPrice(p, `GUN-${g.id}-${gunMode}`);
+}
+function openTask(i){
+  const x = TASKS[i];
+  CUR = {ico:icoOf(x), title:x.t, dur:x.dur};
+  $("#m-ico").innerHTML = svg(icoOf(x)); $("#m-title").textContent = x.t; $("#m-desc").textContent = x.d;
+  $("#picker").classList.toggle("on", !!x.picker);
+  const music = x.code === "MUSIC";
+  $("#m-note").innerHTML = music
+    ? `Код скопируется сам. В сообщении: <b>код + исполнитель и название</b>, сумма ровно <b id="m-price2">${x.p}</b> ₽.`
+    : `Нажми DonationAlerts или DonatePay — код уже будет скопирован. Вставь его в сообщение доната и отправь ровно <b id="m-price2"></b> ₽.`;
+  const h = $("#m-hint"); h.classList.toggle("on", music);
+  h.innerHTML = music ? "После кода допиши в сообщении <b>исполнителя и название трека</b>, например: <i>#MUSIC — Закажи трек: Скриптонит — Притон</i>." : "";
+  if (x.picker) updGun(); else setPrice(x.p, x.code);
+  $("#m-da").href = CONFIG.donationAlerts; $("#m-dp").href = CONFIG.donatePay;
+  $("#ov").classList.add("on");
+}
+$("#gun").innerHTML = GUNS.map((g, i) => `<option value="${i}">${g.n} — ${g.r} ₽ / раунд · ${g.g} ₽ / игра</option>`).join("");
+$("#gun").onchange = updGun;
+$$(".seg button").forEach(b => b.onclick = () => { gunMode = b.dataset.m; $$(".seg button").forEach(x => x.classList.toggle("on", x === b)); updGun(); });
+
+let toastT;
+function toast(t){ const e = $("#toast"); e.textContent = t; e.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => e.classList.remove("on"), 1800); }
+const closeAll = () => { $("#ov").classList.remove("on"); $("#cov").classList.remove("on"); };
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("#tabs .tab"); if (t){ cat = t.dataset.c; render(); return; }
+  const ad = e.target.closest(".add"); if (ad){ const x = TASKS[+ad.dataset.i]; addCart({ico:icoOf(x), title:x.t, price:x.p, code:x.code, dur:x.dur}, ad); return; }
+  const b = e.target.closest(".buy, [data-open]"); if (b){ openTask(+(b.dataset.i ?? b.dataset.open)); return; }
+});
+$("#q").addEventListener("input", e => { query = e.target.value; render(); });
+$("#onlyAuto").onclick = e => { onlyAuto = !onlyAuto; e.currentTarget.classList.toggle("on", onlyAuto); render(); };
+$("#x").onclick = closeAll;
+$("#ov").onclick = e => { if (e.target.id === "ov") closeAll(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeAll(); });
+
+async function copyText(v, okMsg, el){
+  try { await navigator.clipboard.writeText(v); toast(okMsg); } catch (e) { if (el){ el.select(); } toast("Выдели и скопируй вручную"); }
+}
+$("#m-da").addEventListener("click", () => copyText($("#m-code").value, "Код скопирован — вставь в сообщение", $("#m-code")));
+$("#m-dp").addEventListener("click", () => copyText($("#m-code").value, "Код скопирован — вставь в сообщение", $("#m-code")));
+$("#copy").onclick = () => copyText($("#m-code").value, "Код скопирован!", $("#m-code"));
+
+/* случайное задание: рулетка по карточкам */
+$("#rand").onclick = () => {
+  cat = "all"; onlyAuto = false; query = ""; $("#q").value = ""; $("#onlyAuto").classList.remove("on"); render();
+  const all = $$("#list .card"), win = all[Math.random() * all.length | 0];
+  const vis = all.filter(c => { const r = c.getBoundingClientRect(); return r.top > 80 && r.bottom < innerHeight; });
+  const pool = vis.length > 3 ? vis : all.slice(0, 8);
+  let step = 0, prev = null; const steps = RM ? 0 : 16;
+  (function spin(){
+    if (prev) prev.classList.remove("roul");
+    if (step >= steps){
+      win.scrollIntoView({behavior: RM ? "auto" : "smooth", block: "center"});
+      setTimeout(() => { win.classList.add("flash"); setTimeout(() => win.classList.remove("flash"), 2300); }, 450);
+      return;
+    }
+    prev = pool[Math.random() * pool.length | 0]; prev.classList.add("roul");
+    step++; setTimeout(spin, 50 + step * step * 1.4);
+  })();
+};
+
+/* ---------- корзина ---------- */
+let CART = [];
+try { CART = JSON.parse(localStorage.getItem("varde_cart") || "[]"); } catch (e) {}
+function saveCart(){ try { localStorage.setItem("varde_cart", JSON.stringify(CART)); } catch (e) {} }
+const cartCodes = () => CART.map(codeText).join(" + ") + (CART.length > 1 ? ` · итого ${cartTotal()} ₽` : "");
+const cartTotal = () => CART.reduce((a, c) => a + c.price, 0);
+function renderCart(){
+  $("#cartfab").classList.toggle("on", CART.length > 0);
+  $("#cartN").textContent = CART.length; $("#cartSum").textContent = cartTotal() + " ₽";
+  $("#citems").innerHTML = CART.map((c, i) => `<div class="cit"><span class="tile">${svg(P[c.ico] ? c.ico : "box")}</span><span class="t">${esc(c.title)}</span><span class="p">${c.price} ₽</span><button data-rm="${i}" title="Убрать">✕</button></div>`).join("") || '<p style="color:var(--mute)">Пусто</p>';
+  $("#ctotal").innerHTML = cartTotal() + "<small> ₽</small>"; $("#ccode").value = cartCodes();
+  const music = CART.some(c => c.code === "MUSIC");
+  $("#cnote").innerHTML = `Нажми DonationAlerts или DonatePay — коды уже будут скопированы. Вставь их в сообщение доната и отправь <b>${cartTotal()} ₽</b>.` + (music ? " После кодов допиши исполнителя и название трека." : "");
+  saveCart();
+}
+function addCart(it, from){
+  CART.push(it); renderCart();
+  const f = $("#cartfab"); f.classList.remove("bump"); void f.offsetWidth; f.classList.add("bump");
+  if (from && !RM){
+    const a = from.getBoundingClientRect(), b = f.getBoundingClientRect(), el = document.createElement("div");
+    el.className = "fly"; el.style.left = a.left + "px"; el.style.top = a.top + "px"; document.body.appendChild(el);
+    requestAnimationFrame(() => { el.style.transform = `translate(${b.left - a.left + 20}px,${b.top - a.top}px) scale(.4)`; el.style.opacity = ".2"; });
+    setTimeout(() => el.remove(), 750);
+  }
+  toast("Добавлено в корзину");
+}
+$("#madd").onclick = () => { if (CUR.code){ addCart({...CUR}); closeAll(); } };
+$("#cartfab").onclick = () => { renderCart(); $("#c-da").href = CONFIG.donationAlerts; $("#c-dp").href = CONFIG.donatePay; $("#cov").classList.add("on"); };
+$("#cx").onclick = closeAll;
+$("#cov").onclick = e => { if (e.target.id === "cov") closeAll(); const r = e.target.closest("[data-rm]"); if (r){ CART.splice(+r.dataset.rm, 1); renderCart(); } };
+$("#cclear").onclick = () => { CART = []; renderCart(); closeAll(); };
+$("#c-da").addEventListener("click", () => copyText(cartCodes(), "Коды скопированы — вставь в сообщение", $("#ccode")));
+$("#c-dp").addEventListener("click", () => copyText(cartCodes(), "Коды скопированы — вставь в сообщение", $("#ccode")));
+
+/* ---------- стрим-центр: MVP, лента, новинки, цель ---------- */
+/* звания по общей сумме донатов, как в CS */
+const RANKS = [[0,"Silver","#9aa3b5"],[300,"Gold Nova","#e6c35c"],[800,"Master Guardian","#5fb3ff"],[1500,"Legendary Eagle","#b58cff"],[3000,"Supreme","#ff8a5c"],[6000,"Global Elite","#ff4d6d"]];
+const rankOf = sum => [...RANKS].reverse().find(r => sum >= r[0]);
+/* достижения: бот считает сам и присылает ключи в ленте */
+const ACH = {first:["fire","Первый донат"], regular:["user","10 донатов"], tasks10:["zap","10 заданий"], cases5:["box","Открыл 5 кейсов"], marathon:["clock","Заказал марафон"], big:["card","Донат от 1 000 ₽"]};
+const achIcons = keys => keys && keys.length ? `<span class="ach">${keys.filter(k => ACH[k]).map(k => `<i title="${ACH[k][1]}">${svg(ACH[k][0])}</i>`).join("")}</span>` : "";
+function renderFame(){
+  const list = [...FAME].sort((a, b) => b.sum - a.sum).slice(0, 6);
+  $("#fame-since").textContent = "Донаты считаются с " + FAME_SINCE;
+  $("#fame").innerHTML = (list.length ? list.map((d, i) => { const r = rankOf(d.sum);
+      return `<div class="row2"><span class="pos">${i + 1}</span><span class="av ${i ? "" : "top1"}">${esc((d.name || "?")[0].toUpperCase())}</span><span class="nm">${esc(d.name)}<span class="rk" style="--rc:${r[2]}">${r[1]}${achIcons(d.ach)}</span></span><span class="sm">${fmt(d.sum)} ₽</span></div>`; }).join("")
+    : '<div class="empty2">Топ пока пустой — первый донат займёт первое место</div>')
+    + `<div class="ranks">${RANKS.map(r => `<span style="--rc:${r[2]}">${r[1]}${r[0] ? " от " + fmt(r[0]) + " ₽" : ""}</span>`).join("")}</div>`
+    + `<div class="achs">${Object.keys(ACH).map(k => `<span>${achIcons([k])}${ACH[k][1]}</span>`).join("")}</div>`;
+}
+const NEW = TASKS.filter(t => t.new);
+$("#new-list").innerHTML = NEW.length ? NEW.map(x => `<div class="row2 nw" data-open="${TASKS.indexOf(x)}"><span class="tile">${svg(icoOf(x))}</span><span class="nm">${esc(x.t)}</span><span class="sm">${x.p} ₽</span></div>`).join("")
+  : '<div class="empty2">Скоро здесь появятся новые задания</div>';
+(function(){
+  const ago = t => { const s = Date.now() / 1000 - t; return s < 60 ? "только что" : s < 3600 ? Math.floor(s / 60) + " мин назад" : s < 86400 ? Math.floor(s / 3600) + " ч назад" : Math.floor(s / 86400) + " дн назад"; };
+  function goal(total){
+    const pct = Math.min(100, total / SITE.goal.target * 100);
+    $("#feed-total").textContent = fmt(total) + " ₽";
+    $("#goal-name").textContent = SITE.goal.name;
+    $("#goal-txt").textContent = `${fmt(total)} из ${fmt(SITE.goal.target)} ₽`;
+    $("#goal-pct").textContent = pct.toFixed(pct < 10 && pct > 0 ? 1 : 0) + "%";
+    $("#goal-bar").style.width = pct + "%";
+    const steps = SITE.goal.steps || [];
+    $("#goal-w").classList.toggle("has", steps.length > 0);
+    $("#goal-w").querySelectorAll(".gst").forEach(e => e.remove());
+    steps.forEach((s, i) => { const at = Math.min(100, s.at / SITE.goal.target * 100), ok = total >= s.at;
+      $("#goal-w").insertAdjacentHTML("beforeend", `<div class="gst${ok ? " ok" : ""}${i === 0 && steps.length > 1 ? " first" : ""}" style="left:calc(${at}% - 1px)"><span>${ok ? "✓ " : ""}${esc(s.t)} · ${fmt(s.at)} ₽</span></div>`); });
+  }
+  goal(0);
+  let lastKey = "";
+  async function load(){
+    const url = SITE.feed ? SITE.feed + "?m=" + Math.floor(Date.now() / 60000) : "feed.json?" + Date.now();
+    let d; try { d = await (await fetch(url, {cache:"no-store"})).json(); } catch (e) { return; }
+    const ev = d.events || [], key = JSON.stringify(ev.slice(0, 3));
+    if (key !== lastKey){
+      lastKey = key;
+      $("#feed-list").innerHTML = ev.length ? ev.slice(0, 6).map(e => `<div class="row2"><span class="av">${esc((e.who || "?")[0].toUpperCase())}</span>
+        <span class="nm">${esc(e.who)}<small>${e.tasks && e.tasks.length ? esc(e.tasks.join(" + ")) : "поддержал стрим"} · ${ago(e.t)}</small></span><span class="sm">${fmt(e.sum)} ₽</span></div>`).join("")
+        : '<div class="empty2">Пока тихо… стань первым!</div>';
+    }
+    goal(d.total ?? (d.top || []).reduce((a, x) => a + x.sum, 0));   // total — по всем донатам, включая Анонима
+    $("#feed-upd").textContent = d.updated ? "· обновлено " + ago(d.updated) : "";
+    if (d.top && d.top.length){ FAME.length = 0; d.top.forEach(x => FAME.push(x)); renderFame(); }
+    const fd = d.fund; $("#fundb").hidden = !(fd && fd.on);
+    if (fd && fd.on){ $("#fund-v").textContent = fmt(fd.fund) + " ₽"; $("#fund-sub").textContent = `${Math.round(fd.share * 100)}% от ${fmt(fd.total)} ₽ · донатов: ${fmt(fd.count)}`; }
+    const st = d.stats;
+    if (st){ $("#st-tasks").textContent = fmt(st.tasks); $("#st-don").textContent = fmt(st.donations);
+      $("#st-big").textContent = st.biggest ? fmt(st.biggest.sum) + " ₽" : "—"; $("#st-big-who").textContent = st.biggest ? "от " + st.biggest.who : "пока никого — будь первым"; }
+    QUEUE_D = d.queue && Date.now() / 1000 - (d.updated || 0) < 900 ? d.queue : null; renderQueue();
+    // какая игра сейчас на стриме (бот: кнопка в пульте) — если не та, что на этой странице, зовём на нужный прайс
+    const gb = $("#gameban"), PAGE_GAME = "robrun";
+    if (d.game && d.game !== PAGE_GAME){ gb.hidden = false; gb.href = d.game === "robrun" ? "robrun.html" : "index.html";
+      gb.innerHTML = `Сейчас играю в <b>${d.game === "robrun" ? "ROB RUN" : "CS2"}</b> — открыть прайс →`; } else gb.hidden = true;
+  }
+  /* очередь: бот присылает, что включено сейчас и что ждёт; старше 15 минут — значит, бот выключен */
+  let QUEUE_D = null;
+  function renderQueue(){
+    const off = '<div class="qoff">Бот сейчас не на стриме — очередь появится во время эфира.</div>';
+    if (!QUEUE_D){ $("#q-now").innerHTML = off; $("#q-wait").innerHTML = '<div class="qoff">Пусто.</div>'; return; }
+    const left = u => typeof u === "number" ? (s => s > 0 ? `ещё ${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}` : "заканчивается")(Math.round(u - Date.now() / 1000)) : esc(u);
+    $("#q-now").innerHTML = QUEUE_D.now.length ? QUEUE_D.now.map(x => `<div class="qi"><span class="live"></span><span class="nm">${esc(x.title)}<small>заказал ${esc(x.who || "аноним")}</small></span><span class="tm">${left(x.until)}</span></div>`).join("")
+      : '<div class="qoff">Сейчас ничего не включено — закажи задание первым!</div>';
+    $("#q-wait").innerHTML = QUEUE_D.wait.length ? QUEUE_D.wait.map((x, i) => `<div class="qi"><span class="num">${i + 1}</span><span class="nm">${esc(x.title)}<small>от ${esc(x.who || "аноним")}</small></span></div>`).join("")
+      : '<div class="qoff">Очередь пустая.</div>';
+  }
+  renderQueue(); setInterval(renderQueue, 1000);
+  load(); setInterval(load, 20000);
+})();
+
+/* ---------- эфир: ссылки и плеер Twitch ---------- */
+const LINKS = [["tw","--tw","Twitch","twitch.tv/" + SITE.twitch + " — стримы","https://www.twitch.tv/" + SITE.twitch],
+  ["tt","--tt","TikTok","@" + CONFIG.tiktok.split("@").pop() + " — нарезки",CONFIG.tiktok],
+  ["tg","--tg","Telegram",CONFIG.telegram.replace("https://", "") + " — анонсы эфиров",CONFIG.telegram]];
+$("#links").innerHTML = LINKS.map(([k, c, n, s, u]) => `<a class="lk" style="--c:var(${c})" href="${u}" target="_blank" rel="noopener"><span class="tile">${svg(k)}</span><span><b>${n}</b><small>${esc(s)}</small></span><span class="arr">→</span></a>`).join("");
+$("#foot-links").innerHTML = LINKS.map(l => `<a href="${l[4]}" target="_blank" rel="noopener">${l[2]}</a>`).join("")
+  + `<a href="${CONFIG.donationAlerts}" target="_blank" rel="noopener">DonationAlerts</a><a href="${CONFIG.donatePay}" target="_blank" rel="noopener">DonatePay</a>`;
+(function(){
+  const box = $("#tw-box");
+  function setLive(on){
+    $("#livepill").lastElementChild.textContent = on ? "В ЭФИРЕ" : "ОФФЛАЙН";
+    $("#livepill .dot").classList.toggle("on", on);
+    $("#live-dot").classList.toggle("on", on); $("#nav-dot").classList.toggle("on", on);
+    $("#live-st").classList.toggle("on", on);
+    $("#live-t").textContent = on ? "Я сейчас в эфире!" : "Сейчас оффлайн — анонсы в Telegram";
+    $("#nav-live").textContent = on ? "В эфире" : "Стрим на Twitch";
+    $("#live-h").textContent = on ? "Я сейчас в эфире" : "Смотри стрим";
+  }
+  const host = location.hostname;
+  if (!host || !/\./.test(host) || /claude|anthropic|usercontent/.test(host)){ $("#tw-ph-t").textContent = "Плеер появится на сайте"; return; }
+  // запасной путь: плеер напрямую, без скрипта Twitch (если его режет блокировщик или сеть)
+  let done = false;
+  const plain = () => { if (done) return; done = true;
+    box.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${SITE.twitch}&parent=${host}&muted=true&autoplay=true" allowfullscreen allow="autoplay; fullscreen" style="width:100%;height:100%;border:0"></iframe>`; };
+  const s = document.createElement("script"); s.src = "https://embed.twitch.tv/embed/v1.js";
+  s.onload = () => { if (done || !window.Twitch) return plain(); done = true;
+    box.innerHTML = '<div id="tw-embed" style="width:100%;height:100%"></div>';
+    const em = new Twitch.Embed("tw-embed", {width:"100%", height:"100%", channel:SITE.twitch, layout:"video", muted:true, autoplay:true, parent:[host]});
+    em.addEventListener(Twitch.Player.ONLINE, () => setLive(true));
+    em.addEventListener(Twitch.Player.OFFLINE, () => setLive(false));
+  };
+  s.onerror = plain;
+  setTimeout(plain, 6000);
+  document.head.appendChild(s);
+})();
+
+/* ---------- сетап: плитки и прицел ---------- */
+(function(){
+  const get = n => (SITE.setup.find(s => s[1] === n) || [])[2] || "";
+  const x = SITE.crosshair;
+  const tile = (lab, v, cls = "", ic = "") => v ? `<div class="bt ${cls}">${ic ? svg(ic, "i big") : ""}<span class="lab">${lab}</span><span class="v">${esc(v)}</span></div>` : "";
+  $("#bento").innerHTML = `<div class="bt xh"><span class="lab">Мой прицел</span><canvas id="xh" width="1200" height="800"></canvas>
+      ${SITE.crosshairCode ? `<div class="xcode"><code>${esc(SITE.crosshairCode)}</code><button id="xcopy">Скопировать</button></div>` : ""}</div>`
+    + tile("Сенса", get("Сенса"), "acc")
+    + tile("DPI · eDPI", [get("DPI"), get("eDPI")].filter(Boolean).join(" · "))
+    + tile("Монитор", get("Монитор"), "", "mon")
+    + tile("Разрешение", get("Разрешение").replace(/\s*\(.*\)/, ""), "", "mon")
+    + tile("Мышь", get("Мышь"), "dev", "mouse")
+    + tile("Наушники", get("Наушники"), "dev", "head")
+    + tile("Клавиатура", get("Клавиатура"), "dev span2", "kb");
+  if ($("#xcopy")) $("#xcopy").onclick = () => copyText(SITE.crosshairCode, "Код прицела скопирован — вставь в CS2: Настройки → Прицел → Импорт");
+  const cv = $("#xh"), g = cv.getContext("2d"), host = cv.parentElement, col = `rgba(${x.r},${x.g},${x.b},${(x.a ?? 255) / 255})`;
+  let hot = 0, hv = 0, run = false;
+  function draw(){
+    hv += (hot - hv) * .12; g.clearRect(0, 0, cv.width, cv.height);
+    const u = 11, cx = cv.width / 2, cy = cv.height / 2, L = x.length * u, G = (x.gap + hv * 4) * u, T = x.thickness * u * .5;
+    g.shadowColor = col; g.shadowBlur = u * 2; g.fillStyle = col;
+    const bar = (px, py, w, h) => { if (x.outline){ g.fillStyle = "#000"; g.fillRect(px - 3, py - 3, w + 6, h + 6); g.fillStyle = col; } g.fillRect(px, py, w, h); };
+    bar(cx + G, cy - T / 2, L, T); bar(cx - G - L, cy - T / 2, L, T); bar(cx - T / 2, cy + G, T, L); if (!x.t) bar(cx - T / 2, cy - G - L, T, L);
+    if (x.dot) bar(cx - T / 2, cy - T / 2, T, T);
+    if (Math.abs(hot - hv) > .002) requestAnimationFrame(draw); else run = false;
+  }
+  const kick = () => { if (!run){ run = true; requestAnimationFrame(draw); } };
+  host.addEventListener("mouseenter", () => { hot = 1; kick(); }); host.addEventListener("mouseleave", () => { hot = 0; kick(); });
+  draw();
+})();
+
+/* ---------- донат и FAQ ---------- */
+$("#don").innerHTML = [["fire","DonationAlerts",CONFIG.donationAlerts,["СБП","Карты РФ","Иностранные карты"]],["card","DonatePay",CONFIG.donatePay,["Карты РФ","СБП","Онлайн-банки","Иностранные карты","Криптовалюта"]]]
+  .map(d => `<a href="${d[2]}" target="_blank" rel="noopener">${svg(d[0], "i bg")}<div class="chips">${d[3].map(c => `<span class="chip2">${c}</span>`).join("")}</div><h3>${d[1]} →</h3><small>${d[2].replace(/^https?:\/\/(www\.)?/, "")}</small></a>`).join("");
+const FAQ = [
+  ["Как заказать задание?","Нажми «Заказать», затем DonationAlerts или DonatePay — код задания скопируется сам. Вставь его в сообщение доната и отправь указанную сумму."],
+  ["Что значит «АВТО»?","Задания с меткой АВТО включает бот сам: меняет прицел, сенсу, кнопки и звук в игре. Остальные задания попадают в очередь на экране стрима, и я выполняю их сам."],
+  ["Зачем код в сообщении?","По коду бот понимает, что донат пришёл с сайта и какое задание включить. Код копируется сам — нужно только вставить его в сообщение. Обычный донат без кода задание не включит."],
+  ["Когда начинается задание «на раунд»?","АВТО-задания включаются сразу и выключаются в конце раунда. Ручные — со следующего раунда. «На игру» — до конца текущего матча."],
+  ["Как заказать трек?","Выбери «Закажи трек» и напиши в сообщении исполнителя и название. Трек откроется у меня в Яндекс.Музыке."],
+  ["Как попасть в табло MVP?","В табло — донатеры с самой большой общей суммой. Донать на стримах — и ник появится здесь."],
+  ["Учитываются ли донаты со всех сервисов?","Да, и с DonationAlerts, и с DonatePay — всё суммируется."],
+  ["Как часто обновляется табло?","Через минуту-другую после доната — бот обновляет табло сам."],
+  ["Можно вернуть донат?","Донат — добровольная поддержка стримера, возврат не предусмотрен. Если задание нельзя выполнить (нарушает правила площадки), донат идёт как обычная поддержка."]];
+$("#qa").innerHTML = FAQ.map((q, i) => `<details class="qa" ${i ? "" : "open"}><summary>${q[0]}<span class="pl">+</span></summary><p>${q[1]}</p></details>`).join("");
+$("#rules").innerHTML = ["Задание включается, только если в сообщении доната есть его код (он копируется сам) и сумма не меньше цены.","Задания «на раунд» начинаются со следующего раунда, «на игру» — с текущего матча до конца.","Если задания одной категории пересекаются — выполняются по очереди.","Задания можно не выполнять, если они нарушают правила Twitch/TikTok или вредят здоровью — донат тогда идёт как обычная поддержка.","Без оскорблений в сообщениях доната — такие сообщения не зачитываются.","Донат — добровольная поддержка стримера, возврат не предусмотрен."]
+  .map(r => `<li>${r}</li>`).join("");
+
+renderCart(); renderFame(); render();
+
+/* ---------- марафон 24 часа: окно по МСК и циферблат ---------- */
+(function(){
+  const M = SITE.marathon, HR = 3600e3, WEEK = 7 * 24 * HR, MSK = 3 * HR;
+  const t = TASKS.find(x => x.code === "STREAM24");
+  if (t){ $("#m24-price").textContent = t.p + " ₽"; $("#m24-buy").onclick = () => openTask(TASKS.indexOf(t)); }
+  const DN = ["вс","пн","вт","ср","чт","пт","сб"], p2 = n => String(n).padStart(2, "0");
+  $("#m24-win").textContent = `${DN[M.from.day]} ${p2(M.from.hour)}:00 — ${DN[M.to.day]} ${p2(M.to.hour)}:00 МСК`;
+  const len = ((M.to.day - M.from.day + 7) % 7) * 24 * HR + (M.to.hour - M.from.hour) * HR;
+  function lastStart(now){
+    const d = new Date(now + MSK), back = (d.getUTCDay() - M.from.day + 7) % 7;
+    let s = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - back, M.from.hour) - MSK;
+    if (s > now) s -= WEEK;
+    return s;
+  }
+  const cv = $("#dial"), g = cv.getContext("2d");
+  function dial(frac){
+    const c = 520, r = 440; g.clearRect(0, 0, 1040, 1040); g.lineCap = "round";
+    for (let i = 0; i < 96; i++){ const a = i / 96 * Math.PI * 2 - Math.PI / 2, big = i % 4 === 0; g.strokeStyle = big ? "#4a4a45" : "#262624"; g.lineWidth = big ? 4 : 2;
+      g.beginPath(); g.moveTo(c + Math.cos(a) * (r - (big ? 34 : 20)), c + Math.sin(a) * (r - (big ? 34 : 20))); g.lineTo(c + Math.cos(a) * r, c + Math.sin(a) * r); g.stroke(); }
+    g.lineWidth = 14; g.strokeStyle = "#1d1d1e"; g.beginPath(); g.arc(c, c, r + 30, 0, 7); g.stroke();
+    const e = -Math.PI / 2 + Math.PI * 2 * frac;
+    g.strokeStyle = "#c8ff4d"; g.beginPath(); g.arc(c, c, r + 30, -Math.PI / 2, e); g.stroke();
+    g.fillStyle = "#c8ff4d"; g.beginPath(); g.arc(c + Math.cos(e) * (r + 30), c + Math.sin(e) * (r + 30), 16, 0, 7); g.fill();
+  }
+  function tick(){
+    const now = Date.now(), s = lastStart(now), open = now < s + len;
+    const left = Math.max(0, (open ? s + len : s + WEEK) - now);
+    $("#cd").textContent = `${p2(Math.floor(left / HR))}:${p2(Math.floor(left / 6e4) % 60)}:${p2(Math.floor(left / 1e3) % 60)}`;
+    const st = $("#m24-st"); st.classList.toggle("open", open); st.firstElementChild.classList.toggle("on", open);
+    st.lastElementChild.textContent = open ? "Окно открыто — марафон можно заказать на эти выходные" : "Окно закрыто — откроется в пятницу в 18:00 МСК";
+    $("#m24-h").textContent = open ? "До конца окна" : "До открытия окна";
+    dial(open ? (now - s) / len : 1 - left / (WEEK - len));
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ---------- кейс: лента ---------- */
+(function(){
+  const RAR = [["Армейское","#4b69ff",0,45,70],["Запрещённое","#8847ff",45,95,22],["Засекреченное","#d32ce6",95,185,6],["Тайное","#eb4b4b",185,420,1.7],["Золото","#ffd700",420,1e9,.3]];   // пороги ×0.7 после снижения цен 2026-11-08 (как в bot.py)
+  const SKIP = ["CASE","RR-CASE","RR-CHATPICK","RANDOM","ROULETTE","MUSIC","NAME","UNTILWIN","COACH","PARTY","STREAM24"];
+  const pool = TASKS.filter(t => !t.picker && t.c !== "chat" && !SKIP.includes(t.code)).map(t => { const r = RAR.find(r => t.p >= r[2] && t.p < r[3]); return {...t, rar:r[0], col:r[1]}; });
+  const tiers = RAR.filter(r => pool.some(p => p.rar === r[0]));
+  const tot = tiers.reduce((a, r) => a + r[4], 0);
+  const roll = () => { let x = Math.random() * tot; for (const r of tiers){ x -= r[4]; if (x <= 0){ const l = pool.filter(p => p.rar === r[0]); return l[Math.random() * l.length | 0]; } } return pool[0]; };
+  $("#chances").innerHTML = tiers.map(r => `<span style="--rc:${r[1]}"><i></i>${r[0]} ${(r[4] / tot * 100).toFixed(r[4] / tot < .05 ? 1 : 0)}%</span>`).join("");
+  const C = TASKS.find(t => t.code === "CASE"); $("#case-price").textContent = C ? C.p : "—";
+  if (C) $("#case-buy").textContent = `Открыть за ${C.p} ₽`;
+  const strip = $("#strip"), IW = 204;
+  const item = t => `<div class="mini" style="--rc:${t.col}"><span class="tile">${svg(icoOf(t))}</span><b>${esc(t.t)}</b><small>${t.rar} · ${t.p} ₽</small></div>`;
+  strip.innerHTML = Array.from({length:14}, roll).map(item).join("");
+  let AC, spinning = false;
+  /* звук ленты: щелчок на каждом предмете и аккорд на выпадении (тихо, только после нажатия) */
+  function blip(f, d, v, type){
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+      const o = AC.createOscillator(), gn = AC.createGain(), t = AC.currentTime;
+      o.type = type || "square"; o.frequency.value = f;
+      gn.gain.setValueAtTime(v, t); gn.gain.exponentialRampToValueAtTime(.0001, t + d);
+      o.connect(gn).connect(AC.destination); o.start(t); o.stop(t + d);
+    } catch (e) {}
+  }
+  function spin(){
+    if (spinning) return; spinning = true; $("#case-try").disabled = true; $("#drop").innerHTML = "Крутится…";
+    const win = roll(), N = 56, wi = 48;
+    const items = Array.from({length:N}, (_, i) => i === wi ? win : roll());
+    strip.style.transition = "none"; strip.style.transform = "translateX(0)"; strip.innerHTML = items.map(item).join("");
+    const reelW = strip.parentElement.clientWidth, off = wi * IW + 14 + 95 - reelW / 2 + (Math.random() - .5) * 150;
+    void strip.offsetWidth;
+    const dur = 6.2;
+    strip.style.transition = `transform ${dur}s cubic-bezier(.08,.6,.12,1)`; strip.style.transform = `translateX(${-off}px)`;
+    const line = strip.parentElement.querySelector(".line"); let last = -1;
+    (function tick(){
+      if (!spinning) return;
+      const x = -new DOMMatrix(getComputedStyle(strip).transform).m41, i = Math.floor((x + reelW / 2 - 14) / IW);
+      if (i !== last){ last = i; blip(1700, .03, .035); if (line.animate) line.animate([{transform:"scaleY(1.15)"}, {transform:"none"}], {duration:90}); }
+      requestAnimationFrame(tick);
+    })();
+    setTimeout(() => {
+      spinning = false; $("#case-try").disabled = false;
+      strip.children[wi].classList.add("win");
+      [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => blip(f, .35, .05, "triangle"), i * 70));
+      $("#drop").innerHTML = `Выпало: <b>${esc(win.t)}</b> — <span style="color:${win.col}">${win.rar.toLowerCase()}</span>, ${win.p} ₽<small>Это пробный спин. Настоящий кейс бот откроет прямо на стриме — и задание будет уже взаправду.</small>`;
+    }, dur * 1000 + 100);
+  }
+  $("#case-try").onclick = spin;
+  $("#case-buy").onclick = () => { const i = TASKS.findIndex(t => t.code === "CASE"); if (i >= 0) openTask(i); };
+})();
+
+/* ---------- шапка, меню, появление блоков ---------- */
+(function(){
+  const nav = $("#nav");
+  const onScroll = () => nav.classList.toggle("solid", scrollY > 30);
+  addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  $("#burger").onclick = () => nav.classList.toggle("open");
+  $$("#menu a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+  if (RM || !("IntersectionObserver" in window)){ $$(".rv").forEach(e => e.classList.add("in")); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {rootMargin:"0px 0px -8% 0px"});
+  $$(".rv").forEach(e => io.observe(e));
+})();
+
+/* ---------- шар из точек на первом экране (three.js) ---------- */
+(function(){
+  const cv = $("#bg3d");
+  if (!window.THREE){ cv.remove(); return; }
+  let R; try { R = new THREE.WebGLRenderer({canvas:cv, antialias:true}); } catch (e){ cv.remove(); return; }
+  R.setPixelRatio(Math.min(devicePixelRatio, 2)); R.setClearColor(0x0b0b0c);
+  const S = new THREE.Scene(), C = new THREE.PerspectiveCamera(40, 1, .1, 100); C.position.set(0, 0, 7.5);
+  const small = innerWidth < 860, N = small ? 4500 : 9000, pos = new Float32Array(N * 3), col = new Float32Array(N * 3), base = [];
+  for (let i = 0; i < N; i++){ const y = 1 - 2 * (i + .5) / N, r = Math.sqrt(1 - y * y), th = i * 2.39996; base.push([Math.cos(th) * r, y, Math.sin(th) * r]); }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute("position", new THREE.BufferAttribute(pos, 3)); geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+  const pts = new THREE.Points(geo, new THREE.PointsMaterial({size: small ? .03 : .02, vertexColors:true})); S.add(pts);
+  let mx = 0, my = 0, tx = 0, ty = 0, vis = true;
+  addEventListener("pointermove", e => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; }, {passive:true});
+  function rs(){ const h = cv.parentElement.offsetHeight; R.setSize(innerWidth, h, false); C.aspect = innerWidth / h; C.updateProjectionMatrix(); pts.scale.setScalar(innerWidth < 860 ? .8 : 1); }
+  addEventListener("resize", rs); rs();
+  new IntersectionObserver(es => vis = es[0].isIntersecting).observe(cv);
+  function frame(t){
+    t *= .001; mx += (tx - mx) * .05; my += (ty - my) * .05;
+    for (let i = 0; i < N; i++){ const b = base[i], n = Math.sin(b[0] * 4 + t * 1.1) * Math.sin(b[1] * 5 - t * .8) * Math.sin(b[2] * 4 + t * .6), r = 2.5 + n * .25;
+      pos[i * 3] = b[0] * r; pos[i * 3 + 1] = b[1] * r; pos[i * 3 + 2] = b[2] * r;
+      const hot = n > .42, k = .28 + n * .25; col[i * 3] = hot ? .6 : k; col[i * 3 + 1] = hot ? .78 : k; col[i * 3 + 2] = hot ? .23 : k; }
+    geo.attributes.position.needsUpdate = geo.attributes.color.needsUpdate = true;
+    pts.rotation.y = t * .1 + mx * 1.2; pts.rotation.x = my * .6; R.render(S, C);
+  }
+  if (RM){ frame(4000); addEventListener("pointermove", () => requestAnimationFrame(() => frame(4000)), {passive:true}); return; }
+  (function loop(t){ if (vis) frame(t); requestAnimationFrame(loop); })(0);
+})();
+</script>
+</body>
+</html>
