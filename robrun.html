@@ -632,6 +632,7 @@ const TASKS = [
  {c:"cam",ico:"🏋",t:"30 приседаний",d:"Прямо на камеру.",p:179,dur:"сразу",auto:false,code:"SQUAT30"},
  {c:"cam",ico:"💪",t:"15 отжиманий",d:"Прямо на камеру.",p:179,dur:"сразу",auto:false,code:"PUSH15"},
  {c:"cam",ico:"🧱",t:"Планка 1 минута",d:"Стою в планке на камеру.",p:109,dur:"1 мин",auto:false,code:"PLANK"},
+ {c:"cam",ico:"🧍",t:"Встать в угол",d:"Встаю в угол на минуту — лицом к вебке, чтобы всем было видно.",p:50,dur:"1 мин",auto:false,code:"CORNER"},
  {c:"cam",ico:"🧢",t:"Надеть шапку",d:"Надеваю шапку и играю в ней 15 минут.",p:49,dur:"15 мин",auto:false,code:"RR-HAT"},
  {c:"cam",ico:"👓",t:"Надеть очки",d:"Надеваю очки и играю в них 15 минут.",p:49,dur:"15 мин",auto:false,code:"RR-GLASSES"},
  {c:"chat",ico:"🎯",t:"Чат выбирает цель",d:"Чат решает, кого грабить и куда ехать.",p:49,dur:"10 мин",auto:false,code:"RR-CHATPICK"},
@@ -687,7 +688,7 @@ const P = {
  tt:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.3 2.8 2.2 4.8 5 5"/>',
  tg:'<path d="M21 4L3 11.2l6 2.1 2.2 6.2 3.3-3.8 4.6 3.5z"/><path d="M9 13.3l12-9.3"/>',
  play:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/>'};
-const BYCODE = {"RR-SWAP":"kb","RR-JUMP":"walk","RR-SPIN":"dice","RR-RUN":"walk","RR-EXIT":"walk","RR-SLOW":"mouse","RR-MUTE":"sound","RR-LOUD":"sound","RR-SQUATS":"body","RR-CHAOS":"zap","RR-CASE":"box","RR-LHAND":"mouse","RR-STAND":"body","RR-NOPAD":"mouse","RR-CHATPICK":"vote","RR-HAT":"hat","RR-GLASSES":"glasses",SQUAT10:"body",SQUAT30:"body",PUSH15:"body",PLANK:"body",GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",SOUND:"sound",MUSIC:"music",
+const BYCODE = {"RR-SWAP":"kb","RR-JUMP":"walk","RR-SPIN":"dice","RR-RUN":"walk","RR-EXIT":"walk","RR-SLOW":"mouse","RR-MUTE":"sound","RR-LOUD":"sound","RR-SQUATS":"body","RR-CHAOS":"zap","RR-CASE":"box","RR-LHAND":"mouse","RR-STAND":"body","RR-NOPAD":"mouse","RR-CHATPICK":"vote","RR-HAT":"hat",CORNER:"body","RR-GLASSES":"glasses",SQUAT10:"body",SQUAT30:"body",PUSH15:"body",PLANK:"body",GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",SOUND:"sound",MUSIC:"music",
  "CROSS-R":"cross","CROSS-G":"cross",NOCROSS:"cross",LOWSENS:"mouse",HIGHSENS:"mouse",SENSRND:"mouse",INVERT:"mouse",LEFT:"gun",NOSOUND:"sound",DROPNOW:"gun",
  DUCK:"body",BACK:"walk",JUMP:"walk",RUSH:"walk",ONEHAND:"user",MUTE:"mic",DROP:"gun",HAT:"hat",GLASSES:"glasses",
  GUNPOS:"gun",NOHUD:"eye",SWAP:"kb",RES:"mon",EARS:"head",LHAND:"mouse",ECO:"gun",NOPAD:"mouse",TAPS:"cross",STAND:"body",CORNER:"body",POLL:"vote",HI:"chat",MAP:"chat",PARTY:"user",CASE:"box",RANDOM:"dice",CHAOS:"zap",ROULETTE:"dice",NAME:"crown",COACH:"user",UNTILWIN:"crown",STREAM24:"clock"};
