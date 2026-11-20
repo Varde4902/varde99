@@ -401,7 +401,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
   <div class="sh rv"><h2>Вертолёт за вайп</h2><p>Я начинаю в ROB RUN с нуля и даю себе неделю: купить вертолёт на свои деньги до пятницы. Твой донат отнимает у меня игровые деньги и вещи.</p></div>
   <div class="heli rv">
     <div class="hc hbank"><span class="lab">Банк розыгрыша</span><div class="hv" id="h-bank">0 ₽</div><small>Не куплю вертолёт до пятницы — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующий забег и растёт.</small></div>
-    <div class="hc"><span class="lab">До дедлайна</span><div class="hv" id="h-left">—</div><small id="h-wipe"></small></div>
+    <div class="hc"><span class="lab">До вайпа</span><div class="hv" id="h-left">—</div><small id="h-wipe"></small></div>
     <div class="hc"><span class="lab">Забег</span><div class="hv" id="h-week">№1</div><small id="h-status"></small></div>
   </div>
   <div class="hgo rv"><a class="btn pri go" href="#price" id="h-price">Помешать мне купить вертолёт<span>→</span></a></div>
@@ -563,7 +563,7 @@ const HELI = {
   faceit: 0,                // остаток фонда с FACEIT, ₽ (фонд бота уже включает донаты FACEIT — здесь только если его обнулили)
   start: 0,                 // мой стартовый вклад, ₽
   paid: 0,                  // сколько уже разыграно, ₽ (вычитается из банка)
-  wipe: {day: 5, hour: 12}, // дедлайн: день недели (5 = пятница) и час по МСК
+  wipe: {day: 5, hour: 15}, // вайп: день недели (5 = пятница) и час по МСК (вайп был 2026-11-20 в 15:00)
 };
 const HELI_FEED = {fund: 0};   // фонд из ленты бота — заполняется сам
 
@@ -1063,7 +1063,7 @@ $("#rules").innerHTML = [...HELI_RULES,"Задание включается, т�
   .map(r => `<li>${r}</li>`).join("");
 
 renderCart(); renderFame(); render();
-/* ---------- «Вертолёт за вайп»: банк, статус, отсчёт до дедлайна ---------- */
+/* ---------- «Вертолёт за вайп»: банк, статус, отсчёт до вайпа ---------- */
 function heliRender(){
   const bank = Math.max(0, (HELI_FEED.fund || 0) + HELI.faceit + HELI.start - HELI.paid);
   $("#h-bank").textContent = fmt(bank) + " ₽";
@@ -1079,7 +1079,7 @@ function heliRender(){
     if (t <= now) t += 7 * 24 * HR;
     return t;
   }
-  $("#h-wipe").textContent = `Дедлайн — ${DN[HELI.wipe.day]}, ${p2(HELI.wipe.hour)}:00 МСК`;
+  $("#h-wipe").textContent = `Вайп — ${DN[HELI.wipe.day]}, ${p2(HELI.wipe.hour)}:00 МСК`;
   function tick(){
     const left = Math.max(0, next(Date.now()) - Date.now()), d = Math.floor(left / 24 / HR), h = Math.floor(left / HR) % 24, m = Math.floor(left / 6e4) % 60, s = Math.floor(left / 1e3) % 60;
     $("#h-left").textContent = (d ? d + " д " : "") + p2(h) + ":" + p2(m) + ":" + p2(s);
