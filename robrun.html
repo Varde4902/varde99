@@ -357,6 +357,19 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
   *{transition-duration:.01ms!important;animation-duration:.01ms!important}
   .strip{transition:transform 6.2s cubic-bezier(.08,.6,.12,1)!important}
 }
+/* «Вертолёт за вайп» */
+.heli{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:12px}
+.hc{border:1px solid var(--line);border-radius:18px;padding:22px 24px;background:var(--card);display:flex;flex-direction:column;gap:10px;min-width:0}
+.hc.hbank{border-color:var(--acc)}.hc.hbank .lab{color:var(--acc)}
+.hv{font:600 clamp(26px,2.4vw,38px)/1 "Geologica";letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hbank .hv{font-size:clamp(36px,4vw,56px)}
+.hc small{color:var(--ink2);font-size:14px;line-height:1.45}
+.hst{display:inline-block;font-size:13px;border:1px solid currentColor;border-radius:999px;padding:4px 12px}
+.hst.go{color:var(--acc)}.hst.ok{color:var(--ink)}.hst.bad{color:#ff6b5b}
+.hgo{margin-top:18px}
+@media(max-width:980px){.heli{grid-template-columns:1fr 1fr}.hbank{grid-column:1/-1}}
+@media(max-width:520px){.heli{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -381,6 +394,17 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
     <div class="cta"><a class="btn pri go" href="#price">Открыть прайс<span>→</span></a><a class="btn ghost" href="#how">Как заказать</a></div>
   </div>
   <div class="hstats" id="hstats"></div>
+</section>
+
+<section class="s w" id="heli">
+  <div class="sh rv"><h2>Вертолёт за вайп</h2><p>Каждое воскресенье в ROB RUN вайп — прогресс сгорает. Моя цель: купить вертолёт на свои деньги до вайпа. Твой донат отнимает у меня игровые деньги и вещи.</p></div>
+  <div class="heli rv">
+    <div class="hc hbank"><span class="lab">Банк розыгрыша</span><div class="hv" id="h-bank">0 ₽</div><small>Не куплю вертолёт до вайпа — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующую неделю и растёт.</small></div>
+    <div class="hc"><span class="lab">До вайпа</span><div class="hv" id="h-left">—</div><small id="h-wipe"></small></div>
+    <div class="hc"><span class="lab">Вайп</span><div class="hv" id="h-week">№1</div><small id="h-status"></small></div>
+    <div class="hc"><span class="lab">Мой долг</span><div class="hv" id="h-debt">0 $</div><small>Не хватило денег на донат — выкидываю недостающее из всего, что заработаю.</small></div>
+  </div>
+  <div class="hgo rv"><a class="btn pri go" href="#price" id="h-price">Помешать мне купить вертолёт<span>→</span></a></div>
 </section>
 
 <section class="s w" id="how">
@@ -532,6 +556,18 @@ const CONFIG = {
 };
 
 /* ============ САЙТ: цель, сетап, прицел ============ */
+/* ===== «Вертолёт за вайп» (ROB RUN) — ЭТО МЕНЯЮ САМ ===== */
+const HELI = {
+  week: 1,                  // номер вайпа (недели) проекта
+  status: "go",             // "go" — иду к вертолёту · "bought" — куплен, банк переносится · "lost" — не успел, розыгрыш
+  faceit: 0,                // остаток фонда с FACEIT, ₽ (фонд бота уже включает донаты FACEIT — здесь только если его обнулили)
+  start: 0,                 // мой стартовый вклад, ₽
+  paid: 0,                  // сколько уже разыграно, ₽ (вычитается из банка)
+  debt: 0,                  // текущий долг, $
+  wipe: {day: 0, hour: 12}, // вайп: день недели (0 = воскресенье) и час по МСК — УТОЧНИТЬ точное время
+};
+const HELI_FEED = {fund: 0};   // фонд из ленты бота — заполняется сам
+
 const SITE = {
   twitch: "varde99",
   goal: { name: "Цель: 32 ГБ памяти + Ryzen 5 5500X3D", target: 38000,
@@ -560,6 +596,7 @@ const FAME = [
    code — короткий код, по нему бот понимает задание
    hot: true — метка «ХИТ», new: true — попадает во вкладку «Новинки» */
 const CATS = [
+ {id:"heli", name:"Вертолёт за вайп", ico:"🚁", sub:"Донат отнимает мои деньги и вещи в игре"},
  {id:"rrauto", name:"ROB RUN — авто", ico:"⚙️", sub:"Бот сам жмёт кнопки и ломает мне управление"},
  {id:"rrgame", name:"В игре", ico:"🏦", sub:"Что я делаю в ROB RUN"},
  {id:"hands", name:"Руки", ico:"🖱", sub:"Играю неудобно"},
@@ -606,8 +643,19 @@ const GUNS = [
 ];
 
 const TASKS = [
+ {c:"heli",ico:"💸",t:"Выкинуть 10 000 $",d:"Выкидываю 10 000 $ из своих денег прямо на стриме.",p:30,dur:"сразу",auto:false,code:"RR-D10K"},
+ {c:"heli",ico:"💸",t:"Выкинуть 50 000 $",d:"Выкидываю 50 000 $ из своих денег.",p:50,dur:"сразу",auto:false,code:"RR-D50K"},
+ {c:"heli",ico:"💸",t:"Выкинуть 150 000 $",d:"Выкидываю 150 000 $ из своих денег.",p:100,dur:"сразу",auto:false,code:"RR-D150K"},
+ {c:"heli",ico:"💸",t:"Выкинуть 500 000 $",d:"Выкидываю 500 000 $ из своих денег.",p:250,dur:"сразу",auto:false,code:"RR-D500K",hot:true},
+ {c:"heli",ico:"💸",t:"Выкинуть 1 500 000 $",d:"Выкидываю 1,5 млн $ из своих денег.",p:500,dur:"сразу",auto:false,code:"RR-D1M5"},
+ {c:"heli",ico:"💸",t:"Выкинуть 4 000 000 $",d:"Выкидываю 4 млн $ — треть вертолёта.",p:1000,dur:"сразу",auto:false,code:"RR-D4M",hot:true},
+ {c:"heli",ico:"🔥",t:"Выкинуть ВСЕ деньги",d:"Выкидываю всё, что есть на руках. Самый сильный донат перед покупкой вертолёта.",p:2000,dur:"сразу",auto:false,code:"RR-DALL",hot:true},
+ {c:"heli",ico:"🎒",t:"Выкинуть предмет",d:"Выкидываю обычный предмет — какой, пишешь в донате.",p:99,dur:"сразу",auto:false,code:"RR-DITEM"},
+ {c:"heli",ico:"🗝",t:"Выкинуть ценный предмет",d:"Выкидываю ценный предмет на твой выбор (кроме красного оружия).",p:299,dur:"сразу",auto:false,code:"RR-DKEY"},
+ {c:"heli",ico:"🟥",t:"Выкинуть красное оружие",d:"Выкидываю красное оружие. Нет его — выкину, как только добуду.",p:499,dur:"сразу",auto:false,code:"RR-DRED",hot:true},
+ {c:"heli",ico:"🚔",t:"Сдаться федералам",d:"Полный личный вайп: теряю всё на сервере и иду к вертолёту с нуля.",p:5000,dur:"сразу",auto:false,code:"RR-FEDS",hot:true},
  {c:"rrauto",ico:"🔀",t:"Перепутанные кнопки",d:"W↔S и A↔D меняются местами. Вперёд — значит назад.",p:69,dur:"2 мин",auto:true,code:"RR-SWAP",hot:true},
- {c:"rrauto",ico:"🐇",t:"Прыгаю без остановки",d:"Бот сам жмёт прыжок каждые 2–4 секунды.",p:39,dur:"1 мин",auto:true,code:"RR-JUMP"},
+ {c:"rrauto",ico:"🐇",t:"Прыгаю без остановки",d:"Бот сам жмёт прыжок почти без пауз — только приземлился, и снова.",p:39,dur:"1 мин",auto:true,code:"RR-JUMP"},
  {c:"rrauto",ico:"🌀",t:"Резкие развороты",d:"В случайные моменты камеру резко крутит на 180°.",p:49,dur:"1 мин",auto:true,code:"RR-SPIN",hot:true},
  {c:"rrauto",ico:"🏃",t:"Неудержимый бег",d:"Бот зажимает «вперёд» — меня несёт, куда смотрю.",p:29,dur:"15 сек",auto:true,code:"RR-RUN"},
  {c:"rrauto",ico:"🚪",t:"Выкинуть из машины",d:"Бот жмёт выход из машины прямо на ходу.",p:39,dur:"мгновенно",auto:true,code:"RR-EXIT"},
@@ -688,11 +736,11 @@ const P = {
  tt:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.3 2.8 2.2 4.8 5 5"/>',
  tg:'<path d="M21 4L3 11.2l6 2.1 2.2 6.2 3.3-3.8 4.6 3.5z"/><path d="M9 13.3l12-9.3"/>',
  play:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/>'};
-const BYCODE = {"RR-SWAP":"kb","RR-JUMP":"walk","RR-SPIN":"dice","RR-RUN":"walk","RR-EXIT":"walk","RR-SLOW":"mouse","RR-MUTE":"sound","RR-LOUD":"sound","RR-SQUATS":"body","RR-CHAOS":"zap","RR-CASE":"box","RR-LHAND":"mouse","RR-STAND":"body","RR-NOPAD":"mouse","RR-CHATPICK":"vote","RR-HAT":"hat",CORNER:"body","RR-GLASSES":"glasses",SQUAT10:"body",SQUAT30:"body",PUSH15:"body",PLANK:"body",GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",SOUND:"sound",MUSIC:"music",
+const BYCODE = {"RR-DALL":"fire","RR-DITEM":"box","RR-DKEY":"box","RR-DRED":"gun","RR-FEDS":"crown","RR-SWAP":"kb","RR-JUMP":"walk","RR-SPIN":"dice","RR-RUN":"walk","RR-EXIT":"walk","RR-SLOW":"mouse","RR-MUTE":"sound","RR-LOUD":"sound","RR-SQUATS":"body","RR-CHAOS":"zap","RR-CASE":"box","RR-LHAND":"mouse","RR-STAND":"body","RR-NOPAD":"mouse","RR-CHATPICK":"vote","RR-HAT":"hat",CORNER:"body","RR-GLASSES":"glasses",SQUAT10:"body",SQUAT30:"body",PUSH15:"body",PLANK:"body",GUN:"gun",KNIFE:"knife",NADES:"nade",ZEUS:"zap",CHATGUN:"chat",NOARMOR:"body",SOUND:"sound",MUSIC:"music",
  "CROSS-R":"cross","CROSS-G":"cross",NOCROSS:"cross",LOWSENS:"mouse",HIGHSENS:"mouse",SENSRND:"mouse",INVERT:"mouse",LEFT:"gun",NOSOUND:"sound",DROPNOW:"gun",
  DUCK:"body",BACK:"walk",JUMP:"walk",RUSH:"walk",ONEHAND:"user",MUTE:"mic",DROP:"gun",HAT:"hat",GLASSES:"glasses",
  GUNPOS:"gun",NOHUD:"eye",SWAP:"kb",RES:"mon",EARS:"head",LHAND:"mouse",ECO:"gun",NOPAD:"mouse",TAPS:"cross",STAND:"body",CORNER:"body",POLL:"vote",HI:"chat",MAP:"chat",PARTY:"user",CASE:"box",RANDOM:"dice",CHAOS:"zap",ROULETTE:"dice",NAME:"crown",COACH:"user",UNTILWIN:"crown",STREAM24:"clock"};
-const BYCAT = {rrauto:"kb",rrgame:"walk",hands:"mouse",weapons:"gun",cs2auto:"cross",challenge:"walk",obs:"screen",cam:"body",chat:"chat",mega:"crown"};
+const BYCAT = {heli:"card",rrauto:"kb",rrgame:"walk",hands:"mouse",weapons:"gun",cs2auto:"cross",challenge:"walk",obs:"screen",cam:"body",chat:"chat",mega:"crown"};
 const icoOf = x => P[BYCODE[x.code] || BYCAT[x.c] || "box"] ? (BYCODE[x.code] || BYCAT[x.c] || "box") : "box";
 const svg = (k, cls = "i") => `<svg class="${cls}" viewBox="0 0 24 24">${P[k] || P.box}</svg>`;
 $$("[data-ic]").forEach(h => h.insertAdjacentHTML("afterbegin", svg(h.dataset.ic)));
@@ -898,7 +946,7 @@ $("#new-list").innerHTML = NEW.length ? NEW.map(x => `<div class="row2 nw" data-
     goal(d.total ?? (d.top || []).reduce((a, x) => a + x.sum, 0));   // total — по всем донатам, включая Анонима
     $("#feed-upd").textContent = d.updated ? "· обновлено " + ago(d.updated) : "";
     if (d.top && d.top.length){ FAME.length = 0; d.top.forEach(x => FAME.push(x)); renderFame(); }
-    const fd = d.fund; $("#fundb").hidden = !(fd && fd.on);
+    const fd = d.fund; $("#fundb").hidden = true; HELI_FEED.fund = fd ? fd.fund || 0 : 0; heliRender();
     if (fd && fd.on){ $("#fund-v").textContent = fmt(fd.fund) + " ₽"; $("#fund-sub").textContent = `${Math.round(fd.share * 100)}% от ${fmt(fd.total)} ₽ · донатов: ${fmt(fd.count)}`; }
     const st = d.stats;
     if (st){ $("#st-tasks").textContent = fmt(st.tasks); $("#st-don").textContent = fmt(st.donations);
@@ -994,7 +1042,15 @@ $("#foot-links").innerHTML = LINKS.map(l => `<a href="${l[4]}" target="_blank" r
 /* ---------- донат и FAQ ---------- */
 $("#don").innerHTML = [["fire","DonationAlerts",CONFIG.donationAlerts,["СБП","Карты РФ","Иностранные карты"]],["card","DonatePay",CONFIG.donatePay,["Карты РФ","СБП","Онлайн-банки","Иностранные карты","Криптовалюта"]]]
   .map(d => `<a href="${d[2]}" target="_blank" rel="noopener">${svg(d[0], "i bg")}<div class="chips">${d[3].map(c => `<span class="chip2">${c}</span>`).join("")}</div><h3>${d[1]} →</h3><small>${d[2].replace(/^https?:\/\/(www\.)?/, "")}</small></a>`).join("");
-const FAQ = [
+const HELI_FAQ = [
+  ["Что такое «Вертолёт за вайп»?","В ROB RUN каждое воскресенье вайп — весь прогресс сбрасывается. Каждую неделю моя цель — купить вертолёт (~12 млн $) на свои деньги до вайпа. Друзья могут помогать, но покупаю и выкидываю я только своё."],
+  ["Как я мешаю?","Донат с кодом из раздела «Вертолёт за вайп» — и я прямо на стриме выкидываю свои игровые деньги или вещи. Деньги и вещи просто пропадают."],
+  ["Что за банк розыгрыша?","50% всех донатов за проект + остаток фонда с FACEIT + мой вклад. Не куплю вертолёт до вайпа — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующую неделю и растёт, как джекпот."],
+  ["Что если у меня нет денег на донат?","Недостающее становится долгом. Выкидываю его из всего, что заработаю, пока не верну. Тратить деньги, чтобы не выкидывать, нельзя."],
+  ["Как проходит розыгрыш?","В Telegram-канале, победителя выбираю на стриме."]];
+const HELI_RULES = ["«Вертолёт за вайп»: выкидываю сразу после доната, прямо на стриме.","Не хватает денег — недостающее становится долгом и выкидывается из всего, что заработаю. Тратить деньги, чтобы не выкидывать, нельзя.","Нужного предмета нет — выкидываю, как только добуду."];
+
+const FAQ = [...HELI_FAQ,
   ["Как заказать задание?","Нажми «Заказать», затем DonationAlerts или DonatePay — код задания скопируется сам. Вставь его в сообщение доната и отправь указанную сумму."],
   ["Что значит «АВТО»?","Задания с меткой АВТО включает бот сам: меняет прицел, сенсу, кнопки и звук в игре. Остальные задания попадают в очередь на экране стрима, и я выполняю их сам."],
   ["Зачем код в сообщении?","По коду бот понимает, что донат пришёл с сайта и какое задание включить. Код копируется сам — нужно только вставить его в сообщение. Обычный донат без кода задание не включит."],
@@ -1005,10 +1061,37 @@ const FAQ = [
   ["Как часто обновляется табло?","Через минуту-другую после доната — бот обновляет табло сам."],
   ["Можно вернуть донат?","Донат — добровольная поддержка стримера, возврат не предусмотрен. Если задание нельзя выполнить (нарушает правила площадки), донат идёт как обычная поддержка."]];
 $("#qa").innerHTML = FAQ.map((q, i) => `<details class="qa" ${i ? "" : "open"}><summary>${q[0]}<span class="pl">+</span></summary><p>${q[1]}</p></details>`).join("");
-$("#rules").innerHTML = ["Задание включается, только если в сообщении доната есть его код (он копируется сам) и сумма не меньше цены.","Задания «на раунд» начинаются со следующего раунда, «на игру» — с текущего матча до конца.","Если задания одной категории пересекаются — выполняются по очереди.","Задания можно не выполнять, если они нарушают правила Twitch/TikTok или вредят здоровью — донат тогда идёт как обычная поддержка.","Без оскорблений в сообщениях доната — такие сообщения не зачитываются.","Донат — добровольная поддержка стримера, возврат не предусмотрен."]
+$("#rules").innerHTML = [...HELI_RULES,"Задание включается, только если в сообщении доната есть его код (он копируется сам) и сумма не меньше цены.","Задания «на раунд» начинаются со следующего раунда, «на игру» — с текущего матча до конца.","Если задания одной категории пересекаются — выполняются по очереди.","Задания можно не выполнять, если они нарушают правила Twitch/TikTok или вредят здоровью — донат тогда идёт как обычная поддержка.","Без оскорблений в сообщениях доната — такие сообщения не зачитываются.","Донат — добровольная поддержка стримера, возврат не предусмотрен."]
   .map(r => `<li>${r}</li>`).join("");
 
 renderCart(); renderFame(); render();
+/* ---------- «Вертолёт за вайп»: банк, статус, долг, отсчёт до вайпа ---------- */
+function heliRender(){
+  const bank = Math.max(0, (HELI_FEED.fund || 0) + HELI.faceit + HELI.start - HELI.paid);
+  $("#h-bank").textContent = fmt(bank) + " ₽";
+  $("#h-week").textContent = "№" + HELI.week;
+  const ST = {go: ["иду к вертолёту", "go"], bought: ["куплен — банк переносится", "ok"], lost: ["не успел — розыгрыш", "bad"]}[HELI.status] || ["иду к вертолёту", "go"];
+  $("#h-status").innerHTML = `<span class="hst ${ST[1]}">${ST[0]}</span>`;
+  $("#h-debt").textContent = fmt(HELI.debt || 0) + " $";
+}
+(function(){
+  const HR = 3600e3, MSK = 3 * HR, DN = ["воскресенье","понедельник","вторник","среду","четверг","пятницу","субботу"], p2 = n => String(n).padStart(2, "0");
+  function next(now){
+    const d = new Date(now + MSK);
+    let t = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + (HELI.wipe.day - d.getUTCDay() + 7) % 7, HELI.wipe.hour) - MSK;
+    if (t <= now) t += 7 * 24 * HR;
+    return t;
+  }
+  $("#h-wipe").textContent = `Вайп в ${DN[HELI.wipe.day]} в ${p2(HELI.wipe.hour)}:00 МСК — весь прогресс сгорает`;
+  function tick(){
+    const left = Math.max(0, next(Date.now()) - Date.now()), d = Math.floor(left / 24 / HR), h = Math.floor(left / HR) % 24, m = Math.floor(left / 6e4) % 60, s = Math.floor(left / 1e3) % 60;
+    $("#h-left").textContent = (d ? d + " д " : "") + p2(h) + ":" + p2(m) + ":" + p2(s);
+  }
+  tick(); setInterval(tick, 1000);
+  $("#h-price").addEventListener("click", () => { const b = [...document.querySelectorAll("#tabs button")].find(x => /Вертол/.test(x.textContent)); if (b) b.click(); });
+  heliRender();
+})();
+
 
 /* ---------- марафон 24 часа: окно по МСК и циферблат ---------- */
 (function(){
