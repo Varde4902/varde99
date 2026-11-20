@@ -265,7 +265,7 @@ svg.i{stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-l
 .rules li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;border-radius:50%;background:var(--acc)}
 
 /* ---------- подвал ---------- */
-footer{padding:120px 0 30px}
+footer{padding:120px 0 30px}footer.w{padding-top:120px;padding-bottom:30px}
 footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px}
 footer h5{font-size:12px;letter-spacing:.1em;color:var(--mute);font-weight:400;margin-bottom:14px}
 footer .top a{display:block;color:var(--ink2);padding:4px 0}footer .top a:hover{color:var(--acc)}
@@ -370,13 +370,14 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
 @media(max-width:980px){.heli{grid-template-columns:1fr 1fr}.hbank{grid-column:1/-1}}
 @media(max-width:520px){.heli{grid-template-columns:1fr}}
 
+#setup{display:none}
 </style>
 </head>
 <body>
 
 <header class="nav" id="nav"><div class="w">
   <a class="logo" href="#top">VARDE99</a>
-  <ul id="menu"><li><a href="#price">Прайс</a></li><li><a href="#case">Кейс</a></li><li><a href="#m24">Марафон</a></li><li><a href="#hub">Топ</a></li><li><a href="#live">Эфир</a></li><li><a href="#setup">Сетап</a></li><li><a href="#faq">FAQ</a></li></ul>
+  <ul id="menu"><li><a href="#price">Прайс</a></li><li><a href="#case">Кейс</a></li><li><a href="#m24">Марафон</a></li><li><a href="#hub">Топ</a></li><li><a href="#live">Эфир</a></li><li></li><li><a href="#faq">FAQ</a></li></ul>
   <a class="btn ghost gsw" href="index.html" style="height:36px;padding:0 14px;font-size:13px">CS2 →</a>
   <a class="live-l" href="#live"><span class="dot" id="nav-dot"></span><span id="nav-live">Стрим на Twitch</span></a>
   <button class="burger" id="burger" aria-label="Меню"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -492,8 +493,8 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
 </main>
 
 <footer class="w">
-  <div class="top"><div><div class="logo" style="margin-bottom:12px">VARDE99</div><p style="color:var(--mute);max-width:320px">Стримы по CS2 на Twitch и TikTok. Управляй моей игрой за донат.</p></div>
-    <div><h5>РАЗДЕЛЫ</h5><a href="#price">Прайс</a><a href="#case">Кейс</a><a href="#m24">Марафон</a><a href="#hub">Стрим-центр</a><a href="#live">Эфир</a><a href="#setup">Сетап</a><a href="#faq">FAQ</a></div>
+  <div class="top"><div><div class="logo" style="margin-bottom:12px">VARDE99</div><p style="color:var(--mute);max-width:320px">Стримы по ROB RUN и CS2 на Twitch и TikTok. Управляй моей игрой за донат.</p></div>
+    <div><h5>РАЗДЕЛЫ</h5><a href="#price">Прайс</a><a href="#case">Кейс</a><a href="#m24">Марафон</a><a href="#hub">Стрим-центр</a><a href="#live">Эфир</a><a href="#faq">FAQ</a></div>
     <div><h5>КАНАЛЫ</h5><div id="foot-links"></div></div></div>
   <div class="word" aria-hidden="true">VARDE<span>99</span></div>
   <div class="bot"><span>© Varde99 · Спасибо за поддержку</span><a href="#top">Наверх ↑</a></div>
