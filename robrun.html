@@ -358,7 +358,7 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
   .strip{transition:transform 6.2s cubic-bezier(.08,.6,.12,1)!important}
 }
 /* «Вертолёт за вайп» */
-.heli{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:12px}
+.heli{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:12px}
 .hc{border:1px solid var(--line);border-radius:18px;padding:22px 24px;background:var(--card);display:flex;flex-direction:column;gap:10px;min-width:0}
 .hc.hbank{border-color:var(--acc)}.hc.hbank .lab{color:var(--acc)}
 .hv{font:600 clamp(26px,2.4vw,38px)/1 "Geologica";letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -402,7 +402,6 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
     <div class="hc hbank"><span class="lab">Банк розыгрыша</span><div class="hv" id="h-bank">0 ₽</div><small>Не куплю вертолёт до пятницы — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующий забег и растёт.</small></div>
     <div class="hc"><span class="lab">До дедлайна</span><div class="hv" id="h-left">—</div><small id="h-wipe"></small></div>
     <div class="hc"><span class="lab">Забег</span><div class="hv" id="h-week">№1</div><small id="h-status"></small></div>
-    <div class="hc"><span class="lab">Мой долг</span><div class="hv" id="h-debt">0 $</div><small>Не хватило денег на донат — выкидываю недостающее из всего, что заработаю.</small></div>
   </div>
   <div class="hgo rv"><a class="btn pri go" href="#price" id="h-price">Помешать мне купить вертолёт<span>→</span></a></div>
 </section>
@@ -563,7 +562,6 @@ const HELI = {
   faceit: 0,                // остаток фонда с FACEIT, ₽ (фонд бота уже включает донаты FACEIT — здесь только если его обнулили)
   start: 0,                 // мой стартовый вклад, ₽
   paid: 0,                  // сколько уже разыграно, ₽ (вычитается из банка)
-  debt: 0,                  // текущий долг, $
   wipe: {day: 5, hour: 12}, // дедлайн: день недели (5 = пятница) и час по МСК
 };
 const HELI_FEED = {fund: 0};   // фонд из ленты бота — заполняется сам
@@ -1046,9 +1044,8 @@ const HELI_FAQ = [
   ["Что такое «Вертолёт за вайп»?","Я начинаю в ROB RUN с нуля и за неделю, до пятницы, должен купить вертолёт (~12 млн $) на свои деньги. Друзья могут помогать, но покупаю и выкидываю я только своё."],
   ["Как я мешаю?","Донат с кодом из раздела «Вертолёт за вайп» — и я прямо на стриме выкидываю свои игровые деньги или вещи. Деньги и вещи просто пропадают."],
   ["Что за банк розыгрыша?","50% всех донатов за проект + остаток фонда с FACEIT + мой вклад. Не куплю вертолёт до пятницы — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующий забег и растёт, как джекпот."],
-  ["Что если у меня нет денег на донат?","Недостающее становится долгом. Выкидываю его из всего, что заработаю, пока не верну. Тратить деньги, чтобы не выкидывать, нельзя."],
   ["Как проходит розыгрыш?","В Telegram-канале, победителя выбираю на стриме."]];
-const HELI_RULES = ["«Вертолёт за вайп»: выкидываю сразу после доната, прямо на стриме.","Не хватает денег — недостающее становится долгом и выкидывается из всего, что заработаю. Тратить деньги, чтобы не выкидывать, нельзя.","Нужного предмета нет — выкидываю, как только добуду."];
+const HELI_RULES = ["«Вертолёт за вайп»: выкидываю сразу после доната, прямо на стриме.","Нужного предмета нет — выкидываю, как только добуду."];
 
 const FAQ = [...HELI_FAQ,
   ["Как заказать задание?","Нажми «Заказать», затем DonationAlerts или DonatePay — код задания скопируется сам. Вставь его в сообщение доната и отправь указанную сумму."],
@@ -1065,14 +1062,13 @@ $("#rules").innerHTML = [...HELI_RULES,"Задание включается, т�
   .map(r => `<li>${r}</li>`).join("");
 
 renderCart(); renderFame(); render();
-/* ---------- «Вертолёт за вайп»: банк, статус, долг, отсчёт до вайпа ---------- */
+/* ---------- «Вертолёт за вайп»: банк, статус, отсчёт до дедлайна ---------- */
 function heliRender(){
   const bank = Math.max(0, (HELI_FEED.fund || 0) + HELI.faceit + HELI.start - HELI.paid);
   $("#h-bank").textContent = fmt(bank) + " ₽";
   $("#h-week").textContent = "№" + HELI.week;
   const ST = {go: ["иду к вертолёту", "go"], bought: ["куплен — банк переносится", "ok"], lost: ["не успел — розыгрыш", "bad"]}[HELI.status] || ["иду к вертолёту", "go"];
   $("#h-status").innerHTML = `<span class="hst ${ST[1]}">${ST[0]}</span>`;
-  $("#h-debt").textContent = fmt(HELI.debt || 0) + " $";
 }
 (function(){
   const HR = 3600e3, MSK = 3 * HR, DN = ["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"], p2 = n => String(n).padStart(2, "0");
