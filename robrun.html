@@ -397,11 +397,11 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;font-size:13px;c
 </section>
 
 <section class="s w" id="heli">
-  <div class="sh rv"><h2>Вертолёт за вайп</h2><p>Каждое воскресенье в ROB RUN вайп — прогресс сгорает. Моя цель: купить вертолёт на свои деньги до вайпа. Твой донат отнимает у меня игровые деньги и вещи.</p></div>
+  <div class="sh rv"><h2>Вертолёт за вайп</h2><p>Я начинаю в ROB RUN с нуля и даю себе неделю: купить вертолёт на свои деньги до пятницы. Твой донат отнимает у меня игровые деньги и вещи.</p></div>
   <div class="heli rv">
-    <div class="hc hbank"><span class="lab">Банк розыгрыша</span><div class="hv" id="h-bank">0 ₽</div><small>Не куплю вертолёт до вайпа — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующую неделю и растёт.</small></div>
-    <div class="hc"><span class="lab">До вайпа</span><div class="hv" id="h-left">—</div><small id="h-wipe"></small></div>
-    <div class="hc"><span class="lab">Вайп</span><div class="hv" id="h-week">№1</div><small id="h-status"></small></div>
+    <div class="hc hbank"><span class="lab">Банк розыгрыша</span><div class="hv" id="h-bank">0 ₽</div><small>Не куплю вертолёт до пятницы — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующий забег и растёт.</small></div>
+    <div class="hc"><span class="lab">До дедлайна</span><div class="hv" id="h-left">—</div><small id="h-wipe"></small></div>
+    <div class="hc"><span class="lab">Забег</span><div class="hv" id="h-week">№1</div><small id="h-status"></small></div>
     <div class="hc"><span class="lab">Мой долг</span><div class="hv" id="h-debt">0 $</div><small>Не хватило денег на донат — выкидываю недостающее из всего, что заработаю.</small></div>
   </div>
   <div class="hgo rv"><a class="btn pri go" href="#price" id="h-price">Помешать мне купить вертолёт<span>→</span></a></div>
@@ -558,13 +558,13 @@ const CONFIG = {
 /* ============ САЙТ: цель, сетап, прицел ============ */
 /* ===== «Вертолёт за вайп» (ROB RUN) — ЭТО МЕНЯЮ САМ ===== */
 const HELI = {
-  week: 1,                  // номер вайпа (недели) проекта
+  week: 1,                  // номер забега (недели) проекта
   status: "go",             // "go" — иду к вертолёту · "bought" — куплен, банк переносится · "lost" — не успел, розыгрыш
   faceit: 0,                // остаток фонда с FACEIT, ₽ (фонд бота уже включает донаты FACEIT — здесь только если его обнулили)
   start: 0,                 // мой стартовый вклад, ₽
   paid: 0,                  // сколько уже разыграно, ₽ (вычитается из банка)
   debt: 0,                  // текущий долг, $
-  wipe: {day: 0, hour: 12}, // вайп: день недели (0 = воскресенье) и час по МСК — УТОЧНИТЬ точное время
+  wipe: {day: 5, hour: 12}, // дедлайн: день недели (5 = пятница) и час по МСК
 };
 const HELI_FEED = {fund: 0};   // фонд из ленты бота — заполняется сам
 
@@ -1043,9 +1043,9 @@ $("#foot-links").innerHTML = LINKS.map(l => `<a href="${l[4]}" target="_blank" r
 $("#don").innerHTML = [["fire","DonationAlerts",CONFIG.donationAlerts,["СБП","Карты РФ","Иностранные карты"]],["card","DonatePay",CONFIG.donatePay,["Карты РФ","СБП","Онлайн-банки","Иностранные карты","Криптовалюта"]]]
   .map(d => `<a href="${d[2]}" target="_blank" rel="noopener">${svg(d[0], "i bg")}<div class="chips">${d[3].map(c => `<span class="chip2">${c}</span>`).join("")}</div><h3>${d[1]} →</h3><small>${d[2].replace(/^https?:\/\/(www\.)?/, "")}</small></a>`).join("");
 const HELI_FAQ = [
-  ["Что такое «Вертолёт за вайп»?","В ROB RUN каждое воскресенье вайп — весь прогресс сбрасывается. Каждую неделю моя цель — купить вертолёт (~12 млн $) на свои деньги до вайпа. Друзья могут помогать, но покупаю и выкидываю я только своё."],
+  ["Что такое «Вертолёт за вайп»?","Я начинаю в ROB RUN с нуля и за неделю, до пятницы, должен купить вертолёт (~12 млн $) на свои деньги. Друзья могут помогать, но покупаю и выкидываю я только своё."],
   ["Как я мешаю?","Донат с кодом из раздела «Вертолёт за вайп» — и я прямо на стриме выкидываю свои игровые деньги или вещи. Деньги и вещи просто пропадают."],
-  ["Что за банк розыгрыша?","50% всех донатов за проект + остаток фонда с FACEIT + мой вклад. Не куплю вертолёт до вайпа — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующую неделю и растёт, как джекпот."],
+  ["Что за банк розыгрыша?","50% всех донатов за проект + остаток фонда с FACEIT + мой вклад. Не куплю вертолёт до пятницы — разыграю банк в Telegram. Куплю — банк не сгорает, а переходит на следующий забег и растёт, как джекпот."],
   ["Что если у меня нет денег на донат?","Недостающее становится долгом. Выкидываю его из всего, что заработаю, пока не верну. Тратить деньги, чтобы не выкидывать, нельзя."],
   ["Как проходит розыгрыш?","В Telegram-канале, победителя выбираю на стриме."]];
 const HELI_RULES = ["«Вертолёт за вайп»: выкидываю сразу после доната, прямо на стриме.","Не хватает денег — недостающее становится долгом и выкидывается из всего, что заработаю. Тратить деньги, чтобы не выкидывать, нельзя.","Нужного предмета нет — выкидываю, как только добуду."];
@@ -1075,14 +1075,14 @@ function heliRender(){
   $("#h-debt").textContent = fmt(HELI.debt || 0) + " $";
 }
 (function(){
-  const HR = 3600e3, MSK = 3 * HR, DN = ["воскресенье","понедельник","вторник","среду","четверг","пятницу","субботу"], p2 = n => String(n).padStart(2, "0");
+  const HR = 3600e3, MSK = 3 * HR, DN = ["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"], p2 = n => String(n).padStart(2, "0");
   function next(now){
     const d = new Date(now + MSK);
     let t = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + (HELI.wipe.day - d.getUTCDay() + 7) % 7, HELI.wipe.hour) - MSK;
     if (t <= now) t += 7 * 24 * HR;
     return t;
   }
-  $("#h-wipe").textContent = `Вайп в ${DN[HELI.wipe.day]} в ${p2(HELI.wipe.hour)}:00 МСК — весь прогресс сгорает`;
+  $("#h-wipe").textContent = `Дедлайн — ${DN[HELI.wipe.day]}, ${p2(HELI.wipe.hour)}:00 МСК`;
   function tick(){
     const left = Math.max(0, next(Date.now()) - Date.now()), d = Math.floor(left / 24 / HR), h = Math.floor(left / HR) % 24, m = Math.floor(left / 6e4) % 60, s = Math.floor(left / 1e3) % 60;
     $("#h-left").textContent = (d ? d + " д " : "") + p2(h) + ":" + p2(m) + ":" + p2(s);
